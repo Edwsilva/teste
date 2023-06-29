@@ -3,23 +3,23 @@
   min-height: 100vh;
 }
 
-.container{
+.container {
   max-width: 1366px;
   margin: 0 auto;
 }
 
-.container2{
+.container2 {
   background-color: #f7f7f7;
   padding: 50px 0;
 }
 
-.title{
+.title {
   font-size: 1.6rem;
   line-height: 1.6em;
   margin-bottom: 20px;
 }
 
-.text{
+.text {
   font-size: 1rem;
   line-height: 1.6em;
   color: var(--textDark);
@@ -30,23 +30,10 @@
 
 /*Banner Section*/
 
-.banner{
+.banner {
   width: 100%;
   background-color: var(--secondaryLight);
   display: flex;
-}
-
-.bannerWritten{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.bannerImage{
-  flex: 2;
-  height: 600px;
   background: url("../../public/images/banner.jpg");
   background-size: cover;
   background-position: center;
@@ -54,41 +41,61 @@
   background-attachment: fixed;
 }
 
-.bannerTitle{
+.overlay{
+  display: flex;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.bannerWritten {
+  margin: 10px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerTitle {
   font-size: 2.5rem;
   margin-bottom: 15px;
 }
 
-.bannerContent{
+.bannerContent {
   width: 70%;
+  color: white;
 }
 
+.bannerContent > .text{
+  color: white;
+}
 
 /*Section B*/
-.sectionB{
+.sectionB {
   margin: 50px 0;
   display: flex;
 }
 
-.sectionB1{
+.sectionB1 {
   flex: 1;
   margin: 15px 2%;
 }
 
-.sectionB2{
+.sectionB2 {
   flex: 2;
   margin: 15px 2%;
   display: flex;
   flex-wrap: wrap;
 }
 
-.cardContainer{
+.cardContainer {
   display: flex;
   width: 100%;
   margin: 0 auto 30px auto;
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: column;
   width: 35%;
@@ -96,11 +103,11 @@
   margin: 0 auto;
 }
 
-.cardTitle{
+.cardTitle {
   font-size: 1.5rem;
 }
 
-.cardIcon{
+.cardIcon {
   flex-grow: 1;
   margin: 15px 0;
   display: flex;
@@ -109,42 +116,53 @@
   background-color: var(--secondaryLight);
 }
 
-.cardContainer:first-child .card:last-child .cardIcon{
+.cardContainer:first-child .card:last-child .cardIcon {
   background-color: var(--primary);
 }
 
-.cardContainer:last-child .card:first-child .cardIcon{
+.cardContainer:last-child .card:first-child .cardIcon {
   background-color: var(--primaryLight);
 }
 
-.cardContainer:last-child .card:last-child .cardIcon{
-  background-color: #EC9992;
+.cardContainer:last-child .card:last-child .cardIcon {
+  background-color: #ec9992;
 }
 
-.icon{
+.icon {
   font-size: 100px;
   color: white;
 }
 
-.cardContent{
-  font-size: .9rem;
+.cardContent {
+  font-size: 0.9rem;
 }
 
 /*Section C*/
 
-.sectionC{
+.sectionC {
   display: flex;
   margin-top: 50px;
 }
 
-.sectionC1{
+.sectionC1 {
   flex: 1;
   margin: 15px 2%;
 }
 
-.sectionC2{
+.sectionC2 {
   flex: 2;
   margin: 15px 2%;
   display: flex;
   flex-wrap: wrap;
+}
+
+/*Responsivo*/
+@media screen and (max-width: 768px) {
+  .main{
+    margin-top: 130px;
+  }
+
+  .overlay{
+    height: 400px;
+  }
 }

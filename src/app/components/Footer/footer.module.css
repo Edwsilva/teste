@@ -52,7 +52,15 @@
     margin-top: 20px;
   }
 
+  .footerItem{
+    margin: 10px auto;
+  }
+
+  .subitem{
+    margin: 5px auto;
+  }
+
   .logo{
-    margin-top: 20px;
+    margin: 20px auto;
   }
 }
