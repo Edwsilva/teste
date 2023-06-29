@@ -1,0 +1,86 @@
+.container {
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+.overlay {
+  height: 400px;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6em;
+  color: var(--textDark);
+  letter-spacing: 1px;
+  font-weight: lighter;
+  margin-bottom: 20px;
+}
+
+.banner {
+  width: 100%;
+  background-color: var(--secondaryLight);
+  display: flex;
+  background: url("../../../../public/images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.overlay {
+  display: flex;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bannerWritten {
+  margin: 10px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerTitle {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.bannerContent {
+  width: 100%;
+  color: white;
+}
+
+.bannerContent > .text {
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .overlay {
+    height: 400px;
+  }
+
+  .bannerWritten {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .bannerTitle {
+    font-size: 2rem;
+  }
+  
+  .text {
+    font-size: .9rem;
+    line-height: 1.6em;
+    color: var(--textDark);
+    letter-spacing: 1px;
+    font-weight: lighter;
+    margin-bottom: 20px;
+  }
+
+  .container{
+    margin: 0;
+  }
+}

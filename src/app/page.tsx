@@ -2,24 +2,13 @@ import styles from "./page.module.css";
 import Button from "./components/Button/Button";
 import { HiBookOpen } from "react-icons/hi";
 import CarouselExample from "./components/Carousel/Carousel";
+import Banner from "./components/Banner/Banner";
 
 export default function Home() {
   return (
     <main className={styles.main}>
+      <Banner />
       <div className={styles.container}>
-        <div className={styles.banner}>
-          <div className={styles.overlay}>
-            <div className={styles.bannerWritten}>
-              <div className={styles.bannerContent}>
-                <h1 className={styles.bannerTitle}>Boletim Escolar Carioca</h1>
-                <p className={styles.text}>
-                  Fique por dentro de tudo mesmo fora da escola
-                </p>
-                <Button text="Agende uma aula" />
-              </div>
-            </div>
-          </div>
-        </div>
         <div className={styles.sectionB}>
           <div className={styles.sectionB1}>
             <h2 className={styles.title}>O que nós ensinamos?</h2>

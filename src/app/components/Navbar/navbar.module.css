@@ -94,7 +94,7 @@
   background: none;
   color: var(--textDark);
   position: absolute;
-  top: 40px;
+  top: 35px;
   right: 5%;
   z-index: 1000;
 }
