@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,9 +40,11 @@ const Navbar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          <Image width={200} src={logo} alt="Logo" />
-        </Link>
+        <div className={styles.logoLink}>
+          <Link href="/" className={styles.logo}>
+            <Image className={styles.img} src={logo} alt="Logo" />
+          </Link>
+        </div>
         <div className={styles.links}>
           {links.map((link) => (
             <Link className={styles.link} href={link.href} key={link.id}>
@@ -52,7 +54,10 @@ const Navbar = () => {
           <Login />
         </div>
         <div className={styles.mobileNav}>
-          <button className={`${styles.iconButton} ${menuOpen ? styles.open : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            className={`${styles.iconButton} ${menuOpen ? styles.open : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             <div className={styles.menuIcon}>
               <span></span>
               <span></span>
@@ -61,18 +66,26 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      <div className={`${styles.menu} ${menuOpen === true ? styles.menuOpen : ''}`}>
+      <div
+        className={`${styles.menu} ${menuOpen === true ? styles.menuOpen : ""}`}
+      >
         <div className={styles.menuContainer}>
           <div className={styles.mobileLinks}>
-            {links.map(link => (
-              <Link className={`${styles.mobileLink} ${menuOpen === true ? styles.menuOpenFirstTime : ''}`} href={link.href} key={link.id}>
+            {links.map((link) => (
+              <Link
+                className={`${styles.mobileLink} ${
+                  menuOpen === true ? styles.menuOpenFirstTime : ""
+                }`}
+                href={link.href}
+                key={link.id}
+              >
                 {link.name}
               </Link>
             ))}
           </div>
         </div>
       </div>
-    </header >
+    </header>
   );
 };
 

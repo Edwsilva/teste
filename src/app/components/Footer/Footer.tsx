@@ -25,14 +25,20 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          <Image width={200} src={logo} alt="Logo" />
-        </Link>
+        <div className={styles.logoLink}>
+          <Link href="/" className={styles.logo}>
+            <Image className={styles.img} width={200} src={logo} alt="Logo" />
+          </Link>
+        </div>
         <div className={styles.footerItems}>
           {footerLinks.map((item, i) => (
             <ul className={styles.footerItem} key={i}>
               {item.map((subitem) => (
-                <Link className={styles.subitem} href={subitem.href} key={subitem.id}>
+                <Link
+                  className={styles.subitem}
+                  href={subitem.href}
+                  key={subitem.id}
+                >
                   {subitem.name}
                 </Link>
               ))}

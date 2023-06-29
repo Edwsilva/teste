@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--primaryLight);
+  background-color: rgb(235, 235, 235);
   padding: 20px 0;
   color: var(--textDark);
 }
@@ -13,9 +13,17 @@
   height: inherit;
 }
 
-.logo {
+.logoLink {
   flex: 1;
+}
+
+.logo {
   margin-left: 5px;
+}
+
+.img {
+  width: 200px;
+  height: auto;
 }
 
 .footerItems {
@@ -60,7 +68,11 @@
     margin: 5px auto;
   }
 
-  .logo{
-    margin: 20px auto;
+  .logoLink{
+    margin: 30px auto;
+  }
+
+  .img{
+    width: 150px;
   }
 }
