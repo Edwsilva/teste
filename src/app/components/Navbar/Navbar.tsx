@@ -2,40 +2,38 @@
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
+import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 
 const links = [
   {
     id: 1,
-    name: "Sobre",
-    href: "/sobre",
+    name: "Boletins e Frequência",
+    href: "/boletins-e-frequencia",
   },
   {
     id: 2,
-    name: "Agende uma aula",
-    href: "/agende-uma-aula",
+    name: "Calendário",
+    href: "/calendario",
   },
   {
     id: 3,
-    name: "Pacotes",
-    href: "/pacotes",
+    name: "Cardápio",
+    href: "/cardapio",
   },
   {
     id: 4,
-    name: "Materiais",
-    href: "/materiais",
-  },
-  {
-    id: 5,
-    name: "Contato",
-    href: "/contato",
+    name: "Declarações",
+    href: "/declaracoes",
   },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   return (
     <header className={styles.header}>
@@ -46,13 +44,32 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={styles.links}>
-          {links.map((link) => (
-            <Link className={styles.link} href={link.href} key={link.id}>
-              {link.name}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const isActive = pathname.startsWith(link.href);
+            return (
+              <Link className={isActive ? styles.linkActive : styles.link} href={link.href} key={link.id}>
+                {link.name}
+              </Link>
+            )
+          })
+          }
           <Login />
         </div>
+        <div className={styles.responsiveLinks}>
+          <Dropdown className={styles.dropdown}>
+            <Dropdown.Toggle className={styles.dropdownToggle}>
+              Links
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {links.map((link => (
+                <Dropdown.Item><Link href={link.href} key={link.id}>{link.name}</Link></Dropdown.Item>
+              )))}
+              <Dropdown.Item></Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Login />
+        </div>
+
         <div className={styles.mobileNav}>
           <button
             className={`${styles.iconButton} ${menuOpen ? styles.open : ""}`}
@@ -73,9 +90,8 @@ const Navbar = () => {
           <div className={styles.mobileLinks}>
             {links.map((link) => (
               <Link
-                className={`${styles.mobileLink} ${
-                  menuOpen === true ? styles.menuOpenFirstTime : ""
-                }`}
+                className={`${styles.mobileLink} ${menuOpen === true ? styles.menuOpenFirstTime : ""
+                  }`}
                 href={link.href}
                 key={link.id}
               >

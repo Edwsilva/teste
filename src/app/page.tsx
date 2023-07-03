@@ -17,7 +17,7 @@ export default function Home() {
               basta clicar em "Editar texto" ou clicar duas vezes sobre mim para
               editar o conteúdo, a fonte e mais.
             </p>
-            <Button text="Sobre nós" />
+            <Button text="Sobre nós"/>
           </div>
           <div className={styles.sectionB2}>
             <div className={styles.cardContainer}>
