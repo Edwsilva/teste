@@ -1,3 +1,8 @@
+.slide{
+    width: 75%;
+    margin: 0 auto 30 auto;
+}
+
 .depoimento{
     font-weight: 400;
     letter-spacing: 1px;
