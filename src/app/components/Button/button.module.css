@@ -1,16 +1,15 @@
 .button{
-    border: none;
+    border: 1px solid var(--primary);
     background-color: var(--primary);
     color: white;
-    padding: 20px;
+    padding: 19px;
     font-size: 1rem;
     cursor: pointer;
     font-weight: 500;
-    /* font-family: 'Roboto'; */
 }
 
 .button:hover{
     transition: .3s all ease;
-    background-color: var(--primaryLight);
-    color: var(--primaryDark);
+    background-color: transparent;
+    color: var(--primary);
 }
