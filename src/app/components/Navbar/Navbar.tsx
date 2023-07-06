@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
 import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const links = [
   {
@@ -31,7 +31,7 @@ const links = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({blockScroll} : {blockScroll: Dispatch<SetStateAction<boolean>>}) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
 
@@ -73,7 +73,10 @@ const Navbar = () => {
         <div className={styles.mobileNav}>
           <button
             className={`${styles.iconButton} ${menuOpen ? styles.open : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => {
+              setMenuOpen(!menuOpen);
+              blockScroll(!menuOpen);
+            }}
           >
             <div className={styles.menuIcon}>
               <span></span>
@@ -94,6 +97,7 @@ const Navbar = () => {
                   }`}
                 href={link.href}
                 key={link.id}
+                onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </Link>
