@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
 import { Dropdown } from "react-bootstrap";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 const links = [
   {
@@ -31,7 +31,7 @@ const links = [
   },
 ];
 
-const Navbar = ({blockScroll} : {blockScroll: Dispatch<SetStateAction<boolean>>}) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
 
@@ -73,10 +73,7 @@ const Navbar = ({blockScroll} : {blockScroll: Dispatch<SetStateAction<boolean>>}
         <div className={styles.mobileNav}>
           <button
             className={`${styles.iconButton} ${menuOpen ? styles.open : ""}`}
-            onClick={() => {
-              setMenuOpen(!menuOpen);
-              blockScroll(!menuOpen);
-            }}
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             <div className={styles.menuIcon}>
               <span></span>
@@ -90,6 +87,9 @@ const Navbar = ({blockScroll} : {blockScroll: Dispatch<SetStateAction<boolean>>}
         className={`${styles.menu} ${menuOpen === true ? styles.menuOpen : ""}`}
       >
         <div className={styles.menuContainer}>
+        <Link href="/" className={styles.logoMobile} onClick={() => setMenuOpen(false)}>
+            <Image className={styles.img} src={logo} alt="Logo" />
+          </Link>
           <div className={styles.mobileLinks}>
             {links.map((link) => (
               <Link

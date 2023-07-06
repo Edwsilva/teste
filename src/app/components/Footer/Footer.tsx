@@ -5,10 +5,10 @@ import styles from "./footer.module.css";
 
 const footerLinks = [
   [
-    { id: 1.1, name: "Sobre", href: "/sobre" },
-    { id: 1.2, name: "Agende uma aula", href: "/agende-uma-aula" },
-    { id: 1.3, name: "Pacotes", href: "/pacotes" },
-    { id: 1.4, name: "Materiais", href: "materiais" },
+    { id: 1.1, name: "Boletins e Frequência", href: "/boletins-e-frequencia", },
+    { id: 1.2, name: "Calendário", href: "/calendario", },
+    { id: 1.3, name: "Cardápio", href: "/cardapio", },
+    { id: 1.4, name: "Declarações", href: "/declaracoes",},
   ],
   [
     { id: 2.1, name: "info@meusite.com", href: "/#" },
