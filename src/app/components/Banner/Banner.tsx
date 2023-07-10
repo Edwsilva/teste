@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface BannerProps{
   type: "overlay" | "overlaySM";
-  banner: "banner" | "bannerDeclaracoes";
+  banner: "banner" | "bannerDeclaracoes" | "bannerMatriculas" | "bannerCardapio" | "bannerCalendario" | "bannerBoletins";
   children: ReactNode;
 }
 

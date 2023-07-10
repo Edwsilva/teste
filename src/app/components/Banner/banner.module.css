@@ -39,9 +39,50 @@
 .bannerDeclaracoes{
   width: 100%;
   display: flex;
-  background: url("../../../../public/images/declaracoesBanner.jpg");
+  background: url("../../../../public/images/bannerDeclaracoes.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bannerMatriculas{
+  width: 100%;
+  display: flex;
+  background: url("../../../../public/images/bannerMatriculas.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bannerCardapio{
+  width: 100%;
+  display: flex;
+  background: url("../../../../public/images/bannerCardapio.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bannerCalendario{
+  width: 100%;
+  display: flex;
+  background: url("../../../../public/images/bannerCalendario.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bannerBoletins{
+  width: 100%;
+  display: flex;
+  background: url("../../../../public/images/bannerBoletins.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position-y: -300px;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

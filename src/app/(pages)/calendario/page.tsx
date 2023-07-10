@@ -4,7 +4,7 @@ import styles from "./calendario.module.css";
 const Calendario = () => {
   return (
     <div className={styles.main}>
-        <Banner type="overlaySM" banner="bannerDeclaracoes">
+        <Banner type="overlaySM" banner="bannerCalendario">
             <h1>Calendário</h1>
         </Banner>
         <div className={styles.container}>

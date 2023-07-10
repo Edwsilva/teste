@@ -4,7 +4,7 @@ import styles from "./matriculas.module.css";
 const Matriculas = () => {
     return (
         <div className={styles.main}>
-            <Banner type="overlaySM" banner="bannerDeclaracoes">
+            <Banner type="overlaySM" banner="bannerMatriculas">
                 <h1>Matrículas</h1>
             </Banner>
             <div className={styles.container}>

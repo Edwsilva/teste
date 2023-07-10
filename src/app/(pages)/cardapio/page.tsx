@@ -4,7 +4,7 @@ import styles from "./cardapio.module.css";
 const Cardapio = () => {
   return (
     <div className={styles.main}>
-      <Banner type="overlaySM" banner="bannerDeclaracoes">
+      <Banner type="overlaySM" banner="bannerCardapio">
         <h1>Cardápio</h1>
       </Banner>
       <div className={styles.container}>
