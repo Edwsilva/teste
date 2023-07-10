@@ -29,6 +29,11 @@ const links = [
     name: "Declarações",
     href: "/declaracoes",
   },
+  {
+    id: 5,
+    name: "Matrículas",
+    href: "/matriculas",
+  }
 ];
 
 const Navbar = () => {
@@ -87,7 +92,7 @@ const Navbar = () => {
         className={`${styles.menu} ${menuOpen === true ? styles.menuOpen : ""}`}
       >
         <div className={styles.menuContainer}>
-        <Link href="/" className={styles.logoMobile} onClick={() => setMenuOpen(false)}>
+          <Link href="/" className={styles.logoMobile} onClick={() => setMenuOpen(false)}>
             <Image className={styles.img} src={logo} alt="Logo" />
           </Link>
           <div className={styles.mobileLinks}>

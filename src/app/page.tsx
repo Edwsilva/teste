@@ -7,7 +7,13 @@ import Banner from "./components/Banner/Banner";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Banner />
+      <Banner type="overlay" banner="banner">
+        <h1 className={styles.bannerTitle}>Boletim Escolar Carioca</h1>
+        <p className={styles.bannerText}>
+          Fique por dentro de tudo mesmo fora da escola
+        </p>
+        <Button text="Agende uma aula" />
+      </Banner>
       <div className={styles.container}>
         <div className={styles.sectionB}>
           <div className={styles.sectionB1}>

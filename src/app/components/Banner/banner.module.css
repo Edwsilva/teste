@@ -4,7 +4,17 @@
 }
 
 .overlay {
+  display: flex;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   height: 400px;
+}
+
+.overlaySM{
+  display: flex;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 200px;
 }
 
 .text {
@@ -18,9 +28,18 @@
 
 .banner {
   width: 100%;
-  background-color: var(--secondaryLight);
   display: flex;
   background: url("../../../../public/images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bannerDeclaracoes{
+  width: 100%;
+  display: flex;
+  background: url("../../../../public/images/declaracoesBanner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

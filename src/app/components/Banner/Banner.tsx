@@ -1,18 +1,20 @@
 import styles from "./banner.module.css";
-import Button from "../Button/Button";
+import { ReactNode } from "react";
 
-const Banner = () => {
+interface BannerProps{
+  type: "overlay" | "overlaySM";
+  banner: "banner" | "bannerDeclaracoes";
+  children: ReactNode;
+}
+
+const Banner = ({type, banner, children}: BannerProps) => {
   return (
     <div className={styles.container}>
-      <div className={styles.banner}>
-        <div className={styles.overlay}>
+      <div className={styles[banner]}>
+        <div className={styles[type]}>
           <div className={styles.bannerWritten}>
             <div className={styles.bannerContent}>
-              <h1 className={styles.bannerTitle}>Boletim Escolar Carioca</h1>
-              <p className={styles.text}>
-                Fique por dentro de tudo mesmo fora da escola
-              </p>
-              <Button text="Agende uma aula" />
+              {children}
             </div>
           </div>
         </div>
