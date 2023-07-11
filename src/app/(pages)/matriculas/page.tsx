@@ -1,5 +1,16 @@
+'use client'
 import Banner from "@/app/components/Banner/Banner";
+import Button from "@/app/components/Button/Button";
+import Matricula from "@/app/components/Matricula/Matricula";
 import styles from "./matriculas.module.css";
+
+type Matricula = {
+    id: number;
+    matricula: string;
+    nome: string;
+}
+
+const matriculas: Matricula[] = [{ id: 1, matricula: "1234567", nome: "Eduardo" }, { id: 1, matricula: "1234567", nome: "Eduardo" }, { id: 1, matricula: "1234567", nome: "Eduardo" }, { id: 1, matricula: "1234567", nome: "Eduardo" }];
 
 const Matriculas = () => {
     return (
@@ -10,9 +21,24 @@ const Matriculas = () => {
             <div className={styles.container}>
                 <h2 className={styles.title}>Minhas Matrículas</h2>
                 <p className={styles.text}>Consulte as matrículas e veja os boletins escolares.</p>
-                <p className={styles.text}>No momento você não possui matrícula cadastrada. Insira 
-                os dados da matrícula e a data de nascimento do aluno e clique em "Salvar".</p>
+                <div className={styles.matriculas}>
+                    {matriculas.length === 0 ? <h3>No momento você não possui matrícula cadastrada. Insira os dados
+                        da matrícula e a data de nascimento do aluno e clique em salvar</h3>
+                        :
+                        <div>{matriculas.map(({ id, nome, matricula }: Matricula) => (<Matricula nome={nome} matricula={matricula} key={id} />))}</div>}
+                </div>
+                <div className={styles.cadastrarMatricula}>
+                    <h3>Incluir nova matrícula</h3>
+                    <form action="">
+                        <label htmlFor="">Matrícula:</label>
+                        <input type="text" placeholder="Ex: 1234567" className={styles.input} />
+                        <label htmlFor="">Nascimento:</label>
+                        <input type="date" className={styles.input} />
+                        <Button text="Salvar" />
+                    </form>
+                </div>
             </div>
+
         </div>
     )
 }

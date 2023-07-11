@@ -8,7 +8,8 @@ const footerLinks = [
     { id: 1.1, name: "Boletins e Frequência", href: "/boletins-e-frequencia", },
     { id: 1.2, name: "Calendário", href: "/calendario", },
     { id: 1.3, name: "Cardápio", href: "/cardapio", },
-    { id: 1.4, name: "Declarações", href: "/declaracoes",},
+    { id: 1.4, name: "Declarações", href: "/declaracoes", },
+    { id: 1.5, name: "Matrículas", href: "/matriculas" }
   ],
   [
     { id: 2.1, name: "info@meusite.com", href: "/#" },

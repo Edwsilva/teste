@@ -22,6 +22,40 @@
     font-weight: lighter;
     margin-bottom: 20px;
   }
+
+  .matriculas{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cadastrarMatricula{
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cadastrarMatricula form{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
+
+  .cadastrarMatricula form :last-child{
+    margin-top: 10px;
+  }
+
+  .input{
+    width: 300px;
+    margin: 5px auto;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--text);
+    outline: none;
+  }
+
+  .input:focus{
+    border-color: var(--primary);
+  }
   
   @media screen and (max-width: 1366px) {
     .main {
