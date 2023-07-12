@@ -13,41 +13,105 @@
     line-height: 1.6em;
     margin: 20px 0;
   }
+
+  .title2{
+    font-size: 1.4rem;
+    line-height: 1.6em;
+    margin: 20px 0;
+  }
   
   .text {
     font-size: 1rem;
     line-height: 1.6em;
     color: var(--textDark);
     letter-spacing: 1px;
-    font-weight: lighter;
+    font-weight: 300;
     margin-bottom: 20px;
   }
-
+  
   .matriculas{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
   }
 
+  .matricula, .matriculaSelected{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 1.5px solid var(--text);
+    transition: border ease .5s;
+    gap: 5px;
+  }
+
+  .matricula:hover, 
+  .matriculaSelected{
+    border-color: var(--primary);
+  }
+
+  .matricula:hover > .matriculaTitle,
+  .matriculaSelected > .matriculaTitle{
+    color: #000000;
+  }
+  
+  .matricula:hover > .matriculaNumber,
+  .matriculaSelected > .matriculaNumber{
+    color: var(--textDark);
+  }
+  
+  .star{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    color: white;
+    background-color: var(--primary);
+  }
+
+  .matriculaTitle{
+    color: var(--textDark);
+  }
+
+  .matriculaNumber{
+    color: var(--text);
+  }
+
+  /*Form Cadastro*/
   .cadastrarMatricula{
-    margin: 20px auto;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
   }
 
   .cadastrarMatricula form{
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     width: fit-content;
   }
 
   .cadastrarMatricula form :last-child{
-    margin-top: 10px;
+    padding:10px;
+    margin-left: 10px;
   }
 
   .input{
     width: 300px;
-    margin: 5px auto;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--text);
     outline: none;

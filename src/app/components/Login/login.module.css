@@ -15,7 +15,7 @@
 .icon{
     font-size: 25px;
     margin-right: 5px;
-    color: #02b0d9;
+    color: var(--primary);
 }
 
 .button:hover{
