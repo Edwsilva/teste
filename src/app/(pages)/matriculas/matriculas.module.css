@@ -106,7 +106,7 @@
     width: fit-content;
   }
 
-  .cadastrarMatricula form :last-child{
+  .cadastrarMatricula > form > :last-child{
     padding:10px 19px;
   }
 
@@ -123,7 +123,8 @@
 
   .input{
     width: 300px;
-    padding: 10px;
+    height: 35px;
+    padding: 5px;
     border: 1px solid var(--text);
     outline: none;
   }
