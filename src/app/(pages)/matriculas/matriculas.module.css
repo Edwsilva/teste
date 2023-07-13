@@ -152,5 +152,19 @@
       font-weight: lighter;
       margin-bottom: 20px;
     }
+
+    .cadastrarMatricula form{
+      flex-direction: column;
+    }
+
+    .cadastrarMatricula > form > :last-child{
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 375px){
+    .input{
+      width: 275px;
+    }
   }
   
