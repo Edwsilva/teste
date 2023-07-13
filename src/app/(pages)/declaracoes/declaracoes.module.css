@@ -23,6 +23,50 @@
   margin-bottom: 20px;
 }
 
+.declaracoes{
+  margin: 50px auto;
+}
+
+.declaracoes > form > :last-child{
+  padding: 10px 19px;
+}
+
+.inputGroup{
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.input{
+  display: none;
+}
+
+.label{
+  display: flex;
+  align-items: center;
+}
+
+.span,
+.spanSelected{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  position: relative;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 10px;
+  background-color: white;
+  color: transparent;
+  border: 1px solid var(--text);
+  border-radius: 5px;
+}
+
+.spanSelected{
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 @media screen and (max-width: 1366px) {
   .main {
     margin-top: 100px;

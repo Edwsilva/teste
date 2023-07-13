@@ -12,12 +12,12 @@ type Matricula = {
 }
 
 const matriculas: Matricula[] = [
-    { id: 1, matricula: "1234567", nome: "Sofia Rodriguez" },
-    { id: 2, matricula: "1234567", nome: "Lucas Thompson" },
-    { id: 3, matricula: "1234567", nome: "Isabella Parker" },
-    { id: 4, matricula: "1234567", nome: "Gabriel Anderson" },
-    { id: 5, matricula: "1234567", nome: "Valentina Mitchell" },
-    { id: 6, matricula: "1234567", nome: "Benjamin Campbell" }
+    // { id: 1, matricula: "1234567", nome: "Sofia Rodriguez" },
+    // { id: 2, matricula: "1234567", nome: "Lucas Thompson" },
+    // { id: 3, matricula: "1234567", nome: "Isabella Parker" },
+    // { id: 4, matricula: "1234567", nome: "Gabriel Anderson" },
+    // { id: 5, matricula: "1234567", nome: "Valentina Mitchell" },
+    // { id: 6, matricula: "1234567", nome: "Benjamin Campbell" }
 ];
 
 const Matriculas = () => {
@@ -29,10 +29,10 @@ const Matriculas = () => {
             </Banner>
             <div className={styles.container}>
                 <h2 className={styles.title}>Minhas Matrículas</h2>
-                <p className={styles.text}>Consulte as matrículas e veja os boletins escolares.</p>
+                <p className={styles.text}>Consulte as matrículas e veja os boletins escolares. Clique em uma das matrículas cadastradas para seleciona-la.</p>
                 <div className={styles.matriculasContainer}>
                     {matriculas.length === 0 ? <h3>No momento você não possui matrícula cadastrada. Insira os dados
-                        da matrícula e a data de nascimento do aluno e clique em salvar</h3>
+                        da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                         :
                         <div className={styles.matriculas}>
                             {matriculas.map(({ id, nome, matricula }: Matricula) => (
@@ -60,7 +60,6 @@ const Matriculas = () => {
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

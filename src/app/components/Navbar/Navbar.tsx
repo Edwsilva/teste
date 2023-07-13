@@ -67,7 +67,7 @@ const Navbar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {links.map((link => (
-                <Dropdown.Item><Link href={link.href} key={link.id}>{link.name}</Link></Dropdown.Item>
+                <Dropdown.Item key={link.id}><Link href={link.href} >{link.name}</Link></Dropdown.Item>
               )))}
               <Dropdown.Item></Dropdown.Item>
             </Dropdown.Menu>
