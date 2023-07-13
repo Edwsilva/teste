@@ -3,8 +3,7 @@ import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import styles from "./matriculas.module.css";
-import { MdStars } from "react-icons/md";
-import { AiFillStar } from "react-icons/ai";
+import { FaCheck } from "react-icons/fa";
 
 type Matricula = {
     id: number;
@@ -38,7 +37,7 @@ const Matriculas = () => {
                         <div className={styles.matriculas}>
                             {matriculas.map(({ id, nome, matricula }: Matricula) => (
                                 <span className={id === matriculaSelected ? styles.matriculaSelected : styles.matricula} key={id} onClick={() => setMatriculaSelected(id)}>
-                                    {id === matriculaSelected ? <span className={styles.star}><AiFillStar size={20} /></span> : ""}
+                                    {id === matriculaSelected ? <span className={styles.icon}><FaCheck size={10} /></span> : ""}
                                     <h4 className={styles.matriculaTitle}>{nome}</h4>
                                     <p className={styles.matriculaNumber}>{matricula}</p>
                                 </span>
@@ -49,10 +48,14 @@ const Matriculas = () => {
                 <div className={styles.cadastrarMatricula}>
                     <h3 className={styles.title2}>Incluir nova matrícula</h3>
                     <form action="">
-                        <label htmlFor="">Matrícula:</label>
-                        <input type="text" placeholder="Ex: 1234567" className={styles.input} />
-                        <label htmlFor="">Nascimento:</label>
-                        <input type="date" className={styles.input} />
+                        <div className={styles.textField}>
+                            <label htmlFor="" className={styles.label}>Matrícula:</label>
+                            <input type="text" placeholder="Ex: 1234567" className={styles.input} />
+                        </div>
+                        <div className={styles.textField}>
+                            <label htmlFor="" className={styles.label}>Nascimento:</label>
+                            <input type="date" className={styles.input} />
+                        </div>
                         <Button text="Salvar" />
                     </form>
                 </div>
