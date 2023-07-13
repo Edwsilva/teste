@@ -33,7 +33,7 @@ const Declaracoes = () => {
         <div className={styles.declaracoesContainer}>
           {matriculas.length > 0 ?
             <div className={styles.declaracoes}>
-              <h3>Selecione o tipo da declaração do aluno abaixo:</h3>
+              <h3 className={styles.title2}>Selecione o tipo da declaração do aluno abaixo:</h3>
               <form action="">
                 <div className={styles.inputGroup}>
                   <input type="radio" className={styles.input} id="curso" name="declaracao" value="curso" onChange={() => changeRadioSelect("curso")}/>

@@ -155,10 +155,7 @@
 
     .cadastrarMatricula form{
       flex-direction: column;
-    }
-
-    .cadastrarMatricula > form > :last-child{
-      width: 100%;
+      align-items: flex-start;
     }
   }
 

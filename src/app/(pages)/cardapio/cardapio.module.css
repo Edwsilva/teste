@@ -13,14 +13,33 @@
     line-height: 1.6em;
     margin: 20px 0;
   }
+
+  .title2{
+    font-size: 1.4rem;
+    line-height: 1.6em;
+    margin: 20px 0;
+  }
   
-  .text {
+  .text, 
+  .textI {
     font-size: 1rem;
     line-height: 1.6em;
     color: var(--textDark);
     letter-spacing: 1px;
     font-weight: 300;
     margin-bottom: 20px;
+  }
+
+  .textI{
+    font-style: italic;
+  }
+
+  .cardapio, .sobre{
+    margin: 50px auto;
+  }
+
+  .cardapio{
+    margin-top: 30px;
   }
   
   @media screen and (max-width: 1366px) {

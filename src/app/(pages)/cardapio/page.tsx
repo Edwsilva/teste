@@ -1,5 +1,9 @@
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./cardapio.module.css";
+import Button from "@/app/components/Button/Button";
+
+const data = "28/02/2022";
+const dataFinal = "04/03/2022";
 
 const Cardapio = () => {
   return (
@@ -9,7 +13,16 @@ const Cardapio = () => {
       </Banner>
       <div className={styles.container}>
         <h2 className={styles.title}>Merenda/Cardápio Escolar</h2>
-        <p className={styles.text}>A Alimentação Escolar é direito dos alunos da educação
+        <div className={styles.cardapio}>
+          <h3 className={styles.title2}>Confira o cardápio</h3>
+          <p className={styles.text}>Confira o cardápio da merenda escolar oferecido nas
+            escolas, creches e Espaços de Desenvolvimento Infantil (EDIs).</p>
+          <p className={styles.textI}>Semana de {data} a {dataFinal}</p>
+          <Button text="Cardápio nas Unidades Educacionais"/>
+        </div>
+        <div className={styles.sobre}>
+          <h3 className={styles.title2}>Cardápios do Programa Nacional de Alimentação Escolar</h3>
+          <p className={styles.text}>A Alimentação Escolar é direito dos alunos da educação
           básica pública e dever do Estado. Neste sentido, na Cidade do Rio de Janeiro, o
           Programa Nacional de Alimentação Escolar (PNAE), destinado às escolas e creches,
           tem o objetivo de garantir às crianças matriculadas nas unidades municipais o
@@ -23,13 +36,16 @@ const Cardapio = () => {
           de julho de 2009, são elaborados pela Unidade de Nutrição e Segurança
           Alimentar Annes Dias para orientação das unidades escolares da Rede Municipal
           de Ensino.</p>
-        <p className={styles.text}>O plano alimentar é composto por quatro semanas de cardápios (semana A, 
-          semana B, semana C e semana D) de acordo com o tipo de refeição a ser fornecida. 
-          As refeições levam em consideração o tempo de permanência do aluno e a faixa 
+        <p className={styles.text}>O plano alimentar é composto por quatro semanas de cardápios (semana A,
+          semana B, semana C e semana D) de acordo com o tipo de refeição a ser fornecida.
+          As refeições levam em consideração o tempo de permanência do aluno e a faixa
           etária do aluno da unidade escolar.</p>
-        <p className={styles.text}>Os cardápios são os mesmos para toda a rede municipal de ensino e a sua execução 
-          ocorre de forma alternada, ou seja, as Coordenadorias Regionais de Educação (CRE) 
+        <p className={styles.text}>Os cardápios são os mesmos para toda a rede municipal de ensino e a sua execução
+          ocorre de forma alternada, ou seja, as Coordenadorias Regionais de Educação (CRE)
           utilizam semanas diferentes, conforme anexos.</p>
+        <Button text="Sobre o Cardápio da Alimentação Escolar"/>
+        </div>
+        
       </div>
     </div>
   )
