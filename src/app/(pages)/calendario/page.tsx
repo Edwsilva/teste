@@ -11,12 +11,14 @@ const Calendario = () => {
                 <h1>Calendário</h1>
             </Banner>
             <div className={styles.container}>
-                <h2 className={styles.title}>Calendário Escolar</h2>
-                <p className={styles.textI}>Atenção: Para visualizar o cardápio escolar,
-                    será necessário habilitar os POP-UPS na barra de endereços do seu
-                    navegador</p>
-                <p className={styles.textI}>Ano {ano}</p>
-                <Button text="Calendário Escolar"/>
+                <div className={styles.calendario}>
+                    <h2 className={styles.title}>Calendário Escolar</h2>
+                    <p className={styles.textI}>Atenção: Para visualizar o cardápio escolar,
+                        será necessário habilitar os POP-UPS na barra de endereços do seu
+                        navegador</p>
+                    <p className={styles.textI}>Ano {ano}</p>
+                    <Button text="Calendário Escolar" />
+                </div>
             </div>
         </div>
     )

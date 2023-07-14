@@ -7,6 +7,10 @@
     max-width: 1366px;
     margin: 0 auto;
   }
+
+  .calendario{
+    margin: 0 auto 50px auto;
+  }
   
   .title {
     font-size: 1.6rem;
