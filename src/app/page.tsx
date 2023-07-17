@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import Button from "./components/Button/Button";
-import { HiBookOpen } from "react-icons/hi";
+import {BsCardList, BsCalendarDate} from "react-icons/bs";
+import {IoRestaurantOutline, IoDocumentTextOutline} from "react-icons/io5";
 import CarouselExample from "./components/Carousel/Carousel";
 import Banner from "./components/Banner/Banner";
 
@@ -8,66 +9,62 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Banner type="overlay" banner="banner">
-        <h1 className={styles.bannerTitle}>Boletim Escolar Carioca</h1>
+        <h1 className={styles.bannerTitle}>Portal do Aluno Carioca</h1>
         <p className={styles.bannerText}>
           Fique por dentro de tudo mesmo fora da escola
         </p>
-        <Button text="Agende uma aula" />
+        <Button text="Confira seu boletim" />
       </Banner>
       <div className={styles.container}>
         <div className={styles.sectionB}>
           <div className={styles.sectionB1}>
-            <h2 className={styles.title}>O que nós ensinamos?</h2>
+            <h2 className={styles.title}>O que nós fazemos?</h2>
             <p className={styles.text}>
-              Sou um parágrafo. Aqui você pode adicionar seu texto. É fácil,
-              basta clicar em "Editar texto" ou clicar duas vezes sobre mim para
-              editar o conteúdo, a fonte e mais.
+              O Portal do Aluno Carioca reúne diversos serviços direcionados 
+              ao aluno da rede municipal. Cadastre a matrícula de seu filho 
+              na página "Matrículas" para utilizar nossos serviços.
             </p>
-            <Button text="Sobre nós" />
+            <Button text="Ir até Matrículas" />
           </div>
           <div className={styles.sectionB2}>
             <div className={styles.cardContainer}>
               <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Português</h3>
+                <h3 className={styles.cardTitle}>Boletim</h3>
                 <div className={styles.cardIcon}>
-                  <HiBookOpen className={styles.icon} />
+                  <BsCardList className={styles.icon} />
                 </div>
                 <p className={styles.cardContent}>
-                  Sou um parágrafo. Clique aqui para adicionar e editar seu
-                  texto. Compartilhe sua história.
+                  Confira o boletim e frequência escolares.
                 </p>
               </div>
               <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Português</h3>
+                <h3 className={styles.cardTitle}>Calendário</h3>
                 <div className={styles.cardIcon}>
-                  <HiBookOpen className={styles.icon} />
+                  <BsCalendarDate className={styles.icon} />
                 </div>
                 <p className={styles.cardContent}>
-                  Sou um parágrafo. Clique aqui para adicionar e editar seu
-                  texto. Compartilhe sua história.
+                  Veja o calendário escolar do ano letivo.
                 </p>
               </div>
             </div>
 
             <div className={styles.cardContainer}>
               <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Português</h3>
+                <h3 className={styles.cardTitle}>Cardápio</h3>
                 <div className={styles.cardIcon}>
-                  <HiBookOpen className={styles.icon} />
+                  <IoRestaurantOutline className={styles.icon} />
                 </div>
                 <p className={styles.cardContent}>
-                  Sou um parágrafo. Clique aqui para adicionar e editar seu
-                  texto. Compartilhe sua história.
+                  Confira o cardápio da escola.
                 </p>
               </div>
               <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Português</h3>
+                <h3 className={styles.cardTitle}>Declarações</h3>
                 <div className={styles.cardIcon}>
-                  <HiBookOpen className={styles.icon} />
+                  <IoDocumentTextOutline className={styles.icon} />
                 </div>
                 <p className={styles.cardContent}>
-                  Sou um parágrafo. Clique aqui para adicionar e editar seu
-                  texto. Compartilhe sua história.
+                  Emita a declaração de escolaridade.
                 </p>
               </div>
             </div>

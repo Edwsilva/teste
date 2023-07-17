@@ -107,7 +107,7 @@
   }
 
   .cadastrarMatricula > form > :last-child{
-    padding:10px 19px;
+    padding: 7.5px 19px;
   }
 
   .textField{
@@ -123,7 +123,7 @@
 
   .input{
     width: 300px;
-    height: 40.5px;
+    height: 41px;
     padding: 5px;
     border: 1px solid var(--text);
     outline: none;
