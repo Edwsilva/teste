@@ -4,31 +4,39 @@ import { useState } from "react";
 import styles from "./boletins.module.css";
 
 //MOCKS
-const top4a6 = [
-  { nome: "Escola Alegria", nota: 9.0 },
-  { nome: "Escola Saber", nota: 8.5 },
-  { nome: "Escola Progresso", nota: 7.2 },
-  { nome: "Escola Futuro", nota: 6.8 },
-  { nome: "Escola União", nota: 5.5 },
-  { nome: "Escola Esperança", nota: 4.7 },
-  { nome: "Escola Harmonia", nota: 4.5 },
-  { nome: "Escola Conhecimento", nota: 3.8 },
-  { nome: "Escola Ideal", nota: 3.2 },
-  { nome: "Escola Superação", nota: 2.9 }
-];
 
-const top7a9 = [
-  { nome: "Escola Vencedores", nota: 9.8 },
-  { nome: "Escola Progresso II", nota: 9.5 },
-  { nome: "Escola Conquista", nota: 8.7 },
-  { nome: "Escola Sabedoria", nota: 8.2 },
-  { nome: "Escola União II", nota: 7.9 },
-  { nome: "Escola Futuro II", nota: 7.5 },
-  { nome: "Escola Esperança II", nota: 6.9 },
-  { nome: "Escola Harmonia II", nota: 6.4 },
-  { nome: "Escola Ideal II", nota: 5.7 },
-  { nome: "Escola Superação II", nota: 5.1 }
-];
+const topIndice = [
+  {
+    nome: "top4a6",
+    top: [
+      { nome: "Escola Alegria", nota: 9.0 },
+      { nome: "Escola Saber", nota: 8.5 },
+      { nome: "Escola Progresso", nota: 7.2 },
+      { nome: "Escola Futuro", nota: 6.8 },
+      { nome: "Escola União", nota: 5.5 },
+      { nome: "Escola Esperança", nota: 4.7 },
+      { nome: "Escola Harmonia", nota: 4.5 },
+      { nome: "Escola Conhecimento", nota: 3.8 },
+      { nome: "Escola Ideal", nota: 3.2 },
+      { nome: "Escola Superação", nota: 2.9 }
+    ]
+  },
+  {
+    nome: "top7a9",
+    top: [
+      { nome: "Escola Vencedores", nota: 9.8 },
+      { nome: "Escola Progresso II", nota: 9.5 },
+      { nome: "Escola Conquista", nota: 8.7 },
+      { nome: "Escola Sabedoria", nota: 8.2 },
+      { nome: "Escola União II", nota: 7.9 },
+      { nome: "Escola Futuro II", nota: 7.5 },
+      { nome: "Escola Esperança II", nota: 6.9 },
+      { nome: "Escola Harmonia II", nota: 6.4 },
+      { nome: "Escola Ideal II", nota: 5.7 },
+      { nome: "Escola Superação II", nota: 5.1 }
+    ]
+  }
+]
 
 const minhasEscolasData = [
   { id: 1, nome: "Comandante Arnaldo Varella" }
@@ -93,7 +101,7 @@ const infoPorAno = [
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
-  const [selectField, setSelectField] = useState();
+  const [selectField, setSelectField] = useState("");
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">
@@ -114,7 +122,7 @@ const Boletins = () => {
           <div className={styles.tableOptions}>
             <span className={styles.selectField}>
               <label htmlFor="" className={styles.label}>Minhas Escolas:</label>
-              <select name="minhasEscolas" id="minhasEscolas" className={styles.select}>
+              <select name="minhasEscolas" id="minhasEscolas" className={styles.select} onChange={(e) => setSelectField(e.target.value)}>
                 <option value="">Selecione</option>
                 {minhasEscolasData.map(escola => (
                   <option value={escola.nome} key={escola.id}>{escola.nome}</option>
@@ -124,7 +132,7 @@ const Boletins = () => {
             <p className={`${styles.text} ${styles.ou}`}>ou</p>
             <span className={styles.selectField}>
               <label htmlFor="" className={styles.label}>Ano:</label>
-              <select name="ano" id="ano" className={styles.select}>
+              <select name="ano" id="ano" className={styles.select} onChange={(e) => setSelectField(e.target.value)}>
                 <option value="">Selecione</option>
                 {anosData.map((ano, i) => (
                   <option value={ano} key={i}>{ano}</option>
@@ -137,9 +145,13 @@ const Boletins = () => {
             <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
             <table className={styles.table}>
               <thead className={styles.tHead}>
-                {/* <tr className={styles.tHeadRow}>
-                  <th className={styles.tHeadCell1} rowSpan={4}>Ano</th>
-                </tr> */}
+                {selectField === "" ?
+                  ""
+                  :
+                  <tr className={styles.tHeadRow}>
+                    <th className={styles.tHeadCell1} rowSpan={4}>Ano</th>
+                  </tr>
+                }
                 <tr className={styles.tHeadRow}>
                   <th className={styles.tHeadCell1} rowSpan={4}>Escolas da Região</th>
                   <th className={styles.tHeadCell2}>IDEB</th>
@@ -149,17 +161,19 @@ const Boletins = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedTable === 1 ? top4a6.map(({ nome, nota }, i) => (
+                {selectField === "" ? topIndice[selectedTable - 1].top.map(({ nome, nota }, i) => (
                   <tr className={styles.tRow} key={i}>
                     <th className={styles.tCell}>{nome}</th>
                     <th className={styles.tCell}>{nota}</th>
                   </tr>
-                )) : top7a9.map(({ nome, nota }, i) => (
+                )) : infoPorEscola[selectedTable - 1].info.map((info, i) => (
                   <tr className={styles.tRow} key={i}>
-                    <th className={styles.tCell}>{nome}</th>
-                    <th className={styles.tCell}>{nota}</th>
+                    <th className={styles.tCell}>{info.ano}</th>
+                    <th className={styles.tCell}>{info.nome}</th>
+                    <th className={styles.tCell}>{info.nota}</th>
                   </tr>
-                ))}
+                ))
+                }
               </tbody>
             </table>
           </div>
