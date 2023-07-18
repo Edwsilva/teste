@@ -4,7 +4,6 @@ import { useState } from "react";
 import styles from "./boletins.module.css";
 
 //MOCKS
-
 const topIndice = [
   {
     nome: "top4a6",
@@ -96,12 +95,14 @@ const infoPorAno = [
     ]
   }
 ]
-
 //FIM DOS MOCKS
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
+  const [escolaField, setEscolaField] = useState<string>("");
+  const [anoField, setAnoField] = useState<string>("");
   const [selectField, setSelectField] = useState("");
+
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">
@@ -122,7 +123,13 @@ const Boletins = () => {
           <div className={styles.tableOptions}>
             <span className={styles.selectField}>
               <label htmlFor="" className={styles.label}>Minhas Escolas:</label>
-              <select name="minhasEscolas" id="minhasEscolas" className={styles.select} onChange={(e) => setSelectField(e.target.value)}>
+              <select name="minhasEscolas" id="minhasEscolas" className={styles.select}
+                value={escolaField}
+                onChange={(e) => {
+                  setEscolaField(e.target.value);
+                  setAnoField("");
+                  setSelectField(e.target.value);
+                }}>
                 <option value="">Selecione</option>
                 {minhasEscolasData.map(escola => (
                   <option value={escola.nome} key={escola.id}>{escola.nome}</option>
@@ -132,7 +139,13 @@ const Boletins = () => {
             <p className={`${styles.text} ${styles.ou}`}>ou</p>
             <span className={styles.selectField}>
               <label htmlFor="" className={styles.label}>Ano:</label>
-              <select name="ano" id="ano" className={styles.select} onChange={(e) => setSelectField(e.target.value)}>
+              <select name="ano" id="ano" className={styles.select}
+                value={anoField}
+                onChange={(e) => {
+                  setAnoField(e.target.value);
+                  setEscolaField("");
+                  setSelectField(e.target.value);
+                }}>
                 <option value="">Selecione</option>
                 {anosData.map((ano, i) => (
                   <option value={ano} key={i}>{ano}</option>
@@ -147,10 +160,10 @@ const Boletins = () => {
               <thead className={styles.tHead}>
                 {selectField === "" ?
                   ""
-                  :
-                  <tr className={styles.tHeadRow}>
-                    <th className={styles.tHeadCell1} rowSpan={4}>Ano</th>
-                  </tr>
+                  : anoField === "" ?
+                    <tr className={styles.tHeadRow}>
+                      <th className={styles.tHeadCell1} rowSpan={4}>Ano</th>
+                    </tr> : ""
                 }
                 <tr className={styles.tHeadRow}>
                   <th className={styles.tHeadCell1} rowSpan={4}>Escolas da Região</th>
@@ -166,13 +179,21 @@ const Boletins = () => {
                     <th className={styles.tCell}>{nome}</th>
                     <th className={styles.tCell}>{nota}</th>
                   </tr>
-                )) : infoPorEscola[selectedTable - 1].info.map((info, i) => (
-                  <tr className={styles.tRow} key={i}>
-                    <th className={styles.tCell}>{info.ano}</th>
-                    <th className={styles.tCell}>{info.nome}</th>
-                    <th className={styles.tCell}>{info.nota}</th>
-                  </tr>
-                ))
+                )) :
+                  escolaField === "" ? infoPorAno[selectedTable - 1].top.map(({ nome, nota }, i) => (
+                    <tr className={styles.tRow} key={i}>
+                      <th className={styles.tCell}>{nome}</th>
+                      <th className={styles.tCell}>{nota}</th>
+                    </tr>
+                  ))
+                    :
+                    infoPorEscola[selectedTable - 1].info.map(({ ano, nome, nota }, i) => (
+                      <tr className={styles.tRow} key={i}>
+                        <th className={styles.tCell}>{ano}</th>
+                        <th className={styles.tCell}>{nome}</th>
+                        <th className={styles.tCell}>{nota}</th>
+                      </tr>
+                    ))
                 }
               </tbody>
             </table>
