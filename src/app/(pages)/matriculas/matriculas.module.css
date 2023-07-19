@@ -36,49 +36,29 @@
     gap: 30px;
   }
 
-  .matricula, .matriculaSelected{
+  .matricula{
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    cursor: pointer;
     border-radius: 5px;
-    width: 200px;
-    height: 100px;
+    width: 250px;
+    height: 125px;
     border: 1.5px solid var(--text);
-    transition: border ease .5s;
     gap: 5px;
-  }
-
-  .matricula:hover, 
-  .matriculaSelected{
-    border-color: var(--primary);
-  }
-
-  .matricula:hover > .matriculaTitle,
-  .matriculaSelected > .matriculaTitle{
-    color: #000000;
-  }
-  
-  .matricula:hover > .matriculaNumber,
-  .matriculaSelected > .matriculaNumber{
-    color: var(--textDark);
   }
   
   .icon{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
     position: absolute;
-    right: -7.5px;
-    top: -7.5px;
-    color: white;
-    background-color: var(--primary);
+    right: 5px;
+    top: 10px;
+    color: var(--text);
   }
 
   .matriculaTitle{
@@ -92,6 +72,41 @@
     color: var(--text);
   }
 
+  .dropdown,
+  .dropdownVisible{
+    list-style: none;
+    position: absolute;
+    left: 225px;
+    top: 30px;
+    border: 1px solid var(--text);
+    background-color: white;
+    border-radius: 5px;
+    z-index: 1;
+    width: max-content;
+    display: none;
+  }
+
+  .dropdownVisible{
+    display: block;
+  }
+
+  .dropdownItem{
+    font-size: 1rem;
+  }
+  
+  .dropdownButton{
+    padding: 7.5px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+  }
+
+  .dropdownButton:hover{
+    background-color: var(--textLighter2);
+  }
+
   /*Form Cadastro*/
   .cadastrarMatricula{
     margin: 50px auto;
@@ -99,15 +114,15 @@
     flex-direction: column;
   }
 
-  .cadastrarMatricula form{
+  .cadastrarMatricula .form{
     display: flex;
     align-items: flex-end;
     gap: 20px;
     width: fit-content;
   }
 
-  .cadastrarMatricula > form > :last-child{
-    padding: 7.5px 19px;
+  .cadastrarMatricula > .form > :last-child{
+    padding: 10.25px 19px;
   }
 
   .textField{

@@ -2,6 +2,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import './globals.css';
 import { Roboto } from 'next/font/google';
+import { ReduxProvider } from '@/redux/provider';
 
 const roboto = Roboto({ weight: ['100', '300', '400', '500', '700', '900'], subsets: ['latin'] });
 
@@ -23,9 +24,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
       </head>
       <body className={roboto.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   )
