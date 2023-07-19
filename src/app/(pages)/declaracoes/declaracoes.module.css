@@ -33,10 +33,6 @@
   margin: 50px auto;
 }
 
-.declaracoes > form > :last-child{
-  padding: 10px 19px;
-}
-
 .inputGroup{
   display: flex;
   align-items: center;
@@ -71,6 +67,67 @@
   background-color: var(--primary);
   color: white;
   border-color: var(--primary);
+}
+
+/*Matriculas*/
+.matriculaDropdown{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid var(--text);
+  color: var(--textDark);
+  border-radius: 5px;
+}
+
+.matriculaGroup{
+  display: flex;
+  gap: 15px;
+}
+
+.iconButton {
+  cursor: pointer;
+  display: block;
+  text-align: right;
+  border: none;
+  background: none;
+  color: var(--primary);
+}
+
+.menuIcon span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--primary);
+  transition: transform .3s ease;
+}
+
+.menuIcon span:nth-child(1),
+.menuIcon span:nth-child(2){
+  margin-bottom: 5px;
+}
+
+.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6.5px, 4px);
+}
+
+.open span:nth-child(2) {
+  opacity: 0;
+
+}
+
+.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5.5px, -3.5px);
+}
+
+.declaracao{
+  text-align: center;
+  display: none;
+}
+
+.declaracaoVisible{
+  display: block;
 }
 
 @media screen and (max-width: 1366px) {

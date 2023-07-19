@@ -21,9 +21,11 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
+    const [matricula, setMatricula] = useState("");
+    const [nascimento, setNascimento] = useState("");
 
     const dispatch = useDispatch<AppDispatch>();
-    const matriculas = useAppSelector((state) => state.persistedReducer.matriculas.matriculas);
+    const matriculas = useAppSelector((state) => state.matriculas.matriculas);
 
     const toggleDropdown = (index: number) => {
         setDropdownVisible((prevState) => {
@@ -46,14 +48,14 @@ const Matriculas = () => {
                         da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                         :
                         <div className={styles.matriculas}>
-                            {matriculas.map(({ id, nome, matricula }, index) => (
-                                <span className={styles.matricula} key={id}>
+                            {matriculas.map(({ nome, matricula }, index) => (
+                                <span className={styles.matricula} key={index}>
                                     <span className={styles.icon} onClick={() => toggleDropdown(index)}>
                                         <BsThreeDotsVertical size={20} />
                                     </span>
                                     <ul className={`${styles.dropdown} ${dropdownVisible[index] ? styles.dropdownVisible : ''}`}>
                                         <li className={styles.dropdownItem}>
-                                            <button className={styles.dropdownButton} onClick={() => { }}>Remover</button>
+                                            <button className={styles.dropdownButton} onClick={() => { dispatch(removeMatricula({ nome: nascimento, matricula })) }}>Remover</button>
                                         </li>
                                     </ul>
                                     <h4 className={styles.matriculaTitle}>{nome}</h4>
@@ -65,19 +67,23 @@ const Matriculas = () => {
                 </div>
                 <div className={styles.cadastrarMatricula}>
                     <h3 className={styles.title2}>Incluir nova matrícula</h3>
-                    {/* <form action=""> */}
                     <div className={styles.form}>
                         <div className={styles.textField}>
                             <label htmlFor="" className={styles.label}>Matrícula:</label>
-                            <input type="text" placeholder="Ex: 1234567" className={styles.input} />
+                            <input type="text" placeholder="Ex: 1234567" className={styles.input} value={matricula} onChange={(e) => setMatricula(e.target.value)} />
                         </div>
                         <div className={styles.textField}>
                             <label htmlFor="" className={styles.label}>Nascimento:</label>
-                            <input type="date" className={styles.input} />
+                            <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
                         </div>
-                        <Button text="Salvar" fn={() => { dispatch(addMatricula({ id: 7, nome: "Eduardo", matricula: "1234567" })) }} />
+                        <Button text="Salvar" fn={() => {
+                            if (nascimento !== "" && matricula !== "") {
+                                dispatch(addMatricula({ nome: nascimento, matricula: matricula }))
+                                setMatricula("");
+                                setNascimento("");
+                            }
+                        }} />
                     </div>
-                    {/* </form> */}
                 </div>
             </div>
         </div>

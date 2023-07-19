@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 type Matricula = {
-  id: number;
   nome: string;
   matricula: string;
 }
