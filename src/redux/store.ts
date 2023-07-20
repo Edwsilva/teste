@@ -1,13 +1,13 @@
-import {configureStore, combineReducers} from "@reduxjs/toolkit";
-import {persistStore, persistReducer} from "redux-persist";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import matriculasReducer from "./features/matriculas-slice";
-import { TypedUseSelectorHook ,useSelector} from "react-redux";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 const persistConfig = {
-  key: 'root',
+  key: "matriculas",
   storage,
-}
+};
 
 const reducer = combineReducers({
   matriculas: matriculasReducer,
@@ -17,6 +17,14 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
+export const persistor = persistStore(store, null, () => {
+  console.log("Redux state rehydration completed!");
 });
 
 export type RootState = ReturnType<typeof store.getState>;

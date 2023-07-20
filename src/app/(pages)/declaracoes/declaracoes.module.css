@@ -70,15 +70,31 @@
 }
 
 /*Matriculas*/
-.matriculaDropdown{
+.matriculaDropdown,
+.matriculaDropdownVisible{
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  margin-top: 20px;
-  border: 1px solid var(--text);
   color: var(--textDark);
+}
+
+.matriculaDropdownVisible{
+  border-bottom: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.matricula{
+  margin: 10px 0;
+  border: 1px solid var(--text);
   border-radius: 5px;
+}
+
+.matriculaDropdown:hover button > .menuIcon span,
+.matriculaDropdownVisible:hover button > .menuIcon span{
+  background-color: var(--primary);
 }
 
 .matriculaGroup{
@@ -92,14 +108,13 @@
   text-align: right;
   border: none;
   background: none;
-  color: var(--primary);
 }
 
 .menuIcon span {
   display: block;
   width: 20px;
   height: 2px;
-  background-color: var(--primary);
+  background-color: var(--text);
   transition: transform .3s ease;
 }
 
@@ -121,13 +136,115 @@
   transform: rotate(-45deg) translate(5.5px, -3.5px);
 }
 
+/*Declaracao Impressa*/
 .declaracao{
   text-align: center;
   display: none;
+  margin: 30px 5%;
+  border-top: 1px solid var(--textLight);
 }
 
 .declaracaoVisible{
   display: block;
+}
+
+.declaracaoLogo{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 10px 0 50px 0;
+}
+
+.nameGroup{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title6{
+  font-size: .8rem;
+  font-weight: normal;
+  line-height: 1.4em;
+  text-decoration: underline;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.text6{
+  font-size: .75rem;
+  line-height: 1.2em;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tHead{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.tHeadCell{
+  padding: 10px 0;
+  text-align: center;
+}
+
+.tRow{
+  border: 1px solid var(--text);
+}
+
+.tCell{
+  border: 1px solid black;
+  text-align: left;
+  padding: 5px;
+  font-weight: normal;
+  font-size: .9rem;
+}
+
+.tCellText{
+  text-transform: uppercase;
+}
+
+.declaracaoText,
+.declaracaoText2,
+.declaracaoText3{
+  text-align: left;
+  margin: 50px 0;
+}
+
+.declaracaoSignature{
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.signature{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.signatureLine{
+  display: block;
+  background-color: black;
+  width: 300px;
+  height: 1px;
+  margin-bottom: 5px;
+}
+
+.declaracaoText2{
+  font-weight: 600;
+}
+
+.validadeTitle{
+  margin-bottom: 10px;
+}
+
+.declaracaoValidate{
+  margin: 150px auto 100px auto;
 }
 
 @media screen and (max-width: 1366px) {
