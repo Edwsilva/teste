@@ -1,4 +1,4 @@
-import styles from "./matricula.module.css";
+import styles from "./matriculadropdown.module.css";
 import Image from "next/image";
 import Button from "../Button/Button";
 import logoDeclara from "../../../../public/images/logodeclara.png";
@@ -16,7 +16,7 @@ type Props = {
 
 const MatriculaDropdown = ({ i, nome, matricula, selected, dropdownVisible, toggle }: Props) => {
   return (
-    < div className={styles.matricula} key={i} >
+    < div className={styles.matricula} >
       <div className={dropdownVisible === true ? styles.matriculaDropdownVisible : styles.matriculaDropdown} onClick={() => {
         toggle(i);
       }}>

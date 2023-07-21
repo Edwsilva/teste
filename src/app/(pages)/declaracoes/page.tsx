@@ -56,7 +56,7 @@ const Declaracoes = () => {
                   aproveitar todos os recursos disponíveis.</h3>
                 :
                 matriculas.map(({ matricula, nome }, i) => (
-                  <MatriculaDropdown nome={nome} matricula={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} />
+                  <MatriculaDropdown nome={nome} matricula={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
                 ))
               }
             </div>

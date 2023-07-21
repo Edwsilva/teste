@@ -2,22 +2,11 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { removeMatricula, addMatricula } from "../../../redux/features/matriculas-slice";
-import { useDispatch, useSelector } from "react-redux";
+import { addMatricula } from "../../../redux/features/matriculas-slice";
+import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-
-//MOCK
-// const matriculas = [
-//     { id: 1, matricula: "1234567", nome: "Sofia Rodriguez" },
-//     { id: 2, matricula: "1234567", nome: "Lucas Thompson" },
-//     { id: 3, matricula: "1234567", nome: "Isabella Parker" },
-//     { id: 4, matricula: "1234567", nome: "Gabriel Anderson" },
-//     { id: 5, matricula: "1234567", nome: "Valentina Mitchell" },
-//     { id: 6, matricula: "1234567", nome: "Benjamin Campbell" }
-// ]
-
+import Matricula from "@/app/components/Matricula/Matricula";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
@@ -49,18 +38,7 @@ const Matriculas = () => {
                         :
                         <div className={styles.matriculas}>
                             {matriculas.map(({ nome, matricula }, index) => (
-                                <span className={styles.matricula} key={index}>
-                                    <span className={styles.icon} onClick={() => toggleDropdown(index)}>
-                                        <BsThreeDotsVertical size={20} />
-                                    </span>
-                                    <ul className={`${styles.dropdown} ${dropdownVisible[index] ? styles.dropdownVisible : ''}`}>
-                                        <li className={styles.dropdownItem}>
-                                            <button className={styles.dropdownButton} onClick={() => { dispatch(removeMatricula({ nome: nascimento, matricula })) }}>Remover</button>
-                                        </li>
-                                    </ul>
-                                    <h4 className={styles.matriculaTitle}>{nome}</h4>
-                                    <p className={styles.matriculaNumber}>{matricula}</p>
-                                </span>
+                                <Matricula i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
                             ))}
                         </div>
                     }
