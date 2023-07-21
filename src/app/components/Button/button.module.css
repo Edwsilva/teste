@@ -8,6 +8,14 @@
     font-weight: 500;
 }
 
+.p10{
+    padding: 9px;
+}
+
+.radius{
+    border-radius: 5px;
+}
+
 .button:hover{
     transition: .3s all ease;
     background-color: transparent;

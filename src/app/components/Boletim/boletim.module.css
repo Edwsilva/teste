@@ -1,0 +1,14 @@
+.boletim{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--text);
+  border-radius: 5px;
+  padding: 5px 5px 5px 10px;
+  margin: 5px 0;
+}
+
+.boletimGroup{
+  display: flex;
+  gap: 15px;
+}

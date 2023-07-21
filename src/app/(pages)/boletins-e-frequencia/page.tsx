@@ -1,7 +1,9 @@
 'use client'
 import Banner from "@/app/components/Banner/Banner";
 import { useState } from "react";
+import { useAppSelector } from "@/redux/store";
 import styles from "./boletins.module.css";
+import Boletim from "@/app/components/Boletim/Boletim";
 
 //MOCKS
 const topIndice = [
@@ -103,6 +105,8 @@ const Boletins = () => {
   const [anoField, setAnoField] = useState<string>("");
   const [selectField, setSelectField] = useState("");
 
+  const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">
@@ -113,6 +117,15 @@ const Boletins = () => {
           <h2 className={styles.title}>Boletim</h2>
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
+          {matriculas.length === 0 ?
+            <h3 className={styles.title2}>No momento você não possui matrícula cadastrada.
+              Acesse a página "Matrículas" e cadastre as informações do aluno para
+              aproveitar todos os recursos disponíveis.</h3>
+            :
+            matriculas.map(({ nome, matricula }, i) => (
+              <Boletim nome={nome} matricula={matricula} />
+            ))
+          }
         </div>
         <div className={styles.top10}>
           <h3 className={styles.title2}>Top 10 do Índice de Desenvolvimento
