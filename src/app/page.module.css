@@ -28,6 +28,14 @@
   margin-bottom: 20px;
 }
 
+.bannerTitle{
+  margin-bottom: 10px;
+}
+
+.bannerText{
+  margin-bottom: 10px;
+}
+
 /*Section B*/
 .sectionB {
   margin: 50px 0;

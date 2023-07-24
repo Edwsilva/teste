@@ -1,9 +1,10 @@
 "use client"
+import { Dispatch, SetStateAction } from "react";
 import styles from "./button.module.css";
 
 type ButtonProps = {
     text: string;
-    fn?: () => void;
+    fn?: () => void | Dispatch<SetStateAction<boolean>>;
     p?: "p-10";
     radius?: boolean;
 }

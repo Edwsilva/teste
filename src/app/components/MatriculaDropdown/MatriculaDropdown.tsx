@@ -2,7 +2,6 @@ import styles from "./matriculadropdown.module.css";
 import Image from "next/image";
 import Button from "../Button/Button";
 import logoDeclara from "../../../../public/images/logodeclara.png";
-import imgsrc from "../../../../public/images/logoNovo.png";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 

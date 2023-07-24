@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
-import { Dropdown } from "react-bootstrap";
+// import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 
 const links = [
@@ -60,7 +60,7 @@ const Navbar = () => {
           }
           <Login />
         </div>
-        <div className={styles.responsiveLinks}>
+        {/* <div className={styles.responsiveLinks}>
           <Dropdown className={styles.dropdown}>
             <Dropdown.Toggle className={styles.dropdownToggle}>
               Links
@@ -73,7 +73,7 @@ const Navbar = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Login />
-        </div>
+        </div> */}
 
         <div className={styles.mobileNav}>
           <button

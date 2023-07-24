@@ -2,7 +2,6 @@ import styles from "./page.module.css";
 import Button from "./components/Button/Button";
 import {BsCardList, BsCalendarDate} from "react-icons/bs";
 import {IoRestaurantOutline, IoDocumentTextOutline} from "react-icons/io5";
-import CarouselExample from "./components/Carousel/Carousel";
 import Banner from "./components/Banner/Banner";
 
 export default function Home() {
@@ -80,9 +79,9 @@ export default function Home() {
                 Sou um parágrafo. Clique aqui para adicionar e editar o texto.
               </p>
             </div>
-            <div className={styles.sectionC2}>
+            {/* <div className={styles.sectionC2}>
               <CarouselExample />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

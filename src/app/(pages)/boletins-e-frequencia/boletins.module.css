@@ -1,174 +1,257 @@
 .main {
-    margin-top: 150px;
-    flex: 1;
+  margin-top: 150px;
+  flex: 1;
+}
+
+.container {
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+.info,
+.top10 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.6rem;
+  line-height: 1.6em;
+  margin: 20px 0;
+}
+
+.title2 {
+  font-size: 1.4rem;
+  line-height: 1.6em;
+  margin: 20px 0;
+}
+
+.text,
+.textI {
+  font-size: 1rem;
+  line-height: 1.6em;
+  color: var(--textDark);
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.textI {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/*Top10 Section*/
+
+.tableOptions {
+  display: flex;
+  align-items: flex-end;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.selectField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  /* color: var(--textDark); */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.select {
+  padding: 5px;
+}
+
+.ou {
+  margin-bottom: 0;
+}
+
+.tablesContainer {
+  position: relative;
+  width: 100%;
+  margin: 50px auto;
+  border: 1px solid var(--text);
+  background-color: white;
+}
+
+.table {
+  width: 90%;
+  margin: 20px auto;
+  border-spacing: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.tableSelect1,
+.tableSelect2 {
+  position: absolute;
+  cursor: pointer;
+  border-top: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+  border-right: 1px solid var(--text);
+  width: 120px;
+  height: 40px;
+  top: -42px;
+  border-top-right-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+  background-color: white;
+}
+
+.tableSelect1 {
+  left: -1px;
+}
+
+.tableSelect2 {
+  left: 124px;
+}
+
+.tableSelectSelected {
+  top: -40px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.tHead {
+  background-color: var(--primary);
+  color: white;
+}
+
+.tHeadCell1,
+.tHeadCell2,
+.tHeadCell {
+  padding: 10px 0;
+}
+
+.tHeadCell1 {
+  border-right: 1px solid white;
+}
+
+.tHeadCell2 {
+  border-bottom: 1px solid white;
+}
+
+.tRow {
+  color: var(--textDark);
+}
+
+.tRow:nth-child(even) {
+  background-color: var(--textLighter);
+}
+
+.tCell {
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+/*Section Boletim*/
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--textDark);
+}
+
+.sectionInfo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  color: var(--textDark);
+}
+
+.boletim{
+  margin: 20px auto;
+}
+
+.boletimTable{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.boletimTHead{
+  background-color: var(--primary);
+  color: white;
+}
+
+.boletimTHeadCell{
+  font-weight: normal;
+  padding: 5px;
+}
+
+.boletimTRow{
+  color: var(--textDark);
+}
+
+.boletimTRow {
+  color: var(--textDark);
+}
+
+.boletimTRow:nth-child(even) {
+  background-color: var(--textLighter);
+}
+
+.boletimTCell{
+  font-weight: normal;
+  padding: 5px;
+}
+
+.frequencia{
+  width: 100%;
+  margin: 20px auto;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid var(--textDark);
+}
+
+.legenda{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.legenda1{
+  display: flex;
+  gap: 15px;
+}
+
+.legenda2{
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1366px) {
+  .main {
+    margin-top: 100px;
   }
-  
+
   .container {
-    max-width: 1366px;
-    margin: 0 auto;
+    margin: 0 5%;
   }
+}
 
-  .info, 
-  .top10{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .title {
-    font-size: 1.6rem;
-    line-height: 1.6em;
-    margin: 20px 0;
-  }
-
-  .title2{
-    font-size: 1.4rem;
-    line-height: 1.6em;
-    margin: 20px 0;
-  }
-  
-  .text, 
-  .textI {
-    font-size: 1rem;
+@media screen and (max-width: 768px) {
+  .text {
+    font-size: 0.9rem;
     line-height: 1.6em;
     color: var(--textDark);
     letter-spacing: 1px;
-    font-weight: 300;
+    font-weight: lighter;
     margin-bottom: 20px;
   }
-
-  .textI{
-    font-size: .9rem;
-    font-style: italic;
-  }
-
-  /*Top10 Section*/
-
-  .tableOptions{
-    display: flex;
-    align-items: flex-end;
-    gap: 25px;
-    margin-bottom: 20px;
-  }
-
-  .selectField{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .label{
-    /* color: var(--textDark); */
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  .select{
-    padding: 5px;
-  }
-
-  .ou{
-    margin-bottom: 0;
-  }
-
-  .tablesContainer{
-    position: relative;
-    width: 100%;
-    margin: 50px auto;
-    border: 1px solid var(--text);
-    background-color: white;
-  }
-
-  .table{
-    width: 90%;
-    margin: 20px auto;
-    border-spacing: 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    text-align: center;
-  }
-
-  .tableSelect1,
-  .tableSelect2{
-    position: absolute;
-    cursor: pointer;
-    border-top: 1px solid var(--text);
-    border-left: 1px solid var(--text);
-    border-right: 1px solid var(--text);
-    width: 120px;
-    height: 40px;
-    top: -42px;
-    border-top-right-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--text);
-    background-color: white;
-  }
-
-  .tableSelect1{
-    left: -1px;
-  }
-
-  .tableSelect2{
-    left: 124px;
-  }
-
-  .tableSelectSelected{
-    top: -40px;
-    color: var(--primary);
-    font-weight: 500;
-  }
-
-  .tHead{
-    background-color: var(--primary);
-    color: white;
-  }
-
-  .tHeadCell1,
-  .tHeadCell2,
-  .tHeadCell{
-    padding: 10px 0;
-  }
-
-  .tHeadCell1{
-    border-right: 1px solid white;
-  }
-
-  .tHeadCell2{
-    border-bottom: 1px solid white;
-  }
-
-  .tRow{
-    color: var(--textDark);
-  }
-
-  .tRow:nth-child(even){
-    background-color: var(--textLighter);
-  }
-
-  .tCell{
-    font-weight: 400;
-    padding: 10px 0;
-  }
-
-  @media screen and (max-width: 1366px) {
-    .main {
-      margin-top: 100px;
-    }
-  
-    .container {
-      margin: 0 5%;
-    }
-  }
-  
-  @media screen and (max-width: 768px) {
-    .text {
-      font-size: 0.9rem;
-      line-height: 1.6em;
-      color: var(--textDark);
-      letter-spacing: 1px;
-      font-weight: lighter;
-      margin-bottom: 20px;
-    }
-  }
-  
+}
