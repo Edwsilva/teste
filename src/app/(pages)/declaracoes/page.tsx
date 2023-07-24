@@ -7,6 +7,7 @@ import { useAppSelector } from "@/redux/store";
 import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 
+
 const Declaracoes = () => {
   const [selected, setSelected] = useState<RadioProps>("curso");
   const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
