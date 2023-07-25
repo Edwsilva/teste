@@ -156,6 +156,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--textDark);
+  max-height: 600px;
 }
 
 .sectionLogo {
@@ -163,7 +165,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--textDark);
+}
+
+.sectionLogo .title2{
+  margin: 5px auto 10px auto;
 }
 
 .sectionInfo{
@@ -172,34 +177,36 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
-  color: var(--textDark);
 }
 
 .boletim{
   margin: 20px auto;
 }
 
+.boletimTableContainer{
+  overflow-x: scroll;
+}
+
 .boletimTable{
+  min-width: 400px;
   width: 100%;
   border-collapse: collapse;
+}
+
+.boletimTable tbody{
+  border: 1px solid var(--textLighter);
 }
 
 .boletimTHead{
   background-color: var(--primary);
   color: white;
+  border: 1px solid var(--textLighter);
 }
 
 .boletimTHeadCell{
+  border: 1px solid white;
   font-weight: normal;
-  padding: 5px;
-}
-
-.boletimTRow{
-  color: var(--textDark);
-}
-
-.boletimTRow {
-  color: var(--textDark);
+  padding: 2px;
 }
 
 .boletimTRow:nth-child(even) {
@@ -208,12 +215,12 @@
 
 .boletimTCell{
   font-weight: normal;
-  padding: 5px;
+  padding: 1px;
 }
 
 .frequencia{
   width: 100%;
-  margin: 20px auto;
+  margin-bottom: 10px;
   text-align: center;
   padding: 5px;
   border: 1px solid var(--textDark);
@@ -228,11 +235,16 @@
 .legenda1{
   display: flex;
   gap: 15px;
+  font-size: .9rem;
 }
 
 .legenda2{
   display: flex;
   justify-content: space-between;
+}
+
+.legenda2 p{
+  font-size: .8rem;
 }
 
 @media screen and (max-width: 1366px) {

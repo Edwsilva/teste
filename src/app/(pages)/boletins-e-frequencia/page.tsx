@@ -7,6 +7,8 @@ import styles from "./boletins.module.css";
 import Boletim from "@/app/components/Boletim/Boletim";
 import Modal from "react-modal";
 import logoboletim from "../../../../public/images/logoboletim.jpeg";
+import Button from "@/app/components/Button/Button";
+import { IoClose } from "react-icons/io5";
 
 //MOCKS
 const topIndice = [
@@ -127,7 +129,7 @@ const Boletins = () => {
               aproveitar todos os recursos disponíveis.</h3>
             :
             matriculas.map(({ nome, matricula }, i) => (
-              <Boletim nome={nome} matricula={matricula} setModal={setIsOpen} />
+              <Boletim nome={nome} matricula={matricula} setModal={setIsOpen} key={i} />
             ))
           }
         </div>
@@ -217,19 +219,21 @@ const Boletins = () => {
           </div>
         </div>
       </div>
-      <Modal style={{
+      <Modal ariaHideApp={false} style={{
         content: {
-          top: '50%',
+          top: '55%',
           left: '50%',
           right: 'auto',
           bottom: 'auto',
           transform: 'translate(-50%, -50%)',
-          width: '85%',
+          minWidth: '380px',
+          width: '75%',
           height: '75%',
-          paddingRight: 20,
-          paddingLeft: 20,
+          padding: 10,
+          // overflow: "auto",
         },
       }} isOpen={modalIsOpen}>
+        <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setIsOpen(!modalIsOpen)} />
         <div className={styles.modal}>
           <div className={styles.sectionLogo}>
             <Image src={logoboletim} alt="Logo Prefeitura" />
@@ -243,336 +247,338 @@ const Boletins = () => {
             <span><b>Código: </b>2011116500200</span>
           </div>
           <div className={styles.boletim}>
-            <table className={styles.boletimTable}>
-              <thead className={styles.boletimTHead}>
-                <tr className={styles.boletimTHeadRow}>
-                  <th rowSpan={2} className={styles.boletimTHeadCell}>Componente Curricular</th>
-                  <th colSpan={4} className={styles.boletimTHeadCell}>1º COC</th>
-                  <th colSpan={4} className={styles.boletimTHeadCell}>2º COC</th>
-                  <th colSpan={4} className={styles.boletimTHeadCell}>3º COC</th>
-                  <th colSpan={4} className={styles.boletimTHeadCell}>4º COC</th>
-                  <th className={styles.boletimTHeadCell}>TOT</th>
-                  <th className={styles.boletimTHeadCell}>5º COC</th>
-                  <th colSpan={3} className={styles.boletimTHeadCell}>Resultado</th>
-                </tr>
-                <tr className={styles.boletimTHeadRow}>
-                  <th className={styles.boletimTHeadCell}>Conc.</th>
-                  <th className={styles.boletimTHeadCell}>Nota</th>
-                  <th className={styles.boletimTHeadCell}>Faltas</th>
-                  <th className={styles.boletimTHeadCell}>RP.</th>
-                  <th className={styles.boletimTHeadCell}>Conc.</th>
-                  <th className={styles.boletimTHeadCell}>Nota</th>
-                  <th className={styles.boletimTHeadCell}>Faltas</th>
-                  <th className={styles.boletimTHeadCell}>RP.</th>
-                  <th className={styles.boletimTHeadCell}>Conc.</th>
-                  <th className={styles.boletimTHeadCell}>Nota</th>
-                  <th className={styles.boletimTHeadCell}>Faltas</th>
-                  <th className={styles.boletimTHeadCell}>RP.</th>
-                  <th className={styles.boletimTHeadCell}>Conc.</th>
-                  <th className={styles.boletimTHeadCell}>Nota</th>
-                  <th className={styles.boletimTHeadCell}>Faltas</th>
-                  <th className={styles.boletimTHeadCell}>RP.</th>
-                  <th className={styles.boletimTHeadCell}>Notas</th>
-                  <th className={styles.boletimTHeadCell}>2ª Época</th>
-                  <th className={styles.boletimTHeadCell}>Conc. Final</th>
-                  <th className={styles.boletimTHeadCell}>Média Final</th>
-                  <th className={styles.boletimTHeadCell}>Tot. Faltas</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th colSpan={22} className={styles.boletimTCell}>Prova Bimestral</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-                <tr className={styles.boletimTRow}>
-                  <th className={styles.boletimTCell}>Conceito Global</th>
-                  <th className={styles.boletimTCell}>B</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>26</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>MB</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>8</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}></th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>-</th>
-                  <th className={styles.boletimTCell}>34</th>
-                </tr>
-              </tbody>
-            </table>
+            <div className={styles.boletimTableContainer}>
+              <table className={styles.boletimTable}>
+                <thead className={styles.boletimTHead}>
+                  <tr className={styles.boletimTHeadRow}>
+                    <th rowSpan={2} className={styles.boletimTHeadCell}>Componente Curricular</th>
+                    <th colSpan={4} className={styles.boletimTHeadCell}>1º COC</th>
+                    <th colSpan={4} className={styles.boletimTHeadCell}>2º COC</th>
+                    <th colSpan={4} className={styles.boletimTHeadCell}>3º COC</th>
+                    <th colSpan={4} className={styles.boletimTHeadCell}>4º COC</th>
+                    <th className={styles.boletimTHeadCell}>TOT</th>
+                    <th className={styles.boletimTHeadCell}>5º COC</th>
+                    <th colSpan={3} className={styles.boletimTHeadCell}>Resultado</th>
+                  </tr>
+                  <tr className={styles.boletimTHeadRow}>
+                    <th className={styles.boletimTHeadCell}>Conc.</th>
+                    <th className={styles.boletimTHeadCell}>Nota</th>
+                    <th className={styles.boletimTHeadCell}>Faltas</th>
+                    <th className={styles.boletimTHeadCell}>RP.</th>
+                    <th className={styles.boletimTHeadCell}>Conc.</th>
+                    <th className={styles.boletimTHeadCell}>Nota</th>
+                    <th className={styles.boletimTHeadCell}>Faltas</th>
+                    <th className={styles.boletimTHeadCell}>RP.</th>
+                    <th className={styles.boletimTHeadCell}>Conc.</th>
+                    <th className={styles.boletimTHeadCell}>Nota</th>
+                    <th className={styles.boletimTHeadCell}>Faltas</th>
+                    <th className={styles.boletimTHeadCell}>RP.</th>
+                    <th className={styles.boletimTHeadCell}>Conc.</th>
+                    <th className={styles.boletimTHeadCell}>Nota</th>
+                    <th className={styles.boletimTHeadCell}>Faltas</th>
+                    <th className={styles.boletimTHeadCell}>RP.</th>
+                    <th className={styles.boletimTHeadCell}>Notas</th>
+                    <th className={styles.boletimTHeadCell}>2ª Época</th>
+                    <th className={styles.boletimTHeadCell}>Conc. Final</th>
+                    <th className={styles.boletimTHeadCell}>Média Final</th>
+                    <th className={styles.boletimTHeadCell}>Tot. Faltas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th colSpan={22} className={styles.boletimTCell}>Prova Bimestral</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                  <tr className={styles.boletimTRow}>
+                    <th className={styles.boletimTCell}>Conceito Global</th>
+                    <th className={styles.boletimTCell}>B</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>26</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>MB</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>8</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}></th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>-</th>
+                    <th className={styles.boletimTCell}>34</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className={styles.frequencia}>
             <p>O Aluno obteve uma frequência de 93,52%</p>

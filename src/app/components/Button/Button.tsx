@@ -1,9 +1,9 @@
 "use client"
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import styles from "./button.module.css";
 
 type ButtonProps = {
-    text: string;
+    text: ReactNode;
     fn?: () => void | Dispatch<SetStateAction<boolean>>;
     p?: "p-10";
     radius?: boolean;
