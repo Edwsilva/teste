@@ -1,11 +1,12 @@
 import styles from "./page.module.css";
 import Button from "./components/Button/Button";
-import {BsCardList, BsCalendarDate} from "react-icons/bs";
-import {IoRestaurantOutline, IoDocumentTextOutline} from "react-icons/io5";
+import { BsCardList, BsCalendarDate } from "react-icons/bs";
+import { IoRestaurantOutline, IoDocumentTextOutline } from "react-icons/io5";
 import Banner from "./components/Banner/Banner";
 
 export default function Home() {
   return (
+
     <main className={styles.main}>
       <Banner type="overlay" banner="banner">
         <h1 className={styles.bannerTitle}>Portal do Aluno Carioca</h1>
@@ -19,8 +20,8 @@ export default function Home() {
           <div className={styles.sectionB1}>
             <h2 className={styles.title}>O que nós fazemos?</h2>
             <p className={styles.text}>
-              O Portal do Aluno Carioca reúne diversos serviços direcionados 
-              ao aluno da rede municipal. Cadastre a matrícula de seu filho 
+              O Portal do Aluno Carioca reúne diversos serviços direcionados
+              ao aluno da rede municipal. Cadastre a matrícula de seu filho
               na página "Matrículas" para utilizar nossos serviços.
             </p>
             <Button text="Ir até Matrículas" />
@@ -70,8 +71,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className={styles.container2}>
-        <div className={styles.container}>
+      {/* <div className={styles.container2}> */}
+        {/* <div className={styles.container}>
           <div className={styles.sectionC}>
             <div className={styles.sectionC1}>
               <h2 className={styles.title}>Depoimentos</h2>
@@ -79,12 +80,9 @@ export default function Home() {
                 Sou um parágrafo. Clique aqui para adicionar e editar o texto.
               </p>
             </div>
-            {/* <div className={styles.sectionC2}>
-              <CarouselExample />
-            </div> */}
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </main>
   );
 }
