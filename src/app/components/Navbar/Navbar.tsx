@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
-// import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const links = [
   {
@@ -38,7 +38,19 @@ const links = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
   const pathname = usePathname();
+
+  function closeLinks(){
+    setResponsiveLinksOpen(false);
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', closeLinks);
+    return () => {
+      document.removeEventListener('click', closeLinks);
+    }
+  })
 
   return (
     <header className={styles.header}>
@@ -60,20 +72,19 @@ const Navbar = () => {
           }
           <Login />
         </div>
-        {/* <div className={styles.responsiveLinks}>
-          <Dropdown className={styles.dropdown}>
-            <Dropdown.Toggle className={styles.dropdownToggle}>
-              Links
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {links.map((link => (
-                <Dropdown.Item key={link.id}><Link href={link.href} >{link.name}</Link></Dropdown.Item>
-              )))}
-              <Dropdown.Item></Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+        <div className={styles.responsiveLinks}>
+          <div className={styles.responsiveLinksContainer}>
+            <button className={responsiveLinksOpen === true ? `${styles.linksButton} ${styles.linksButtonActive}` : styles.linksButton} onClick={() => setResponsiveLinksOpen(!responsiveLinksOpen)}>
+              <p>Links</p><IoMdArrowDropdown />
+            </button>
+            <div className={responsiveLinksOpen ? styles.rLinksOpen : styles.rLinks}>
+              {links.map((link, i) => (
+                <Link className={styles.rLink} href={link.href} key={`${link} - ${i}`}>{link.name}</Link>
+              ))}
+            </div>
+          </div>
           <Login />
-        </div> */}
+        </div>
 
         <div className={styles.mobileNav}>
           <button

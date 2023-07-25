@@ -155,6 +155,65 @@
   top: 23px;
 }
 
+/*Responsive Links*/
+.responsiveLinksContainer{
+  display: flex;
+  width: 80px;
+  position: relative;
+}
+
+.linksButton{
+  padding: 7.5px 0;
+  display: flex;
+  justify-content: center;
+  border: 0;
+  background-color: transparent;
+  background-color: var(--primary);
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+.linksButtonActive{
+  background-color: var(--primaryDark);
+}
+
+.linksButton:hover{
+  background-color: var(--primaryDark);
+}
+
+
+
+.rLinks{
+  display: none;
+}
+
+.rLinksOpen{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: white;
+  position: absolute;
+  width: max-content;
+  top: calc(100% + 2px);
+  left: 0;
+  border: 1px solid var(--text);
+  border-radius: 5px;
+  padding: 5px 0;
+  color: var(--textDark);
+}
+
+.rLink{
+  padding: 10px 14px;
+}
+
+.rLink:hover{
+  background-color: var(--textLighter2);
+}
+
 /*Responsive*/
 @media screen and (max-width: 1366px) {
   .container {
@@ -165,6 +224,8 @@
 @media screen and (max-width: 1280px){
   .responsiveLinks{
     display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .dropdown{
