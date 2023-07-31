@@ -1,6 +1,6 @@
 'use client'
 import Banner from "@/app/components/Banner/Banner";
-import { useState } from "react";
+import { cache, Suspense, useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/store";
 import Image from "next/image";
 import styles from "./boletins.module.css";
@@ -9,6 +9,20 @@ import Modal from "react-modal";
 import logoboletim from "../../../../public/images/logoboletim.jpeg";
 import Button from "@/app/components/Button/Button";
 import { IoClose } from "react-icons/io5";
+import TopTable from "@/app/components/TopTable/TopTable"
+import next from "next";
+
+type Escola = {
+  nome: string;
+  nota: number;
+};
+
+type TopIndice = {
+  nome: string;
+  top: Escola[];
+};
+
+type TopIndices = TopIndice[];
 
 //MOCKS
 const topIndice = [
@@ -104,14 +118,28 @@ const infoPorAno = [
 ]
 //FIM DOS MOCKS
 
+const getTopIndices = async () => {
+  const res = await fetch("http://localhost:3002/topIndice");
+  const data = await res.json();
+
+  return data;
+}
+
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
   const [escolaField, setEscolaField] = useState<string>("");
   const [anoField, setAnoField] = useState<string>("");
-  const [selectField, setSelectField] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectField, setSelectField] = useState<string>("");
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [topIndices, setTopIndices] = useState<TopIndices>([]);
 
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+
+  useEffect(() => {
+    if (topIndices.length === 0) {
+      getTopIndices().then(res => setTopIndices(res));
+    }
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -175,7 +203,7 @@ const Boletins = () => {
           <div className={styles.tablesContainer}>
             <span className={selectedTable === 1 ? `${styles.tableSelect1} ${styles.tableSelectSelected}` : styles.tableSelect1} onClick={() => setSelectedTable(1)}>4ª a 6ª Série</span>
             <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
-            <table className={styles.table}>
+            {/* <table className={styles.table}>
               <thead className={styles.tHead}>
                 {selectField === "" ?
                   ""
@@ -193,7 +221,7 @@ const Boletins = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectField === "" ? topIndice[selectedTable - 1].top.map(({ nome, nota }, i) => (
+                {selectField === "" ? topIndices[selectedTable - 1].top.map(({ nome, nota }, i) => (
                   <tr className={styles.tRow} key={i}>
                     <th className={styles.tCell}>{nome}</th>
                     <th className={styles.tCell}>{nota}</th>
@@ -215,7 +243,8 @@ const Boletins = () => {
                     ))
                 }
               </tbody>
-            </table>
+            </table> */}
+            <TopTable data={topIndices[selectedTable - 1].top} selectField={selectField} anoField={anoField} escolaField={escolaField} selectedTable={selectedTable} />
           </div>
         </div>
       </div>
@@ -230,7 +259,6 @@ const Boletins = () => {
           width: '75%',
           height: '75%',
           padding: 10,
-          // overflow: "auto",
         },
       }} isOpen={modalIsOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setIsOpen(!modalIsOpen)} />
