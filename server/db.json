@@ -90,5 +90,155 @@
         }
       ]
     }
+  ],
+  
+  "minhasEscolas": [
+    {
+      "id": 1,
+      "nome": "Comandante Arnaldo Varella"
+    }
+  ],
+
+  "anos": [2005, 2007, 2009, 2011, 2013],
+  
+  "infoPorEscola": [
+    {
+      "serie": "4ª a 6ª Série",
+      "info": [
+        {
+          "ano": 2007, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 4.0
+        },
+        {
+          "ano": 2009, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 0.0
+        }
+      ]
+    },
+    {
+      "serie": "7ª a 9ª Série",
+      "info": [
+        {
+          "ano": 2005,
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 3.9
+        },
+        {
+          "ano": 2007, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 4.4
+        },
+        {
+          "ano": 2009, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 3.3
+        },
+        {
+          "ano": 2011, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 3.9
+        },
+        {
+          "ano": 2013, 
+          "nome": "Comandante Arnaldo Varella", 
+          "nota": 4.1
+        }
+      ]
+    }
+  ],
+
+  "infoPorAno": [
+    {
+      "serie": "4ª a 6ª Série",
+      "top": [
+        {
+          "nome": "Glauber Rocha", 
+          "nota": 9.5
+        },
+        {
+          "nome": "Fernando Pessoa", 
+          "nota": 9.2
+        },
+        {
+          "nome": "Pablo Picasso", 
+          "nota": 9.0
+        },
+        {
+          "nome": "Marie Curie", 
+          "nota": 8.8
+        },
+        {
+          "nome": "Albert Einstein", 
+          "nota": 8.7
+        },
+        {
+          "nome": "Ada Lovelace", 
+          "nota": 8.6
+        },
+        {
+          "nome": "Leonardo da Vinci", 
+          "nota": 8.5
+        },
+        {
+          "nome": "Nelson Mandela", 
+          "nota": 8.4
+        },
+        {
+          "nome": "Isaac Newton", 
+          "nota": 8.3
+        },
+        {
+          "nome": "Rosa Parks", 
+          "nota": 8.2
+        }
+      ]
+    },
+    {
+      "serie": "7ª a 9ª Série",
+      "top": [
+        {
+          "nome": "Glauber Rocha", 
+          "nota": 9.8
+        },
+        {
+          "nome": "Fernando Pessoa", 
+          "nota": 9.5
+        },
+        {
+          "nome": "Pablo Picasso", 
+          "nota": 9.3
+        },
+        {
+          "nome": "Marie Curie", 
+          "nota": 9.1
+        },
+        {
+          "nome": "Albert Einstein", 
+          "nota": 9.0
+        },
+        {
+          "nome": "Ada Lovelace", 
+          "nota": 8.9
+        },
+        {
+          "nome": "Leonardo da Vinci", 
+          "nota": 8.7
+        },
+        {
+          "nome": "Nelson Mandela", 
+          "nota": 8.6
+        },
+        {
+          "nome": "Isaac Newton", 
+          "nota": 8.4
+        },
+        {
+          "nome": "Rosa Parks", 
+          "nota": 8.2
+        }
+      ]
+    }
   ]
 }

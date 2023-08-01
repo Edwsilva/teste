@@ -1,6 +1,7 @@
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
+import Container from "@/app/components/Container/Container";
 
 const data = "28/02/2022";
 const dataFinal = "04/03/2022";
@@ -11,10 +12,10 @@ const Cardapio = () => {
       <Banner type="overlaySM" banner="bannerCardapio">
         <h1>Cardápio</h1>
       </Banner>
-      <div className={styles.container}>
+      <Container>
         <h2 className={styles.title}>Merenda/Cardápio Escolar</h2>
         <p className={styles.textI}>Atenção: Para visualizar o cardápio escolar,
-          será necessário habilitar os POP-UPS na barra de endereços do seu 
+          será necessário habilitar os POP-UPS na barra de endereços do seu
           navegador</p>
         <div className={styles.cardapio}>
           <h3 className={styles.title2}>Confira o cardápio</h3>
@@ -48,8 +49,7 @@ const Cardapio = () => {
             utilizam semanas diferentes, conforme anexos.</p>
           <Button text="Sobre o Cardápio da Alimentação Escolar" />
         </div>
-
-      </div>
+      </Container>
     </div>
   )
 }

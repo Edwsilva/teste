@@ -51,7 +51,8 @@
   }
 
   .cadastrarMatricula > .form > :last-child{
-    padding: 10.25px 19px;
+    display: flex;
+    align-items: flex-end;
   }
 
   .textField{
@@ -67,8 +68,7 @@
 
   .input{
     width: 300px;
-    height: 41px;
-    padding: 5px;
+    padding: 9px;
     border: 1px solid var(--text);
     outline: none;
   }
@@ -97,7 +97,7 @@
       margin-bottom: 20px;
     }
 
-    .cadastrarMatricula form{
+    .cadastrarMatricula .form{
       flex-direction: column;
       align-items: flex-start;
     }

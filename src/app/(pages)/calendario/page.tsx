@@ -1,6 +1,7 @@
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./calendario.module.css";
 import Button from "@/app/components/Button/Button";
+import Container from "@/app/components/Container/Container";
 
 const ano = "2021";
 
@@ -10,7 +11,7 @@ const Calendario = () => {
             <Banner type="overlaySM" banner="bannerCalendario">
                 <h1>Calendário</h1>
             </Banner>
-            <div className={styles.container}>
+            <Container>
                 <div className={styles.calendario}>
                     <h2 className={styles.title}>Calendário Escolar</h2>
                     <p className={styles.textI}>Atenção: Para visualizar o cardápio escolar,
@@ -19,7 +20,7 @@ const Calendario = () => {
                     <p className={styles.textI}>Ano {ano}</p>
                     <Button text="Calendário Escolar" />
                 </div>
-            </div>
+            </Container>
         </div>
     )
 }

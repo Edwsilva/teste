@@ -9,6 +9,7 @@ import Button from "@/app/components/Button/Button";
 import { IoClose } from "react-icons/io5";
 import TopTable from "@/app/components/TopTable/TopTable";
 import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
+import Container from "@/app/components/Container/Container";
 
 type Escola = {
   nome: string;
@@ -144,7 +145,7 @@ const Boletins = () => {
       <Banner type="overlaySM" banner="bannerBoletins">
         <h1>Boletins e Frequência</h1>
       </Banner>
-      <div className={styles.container}>
+      <Container>
         <div className={styles.info}>
           <h2 className={styles.title}>Boletim</h2>
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
@@ -208,7 +209,7 @@ const Boletins = () => {
               selectedTable={selectedTable} />
           </div>
         </div>
-      </div>
+      </Container>
       <Modal ariaHideApp={false} style={{
         content: {
           top: '55%',

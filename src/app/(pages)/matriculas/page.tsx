@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import Matricula from "@/app/components/Matricula/Matricula";
+import Container from "@/app/components/Container/Container";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
@@ -29,7 +30,7 @@ const Matriculas = () => {
             <Banner type="overlaySM" banner="bannerMatriculas">
                 <h1>Matrículas</h1>
             </Banner>
-            <div className={styles.container}>
+            <Container>
                 <h2 className={styles.title}>Minhas Matrículas</h2>
                 <p className={styles.text}>Consulte as matrículas e veja os boletins escolares. Clique em uma das matrículas cadastradas para seleciona-la.</p>
                 <div className={styles.matriculasContainer}>
@@ -54,7 +55,7 @@ const Matriculas = () => {
                             <label htmlFor="" className={styles.label}>Nascimento:</label>
                             <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
                         </div>
-                        <Button text="Salvar" fn={() => {
+                        <Button text="Salvar" p="p-10" fn={() => {
                             if (nascimento !== "" && matricula !== "") {
                                 dispatch(addMatricula({ nome: nascimento, matricula: matricula }))
                                 setMatricula("");
@@ -63,7 +64,8 @@ const Matriculas = () => {
                         }} />
                     </div>
                 </div>
-            </div>
+            </Container>
+
         </div>
     )
 }

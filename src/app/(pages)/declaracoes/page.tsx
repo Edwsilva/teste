@@ -6,6 +6,7 @@ import { AiFillPrinter } from "react-icons/ai";
 import { useAppSelector } from "@/redux/store";
 import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
+import Container from "@/app/components/Container/Container";
 
 
 const Declaracoes = () => {
@@ -31,7 +32,7 @@ const Declaracoes = () => {
       <Banner type="overlaySM" banner="bannerDeclaracoes">
         <h1>Declarações</h1>
       </Banner>
-      <div className={styles.container}>
+      <Container>
         <h2 className={styles.title}>Declaração de Escolaridade</h2>
         <p className={styles.text}>A Declaração de Escolaridade é o documento emitido pela unidade escolar,
           que comprova o ano de escolaridade em curso ou concluído do discente, com
@@ -61,10 +62,9 @@ const Declaracoes = () => {
                 ))
               }
             </div>
-
           </div>
         </div>
-      </div>
+      </Container>
     </div >
 
   )
