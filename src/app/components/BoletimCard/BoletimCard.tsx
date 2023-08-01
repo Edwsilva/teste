@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import Button from "../Button/Button";
-import styles from "./boletim.module.css";
+import styles from "./boletimcard.module.css";
 
 type Props = {
   nome: string;
@@ -8,7 +8,7 @@ type Props = {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const Boletim = ({ nome, matricula, setModal }: Props) => {
+const BoletimCard = ({ nome, matricula, setModal }: Props) => {
   return (
     <div className={styles.boletim}>
       <div className={styles.boletimGroup}>
@@ -20,4 +20,4 @@ const Boletim = ({ nome, matricula, setModal }: Props) => {
   )
 }
 
-export default Boletim;
+export default BoletimCard;

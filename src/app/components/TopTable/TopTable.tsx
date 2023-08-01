@@ -1,6 +1,7 @@
 import styles from "./toptable.module.css";
 
 type Escola = {
+  ano?: number;
   nome: string;
   nota: number;
 };
@@ -48,26 +49,13 @@ const TopTable = ({ data, selectField, anoField, escolaField, selectedTable }: T
         </tr>
       </thead>
       <tbody>
-        {selectField === "" ? data.map(({ nome, nota }: Escola, i: number) => (
+        {data.map(({ ano, nome, nota }: Escola, i: number) => (
           <tr className={styles.tRow} key={i}>
+            {ano ? <th className={styles.tCell}>{ano}</th> : ""}
             <th className={styles.tCell}>{nome}</th>
             <th className={styles.tCell}>{nota}</th>
           </tr>
-        )) :
-          escolaField === "" ? data.map(({ nome, nota }: Escola, i: number) => (
-            <tr className={styles.tRow} key={i}>
-              <th className={styles.tCell}>{nome}</th>
-              <th className={styles.tCell}>{nota}</th>
-            </tr>
-          ))
-            : ""
-          // infoPorEscola[selectedTable - 1].info.map(({ ano, nome, nota }, i) => (
-          //   <tr className={styles.tRow} key={i}>
-          //     <th className={styles.tCell}>{ano}</th>
-          //     <th className={styles.tCell}>{nome}</th>
-          //     <th className={styles.tCell}>{nota}</th>
-          //   </tr>
-          // ))
+        ))
         }
       </tbody>
     </table>
