@@ -2,13 +2,14 @@ import styles from "./matricula.module.css";
 import { removeMatricula } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
+import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   i: number;
   nome: string;
   matricula: string;
   dropdownVisible: boolean;
-  toggle: (i: number) => void;
+  toggle: (i: number, remove?: boolean) => void;
   dispatch: AppDispatch;
 }
 
@@ -20,7 +21,11 @@ const Matricula = ({ i, nome, matricula, dropdownVisible, toggle, dispatch }: Pr
       </span>
       <ul className={`${styles.dropdown} ${dropdownVisible ? styles.dropdownVisible : ''}`}>
         <li className={styles.dropdownItem}>
-          <button className={styles.dropdownButton} onClick={() => { dispatch(removeMatricula({ nome, matricula })) }}>Remover</button>
+          <button className={styles.dropdownButton} onClick={() => {
+            dispatch(removeMatricula({ nome, matricula }));
+            toggle(i, true);
+          }
+          }>Remover</button>
         </li>
       </ul>
       <h4 className={styles.matriculaTitle}>{nome}</h4>

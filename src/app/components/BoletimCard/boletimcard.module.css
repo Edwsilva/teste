@@ -12,3 +12,17 @@
   display: flex;
   gap: 15px;
 }
+
+@media screen and (max-width: 768px){
+  .boletimGroup span{
+    display: flex;
+    flex-direction: column;
+    font-size: .9rem;
+  }
+}
+
+@media screen and (max-width: 330px){
+  .boletimGroup span{
+    font-size: .8rem;
+  }
+}

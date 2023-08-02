@@ -182,7 +182,9 @@ const Boletins = () => {
                 ))}
               </select>
             </span>
-            <p className={`${styles.text} ${styles.ou}`}>ou</p>
+            <span>
+              <p className={`${styles.text} ${styles.or}`}>ou</p>
+            </span>
             <span className={styles.selectField}>
               <label htmlFor="" className={styles.label}>Ano:</label>
               <select name="ano" id="ano" className={styles.select}

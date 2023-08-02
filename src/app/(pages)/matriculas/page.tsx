@@ -17,12 +17,21 @@ const Matriculas = () => {
     const dispatch = useDispatch<AppDispatch>();
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
 
-    const toggleDropdown = (index: number) => {
-        setDropdownVisible((prevState) => {
-            const updatedStates = [...prevState];
-            updatedStates[index] = !updatedStates[index];
-            return updatedStates;
-        });
+    const toggleDropdown = (index: number, remove?: boolean) => {
+        if (remove) {
+            setDropdownVisible((prevState) => {
+                const updatedStates = [...prevState];
+                updatedStates.splice(index, 1);
+                return updatedStates;
+            })
+        } else {
+            setDropdownVisible((prevState) => {
+                const updatedStates = [...prevState];
+                updatedStates[index] = !updatedStates[index];
+                return updatedStates;
+            });
+        }
+
     };
 
     return (

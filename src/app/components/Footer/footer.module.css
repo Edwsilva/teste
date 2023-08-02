@@ -1,5 +1,6 @@
 .footer {
-  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+  background-color: var(--primary);
+  /* background-image: linear-gradient(to right, var(--primary), var(--secondary)); */
   padding: 20px 0;
   color: var(--textDark);
 }
