@@ -5,6 +5,7 @@ import { BsCardList, BsCalendarDate } from "react-icons/bs";
 import { IoRestaurantOutline, IoDocumentTextOutline } from "react-icons/io5";
 import Banner from "./components/Banner/Banner";
 import { useRouter } from "next/navigation";
+import Card from "./components/Card/Card";
 
 export default function Home() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Home() {
         <p className={styles.bannerText}>
           Fique por dentro de tudo mesmo fora da escola
         </p>
-        <Button text="Confira seu boletim" fn={() => router.push('/boletins-e-frequencia')}/>
+        <Button text="Confira seu boletim" fn={() => router.push('/boletins-e-frequencia')} />
       </Banner>
       <div className={styles.container}>
         <div className={styles.sectionB}>
@@ -26,49 +27,24 @@ export default function Home() {
               ao aluno da rede municipal. Cadastre a matrícula de seu filho
               na página "Matrículas" para utilizar nossos serviços.
             </p>
-            <Button text="Ir até Matrículas" fn={() => router.push('/matriculas')}/>
+            <Button text="Ir até Matrículas" fn={() => router.push('/matriculas')} />
           </div>
           <div className={styles.sectionB2}>
             <div className={styles.cardContainer}>
-              <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Boletim</h3>
-                <div className={styles.cardIcon}>
-                  <BsCardList className={styles.icon} />
-                </div>
-                <p className={styles.cardContent}>
-                  Confira o boletim e frequência escolares.
-                </p>
-              </div>
-              <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Calendário</h3>
-                <div className={styles.cardIcon}>
-                  <BsCalendarDate className={styles.icon} />
-                </div>
-                <p className={styles.cardContent}>
-                  Veja o calendário escolar do ano letivo.
-                </p>
-              </div>
+              <Card title="Boletim" subtitle="Confira o boletim e frequência escolares.">
+                <BsCardList className={styles.icon} />
+              </Card>
+              <Card title="Calendário" subtitle="Veja o calendário escolar do ano letivo." bg="primary">
+                <BsCalendarDate className={styles.icon} />
+              </Card>
             </div>
-
             <div className={styles.cardContainer}>
-              <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Cardápio</h3>
-                <div className={styles.cardIcon}>
-                  <IoRestaurantOutline className={styles.icon} />
-                </div>
-                <p className={styles.cardContent}>
-                  Confira o cardápio da escola.
-                </p>
-              </div>
-              <div className={styles.card}>
-                <h3 className={styles.cardTitle}>Declarações</h3>
-                <div className={styles.cardIcon}>
-                  <IoDocumentTextOutline className={styles.icon} />
-                </div>
-                <p className={styles.cardContent}>
-                  Emita a declaração de escolaridade.
-                </p>
-              </div>
+              <Card title="Cardápio" subtitle="Confira o cardápio da escola." bg="primaryLight">
+                <IoRestaurantOutline className={styles.icon} />
+              </Card>
+              <Card title="Declarações" subtitle="Emita a declaração de escolaridade." bg="pink">
+                <IoDocumentTextOutline className={styles.icon} />
+              </Card>
             </div>
           </div>
         </div>

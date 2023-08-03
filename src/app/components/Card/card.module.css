@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+}
+
+.cardIcon {
+  height: 60%;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondaryLight);
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.primaryLight{
+    background-color: var(--primaryLight);
+}
+
+.pink{
+    background-color: #ec9992;
+}
+
+.cardContent {
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+  .cardContainer {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    height: 350px;
+    margin: 10px 0;
+  }
+}
