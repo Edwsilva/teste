@@ -1,3 +1,4 @@
+'use client'
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./calendario.module.css";
 import Button from "@/app/components/Button/Button";

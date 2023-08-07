@@ -1,4 +1,10 @@
 'use client'
+import Container from "@/app/components/Container/Container";
+import styles from "./boletins.module.css";
+import Button from "@/app/components/Button/Button";
+import Image from "next/image";
+import imgSrc from "../../../../public/images/errorImg.png";
+
 const Error = ({
   error,
   reset,
@@ -7,17 +13,29 @@ const Error = ({
   reset: () => void
 }) => {
   return (
-    <div style={{ marginTop: '150px' }}>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <Container>
+      <div className={styles.error}>
+        <div className={styles.errorContent}>
+          <div className={styles.errorText}>
+            <h1 className={styles.errorTitle}>Ops!</h1>
+            <h2 className={styles.errorTitle2}>Algo deu errado,<br/> desculpe pelo transtorno.</h2>
+            <p className={styles.errorSubtitle}>Mensagem do erro: "{error.message}"</p>
+            {/* <div className={styles.helpLinks}>
+              <p className={styles.errorSubtitle}>Aqui estão alguns links que podem te ajudar:</p>
+              <ul>
+                <li>Home</li>
+                <li>Pesquisa</li>
+                <li>Ajuda</li>
+              </ul>
+            </div> */}
+            <Button text="Tente Novamente" fn={() => reset()} />
+          </div>
+          <div className={styles.errorImg}>
+            <Image className={styles.img} src={imgSrc} alt="Mera ilustração sobre o erro."/>
+          </div>
+        </div>
+      </div>
+    </Container>
   )
 }
 

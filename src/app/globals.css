@@ -28,7 +28,7 @@ a {
 
 body{
   background-color: white;
-  color: black;
+  color: var(--textDark);
   display: flex;
   justify-content: space-between;
   flex-direction: column;

@@ -212,6 +212,7 @@ const Boletins = () => {
           </div>
         </div>
       </Container>
+
       <Modal ariaHideApp={false} style={{
         content: {
           top: '55%',

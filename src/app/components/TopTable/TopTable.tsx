@@ -29,7 +29,7 @@ type TopTableProps = {
 // }
 
 const TopTable = ({ data, selectField, anoField, escolaField, selectedTable }: TopTableProps) => {
-  console.log(data);
+  // console.log(data);
   return (
     <table className={styles.table}>
       <thead className={styles.tHead}>
