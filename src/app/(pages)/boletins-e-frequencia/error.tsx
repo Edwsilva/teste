@@ -18,20 +18,12 @@ const Error = ({
         <div className={styles.errorContent}>
           <div className={styles.errorText}>
             <h1 className={styles.errorTitle}>Ops!</h1>
-            <h2 className={styles.errorTitle2}>Algo deu errado,<br/> desculpe pelo transtorno.</h2>
+            <h2 className={styles.errorTitle2}>Algo deu errado,<br /> desculpe pelo transtorno.</h2>
             <p className={styles.errorSubtitle}>Mensagem do erro: "{error.message}"</p>
-            {/* <div className={styles.helpLinks}>
-              <p className={styles.errorSubtitle}>Aqui estão alguns links que podem te ajudar:</p>
-              <ul>
-                <li>Home</li>
-                <li>Pesquisa</li>
-                <li>Ajuda</li>
-              </ul>
-            </div> */}
             <Button text="Tente Novamente" fn={() => reset()} />
           </div>
           <div className={styles.errorImg}>
-            <Image className={styles.img} src={imgSrc} alt="Mera ilustração sobre o erro."/>
+            <Image className={styles.img} src={imgSrc} alt="Mera ilustração sobre o erro." />
           </div>
         </div>
       </div>

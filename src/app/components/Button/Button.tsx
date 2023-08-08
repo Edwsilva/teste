@@ -4,7 +4,7 @@ import styles from "./button.module.css";
 
 type ButtonProps = {
     text: ReactNode;
-    fn?: () => void | Dispatch<SetStateAction<boolean>> | Promise<boolean>;
+    fn?: () => void | Dispatch<SetStateAction<boolean>> | Promise<boolean> | Promise<void>;
     p?: "p-10";
     radius?: boolean;
 }

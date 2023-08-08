@@ -2,7 +2,8 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { addMatricula } from "../../../redux/features/matriculas-slice";
+import { setMinhasMatriculas } from "../../../redux/features/matriculas-slice";
+import { apiCheckMatricula, getMinhasMatriculas, postMinhasMatriculas } from "@/app/api/services";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
 import { AppDispatch, useAppSelector } from "@/redux/store";
@@ -64,9 +65,12 @@ const Matriculas = () => {
                             <label htmlFor="" className={styles.label}>Nascimento:</label>
                             <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
                         </div>
-                        <Button text="Salvar" p="p-10" fn={() => {
+                        <Button text="Salvar" p="p-10" fn={async () => {
                             if (nascimento !== "" && matricula !== "") {
-                                dispatch(addMatricula({ nome: nascimento, matricula: matricula }))
+                                const data = await apiCheckMatricula({ nascimento, matricula });
+                                await postMinhasMatriculas({ id: 1, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
+                                const matriculas = await getMinhasMatriculas();
+                                dispatch(setMinhasMatriculas(matriculas));
                                 setMatricula("");
                                 setNascimento("");
                             }
