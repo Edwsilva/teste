@@ -2,11 +2,11 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { setMinhasMatriculas } from "../../../redux/features/matriculas-slice";
-import { apiCheckMatricula, getMinhasMatriculas, postMinhasMatriculas } from "@/app/api/services";
+import { addMatricula } from "../../../redux/features/matriculas-slice";
+import { apiCheckMatricula, postMatricula } from "@/app/api/services";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { AppDispatch, store, useAppSelector } from "@/redux/store";
 import Matricula from "@/app/components/Matricula/Matricula";
 import Container from "@/app/components/Container/Container";
 
@@ -48,8 +48,8 @@ const Matriculas = () => {
                         da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                         :
                         <div className={styles.matriculas}>
-                            {matriculas.map(({ nome, matricula }, index) => (
-                                <Matricula i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
+                            {matriculas.map(({ id, nome, matricula }, index) => (
+                                <Matricula id={id} key={index} i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
                             ))}
                         </div>
                     }
@@ -67,10 +67,18 @@ const Matriculas = () => {
                         </div>
                         <Button text="Salvar" p="p-10" fn={async () => {
                             if (nascimento !== "" && matricula !== "") {
-                                const data = await apiCheckMatricula({ nascimento, matricula });
-                                await postMinhasMatriculas({ id: 1, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
-                                const matriculas = await getMinhasMatriculas();
-                                dispatch(setMinhasMatriculas(matriculas));
+                                const nascimentoFormated = nascimento.split("-").reverse().join("/");
+                                const data = await apiCheckMatricula({ nascimento: nascimentoFormated, matricula });
+                                if (data) {
+                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
+                                    if (matriculaAdded.success) {
+                                        dispatch(addMatricula(data));
+                                    } else {
+                                        console.error("Erro ao adicionar matrícula às suas matrículas.", matriculaAdded.status)
+                                    }
+                                } else {
+                                    console.error("Dados inválidos ou não encontrados.");
+                                }
                                 setMatricula("");
                                 setNascimento("");
                             }

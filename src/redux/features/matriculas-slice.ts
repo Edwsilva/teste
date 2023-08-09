@@ -1,27 +1,22 @@
-import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type InputMatricula = {
-  id?: number;
-  nome: string;
+  // id: number;
+  // nome: string;
   nascimento: string;
   matricula: string;
 }
 
-type Matricula = {
+export type Matricula = {
+  id: number;
   nome: string;
-  // nascimento: string;
+  nascimento: string;
   matricula: string;
 }
 
 type InitialState = {
   matriculas: Matricula[];
 }
-
-// export const fetchMinhasMatriculas = createAsyncThunk("matriculas/getAllMatriculas", async (thunkApi) => {
-//   const response = await fetch("http://localhost:3001/minhasMatriculas");
-//   const data = await response.json();
-//   return data;
-// })
 
 const initialState:InitialState = {
   matriculas: [],
@@ -34,10 +29,10 @@ export const matriculas = createSlice({
     addMatricula: (state, action: PayloadAction<Matricula>) => {
       state.matriculas.push(action.payload);
     },
-    removeMatricula: (state, action: PayloadAction<Matricula>) => {
-      state.matriculas = state.matriculas.filter(matricula => matricula.matricula !== action.payload.matricula);
+    removeMatricula: (state, action: PayloadAction<string>) => {
+      state.matriculas = state.matriculas.filter(matricula => matricula.matricula !== action.payload);
     },
-    setMinhasMatriculas: (state, action: PayloadAction<InputMatricula[]>) => {
+    setMinhasMatriculas: (state, action: PayloadAction<Matricula[]>) => {
       state.matriculas = action.payload;
     }
   },

@@ -2,9 +2,10 @@ import styles from "./matricula.module.css";
 import { removeMatricula } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
-import { Dispatch, SetStateAction } from "react";
+import { deleteMatricula } from "../../api/services"
 
 type Props = {
+  id: number;
   i: number;
   nome: string;
   matricula: string;
@@ -13,7 +14,7 @@ type Props = {
   dispatch: AppDispatch;
 }
 
-const Matricula = ({ i, nome, matricula, dropdownVisible, toggle, dispatch }: Props) => {
+const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, dispatch }: Props) => {
   return (
     <span className={styles.matricula}>
       <span className={styles.icon} onClick={() => toggle(i)}>
@@ -21,9 +22,14 @@ const Matricula = ({ i, nome, matricula, dropdownVisible, toggle, dispatch }: Pr
       </span>
       <ul className={`${styles.dropdown} ${dropdownVisible ? styles.dropdownVisible : ''}`}>
         <li className={styles.dropdownItem}>
-          <button className={styles.dropdownButton} onClick={() => {
-            dispatch(removeMatricula({ nome, matricula }));
-            toggle(i, true);
+          <button className={styles.dropdownButton} onClick={async () => {
+            const matriculaDeleted = await deleteMatricula(id);
+            if (matriculaDeleted.success) {
+              dispatch(removeMatricula(matricula));
+              toggle(i, true);
+            } else {
+              console.error("Erro ao remover matrícula de suas matrículas.", matriculaDeleted.status);
+            }
           }
           }>Remover</button>
         </li>

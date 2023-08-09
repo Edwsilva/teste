@@ -5,7 +5,7 @@ import matriculasReducer from "./features/matriculas-slice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 const persistConfig = {
-  key: "matriculas",
+  key: "minhasMatriculas",
   storage,
 };
 

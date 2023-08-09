@@ -4,8 +4,6 @@ import './globals.css';
 import { Roboto } from 'next/font/google';
 import { ReduxProvider } from '@/redux/provider';
 import Preloader from './components/Preloader/Preloader';
-import { store } from "../redux/store";
-import { setMinhasMatriculas } from "../redux/features/matriculas-slice";
 import { getMinhasMatriculas } from './api/services';
 
 const roboto = Roboto({ weight: ['100', '300', '400', '500', '700', '900'], subsets: ['latin'] });
@@ -21,7 +19,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const data = await getMinhasMatriculas();
-  store.dispatch(setMinhasMatriculas(data));
 
   return (
     <html lang="en">
@@ -30,8 +27,8 @@ export default async function RootLayout({
       </head>
       <body className={roboto.className}>
         <Navbar />
-        <Preloader minhasMatriculas={data} />
         <ReduxProvider>
+          <Preloader minhasMatriculas={data} />
           {children}
         </ReduxProvider>
         <Footer />

@@ -1,6 +1,6 @@
 'use client'
 import Banner from "@/app/components/Banner/Banner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppSelector } from "@/redux/store";
 import styles from "./boletins.module.css";
 import BoletimCard from "@/app/components/BoletimCard/BoletimCard";
