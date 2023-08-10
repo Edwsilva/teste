@@ -1,5 +1,5 @@
 import styles from "./matricula.module.css";
-import { removeMatricula } from "@/redux/features/matriculas-slice";
+import {  matriculasActions } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
 import { deleteMatricula } from "../../api/matriculas"
@@ -25,7 +25,7 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, dispatch }
           <button className={styles.dropdownButton} onClick={async () => {
             const matriculaDeleted = await deleteMatricula(id);
             if (matriculaDeleted.success) {
-              dispatch(removeMatricula(matricula));
+              dispatch(matriculasActions.removeMatricula(matricula));
               toggle(i, true);
             } else {
               console.error("Erro ao remover matrícula de suas matrículas.", matriculaDeleted.status);

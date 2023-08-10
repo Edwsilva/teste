@@ -37,23 +37,23 @@ const Matriculas = () => {
 
     };
     
-    // async function fetchMatriculas() {
-    //     try {
-    //         const data = await getMinhasMatriculas();
-    //         console.log("fetchMatriculas")
-    //         store.dispatch(matriculasActions.setMinhasMatriculas(data));
-    //     } catch (error) {
-    //         console.error("Erro buscando suas matrículas", error);
-    //     }
-    // }
+    async function fetchMatriculas() {
+        try {
+            const data = await getMinhasMatriculas();
+            console.log("fetchMatriculas")
+            store.dispatch(matriculasActions.setMinhasMatriculas(data));
+        } catch (error) {
+            console.error("Erro buscando suas matrículas", error);
+        }
+    }
 
-    // console.log("Page matriculas", matriculasFetched)
+    console.log("Page matriculas", matriculasFetched)
 
-    // if (!matriculasFetched) {
-    //     console.log('Dentro do If')
-    //     fetchMatriculas();
-    //     dispatch(matriculasActions.setMatriculasFetched(true));
-    // }
+    if (!matriculasFetched) {
+        console.log('Dentro do If')
+        fetchMatriculas();
+        dispatch(matriculasActions.setMatriculasFetched(true));
+    }
 
 
     return (

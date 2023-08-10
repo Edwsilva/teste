@@ -8,7 +8,7 @@ import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropd
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import Container from "@/app/components/Container/Container";
 // import { fetchMatriculas } from "@/app/utils/utils";
-import { setMatriculasFetched } from "@/redux/features/matriculas-slice";
+import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { useDispatch } from "react-redux";
 
 

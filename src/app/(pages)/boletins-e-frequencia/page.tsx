@@ -11,7 +11,7 @@ import TopTable from "@/app/components/TopTable/TopTable";
 import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
 import { useDispatch } from "react-redux";
-import { setMatriculasFetched } from "@/redux/features/matriculas-slice";
+import { matriculasActions } from "@/redux/features/matriculas-slice";
 // import { fetchMatriculas } from "@/app/utils/utils";
 
 type Escola = {
