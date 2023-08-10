@@ -1,12 +1,12 @@
 'use client'
 import { store } from "../../../redux/store";
 import { setMinhasMatriculas } from "../../../redux/features/matriculas-slice";
-import { getMinhasMatriculas } from '../../api/services';
-import { InputMatricula } from "@/redux/features/matriculas-slice";
+import { getMinhasMatriculas } from '../../api/matriculas';
+import { Matricula } from "@/redux/features/matriculas-slice";
 import { useAppSelector } from "../../../redux/store";
 import { useEffect } from "react";
 
-const Preloader = ({ minhasMatriculas }: { minhasMatriculas: InputMatricula[] }) => {
+const Preloader = ({ minhasMatriculas }: { minhasMatriculas: Matricula[] }) => {
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasPersisted = window.localStorage.getItem("minhasMatriculas");
 

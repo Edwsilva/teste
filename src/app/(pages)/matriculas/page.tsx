@@ -2,13 +2,14 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { addMatricula } from "../../../redux/features/matriculas-slice";
-import { apiCheckMatricula, postMatricula } from "@/app/api/services";
+import { matriculasActions  } from "../../../redux/features/matriculas-slice";
+import { apiCheckMatricula, postMatricula, getMinhasMatriculas } from "@/app/api/matriculas";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
 import { AppDispatch, store, useAppSelector } from "@/redux/store";
 import Matricula from "@/app/components/Matricula/Matricula";
 import Container from "@/app/components/Container/Container";
+// import { fetchMatriculas } from "@/app/utils/utils";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
@@ -17,6 +18,7 @@ const Matriculas = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+    const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
     const toggleDropdown = (index: number, remove?: boolean) => {
         if (remove) {
@@ -34,6 +36,25 @@ const Matriculas = () => {
         }
 
     };
+    
+    // async function fetchMatriculas() {
+    //     try {
+    //         const data = await getMinhasMatriculas();
+    //         console.log("fetchMatriculas")
+    //         store.dispatch(matriculasActions.setMinhasMatriculas(data));
+    //     } catch (error) {
+    //         console.error("Erro buscando suas matrículas", error);
+    //     }
+    // }
+
+    // console.log("Page matriculas", matriculasFetched)
+
+    // if (!matriculasFetched) {
+    //     console.log('Dentro do If')
+    //     fetchMatriculas();
+    //     dispatch(matriculasActions.setMatriculasFetched(true));
+    // }
+
 
     return (
         <div className={styles.main}>
@@ -72,7 +93,7 @@ const Matriculas = () => {
                                 if (data) {
                                     const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
                                     if (matriculaAdded.success) {
-                                        dispatch(addMatricula(data));
+                                        dispatch(matriculasActions.addMatricula(data));
                                     } else {
                                         console.error("Erro ao adicionar matrícula às suas matrículas.", matriculaAdded.status)
                                     }
@@ -86,7 +107,6 @@ const Matriculas = () => {
                     </div>
                 </div>
             </Container>
-
         </div>
     )
 }

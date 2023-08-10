@@ -3,17 +3,22 @@ import Banner from "@/app/components/Banner/Banner";
 import styles from "./declaracoes.module.css";
 import { useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
-import { useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import Container from "@/app/components/Container/Container";
+// import { fetchMatriculas } from "@/app/utils/utils";
+import { setMatriculasFetched } from "@/redux/features/matriculas-slice";
+import { useDispatch } from "react-redux";
 
 
 const Declaracoes = () => {
   const [selected, setSelected] = useState<RadioProps>("curso");
   const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
 
+  const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+  const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
   function changeRadioSelect(value: RadioProps) {
     setSelected(value);
@@ -26,6 +31,14 @@ const Declaracoes = () => {
       return updatedStates;
     });
   };
+
+  console.log("Page declarações", matriculasFetched)
+
+  // if (!matriculasFetched) {
+  //   console.log('Dentro do If')
+  //   fetchMatriculas();
+  //   dispatch(setMatriculasFetched(true));
+  // }
 
   return (
     <div className={styles.main}>

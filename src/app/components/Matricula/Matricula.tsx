@@ -2,7 +2,7 @@ import styles from "./matricula.module.css";
 import { removeMatricula } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
-import { deleteMatricula } from "../../api/services"
+import { deleteMatricula } from "../../api/matriculas"
 
 type Props = {
   id: number;

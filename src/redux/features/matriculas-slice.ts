@@ -16,10 +16,12 @@ export type Matricula = {
 
 type InitialState = {
   matriculas: Matricula[];
+  fetched: boolean;
 }
 
 const initialState:InitialState = {
   matriculas: [],
+  fetched: false
 }
 
 export const matriculas = createSlice({
@@ -34,9 +36,12 @@ export const matriculas = createSlice({
     },
     setMinhasMatriculas: (state, action: PayloadAction<Matricula[]>) => {
       state.matriculas = action.payload;
+    },
+    setMatriculasFetched: (state, action: PayloadAction<boolean>) => {
+      state.fetched = action.payload;
     }
   },
 });
 
-export const {addMatricula, removeMatricula, setMinhasMatriculas} = matriculas.actions;
+export const matriculasActions = matriculas.actions;
 export default matriculas.reducer;

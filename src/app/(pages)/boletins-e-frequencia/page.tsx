@@ -1,7 +1,7 @@
 'use client'
 import Banner from "@/app/components/Banner/Banner";
 import { useState } from "react";
-import { useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import styles from "./boletins.module.css";
 import BoletimCard from "@/app/components/BoletimCard/BoletimCard";
 import Modal from "react-modal";
@@ -10,6 +10,9 @@ import { IoClose } from "react-icons/io5";
 import TopTable from "@/app/components/TopTable/TopTable";
 import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
+import { useDispatch } from "react-redux";
+import { setMatriculasFetched } from "@/redux/features/matriculas-slice";
+// import { fetchMatriculas } from "@/app/utils/utils";
 
 type Escola = {
   nome: string;
@@ -132,8 +135,17 @@ const Boletins = () => {
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   // const [topIndices, setTopIndices] = useState<TopIndices>([]);
 
+  const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+  const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
+  console.log("Page Boletins", matriculasFetched)
+
+  // if (!matriculasFetched) {
+  //   console.log('Dentro do If')
+  //   fetchMatriculas();
+  //   dispatch(setMatriculasFetched(true));
+  // }
   // useEffect(() => {
   //   if (topIndices.length === 0) {
   //     getTopIndices().then(res => setTopIndices(res));

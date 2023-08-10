@@ -27,6 +27,7 @@ export const persistor = persistStore(store, null, () => {
   console.log("Redux state rehydration completed!");
 });
 
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
