@@ -2,14 +2,14 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { matriculasActions  } from "../../../redux/features/matriculas-slice";
+import { matriculasActions } from "../../../redux/features/matriculas-slice";
 import { apiCheckMatricula, postMatricula, getMinhasMatriculas } from "@/app/api/matriculas";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
 import { AppDispatch, store, useAppSelector } from "@/redux/store";
 import Matricula from "@/app/components/Matricula/Matricula";
 import Container from "@/app/components/Container/Container";
-// import { fetchMatriculas } from "@/app/utils/utils";
+import { fetchMatriculas } from "@/app/utils/utils";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
@@ -36,21 +36,19 @@ const Matriculas = () => {
         }
 
     };
-    
-    async function fetchMatriculas() {
-        try {
-            const data = await getMinhasMatriculas();
-            console.log("fetchMatriculas")
-            store.dispatch(matriculasActions.setMinhasMatriculas(data));
-        } catch (error) {
-            console.error("Erro buscando suas matrículas", error);
-        }
-    }
 
-    console.log("Page matriculas", matriculasFetched)
+    // async function fetchMatriculas() {
+    //     try {
+    //         const data = await getMinhasMatriculas();
+    //         console.log("fetchMatriculas")
+    //         store.dispatch(matriculasActions.setMinhasMatriculas(data));
+    //     } catch (error) {
+    //         console.error("Erro buscando suas matrículas", error);
+    //     }
+    // }
 
     if (!matriculasFetched) {
-        console.log('Dentro do If')
+        console.log('Dentro do If');
         fetchMatriculas();
         dispatch(matriculasActions.setMatriculasFetched(true));
     }

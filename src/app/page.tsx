@@ -9,6 +9,7 @@ import Card from "./components/Card/Card";
 
 export default function Home() {
   const router = useRouter();
+
   return (
     <main className={styles.main}>
       <Banner type="overlay" banner="banner">

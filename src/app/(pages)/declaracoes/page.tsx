@@ -7,7 +7,7 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import Container from "@/app/components/Container/Container";
-// import { fetchMatriculas } from "@/app/utils/utils";
+import { fetchMatriculas } from "@/app/utils/utils";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { useDispatch } from "react-redux";
 
@@ -32,13 +32,11 @@ const Declaracoes = () => {
     });
   };
 
-  console.log("Page declarações", matriculasFetched)
-
-  // if (!matriculasFetched) {
-  //   console.log('Dentro do If')
-  //   fetchMatriculas();
-  //   dispatch(setMatriculasFetched(true));
-  // }
+  if (!matriculasFetched) {
+    console.log('Dentro do If')
+    fetchMatriculas();
+    dispatch(matriculasActions.setMatriculasFetched(true));
+  }
 
   return (
     <div className={styles.main}>

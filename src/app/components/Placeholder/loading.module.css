@@ -1,0 +1,154 @@
+.banner{
+  background-color: var(--textLight);
+  animation: pulse 2s infinite;
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+.banner-home{
+  height: 550px;
+}
+
+.banner-ordinary{
+  height: 200px;
+}
+
+.title{
+  height: 40px;
+  width: 250px;
+  background-color: var(--textLight);
+  border-radius: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.title2{
+  height: 30px;
+  width: 200px;
+  max-width: 100%;
+  background-color: var(--textLight);
+  border-radius: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.text{
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.text2{
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.textCell{
+  width: 100%;
+  height: 20px;
+  background-color: var(--textLight);
+  border-radius: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.textCell2{
+  width: 100%;
+  height: 20px;
+  background-color: var(--textLight);
+  border-radius: 1rem;
+  animation: pulse 2s infinite;
+  grid-column: span 2;
+}
+
+.button{
+  height: 50px;
+  width: 150px;
+  background-color: var(--textLight);
+  animation: pulse 2s infinite;
+}
+
+.sectionB {
+  margin: 50px 0;
+  display: flex;
+}
+
+.sectionB1 {
+  flex: 1;
+  margin: 15px 2%;
+}
+
+.sectionB2 {
+  flex: 2;
+  margin: 15px 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardContainer {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.cardIcon {
+  height: 60%;
+  margin: 15px 0;
+  background-color: var(--textLight);
+  animation: pulse 2s infinite;
+}
+
+.subtitle{
+  width: 80%;
+  height: 10px;
+  background-color: var(--textLight);
+  border-radius: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.pageContent{
+  margin: 30px 0;
+}
+
+@keyframes pulse{
+  0%, 100%{
+    opacity: 1;
+  }
+  50%{
+    opacity: .3;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .sectionB {
+    flex-direction: column;
+    margin: 30px auto;
+    align-items: flex-start;
+  }
+
+  .sectionB1{
+    width: 100%;
+  }
+
+  .cardContainer {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    height: 350px;
+    margin: 10px 0;
+  }
+}

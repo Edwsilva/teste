@@ -16,7 +16,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  console.log("Antes")
 
 
   return (

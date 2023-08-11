@@ -12,7 +12,7 @@ import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
 import { useDispatch } from "react-redux";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
-// import { fetchMatriculas } from "@/app/utils/utils";
+import { fetchMatriculas } from "@/app/utils/utils";
 
 type Escola = {
   nome: string;
@@ -139,13 +139,12 @@ const Boletins = () => {
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
-  console.log("Page Boletins", matriculasFetched)
+  if (!matriculasFetched) {
+    console.log('Dentro do If');
+    fetchMatriculas();
+    dispatch(matriculasActions.setMatriculasFetched(true));
+  }
 
-  // if (!matriculasFetched) {
-  //   console.log('Dentro do If')
-  //   fetchMatriculas();
-  //   dispatch(setMatriculasFetched(true));
-  // }
   // useEffect(() => {
   //   if (topIndices.length === 0) {
   //     getTopIndices().then(res => setTopIndices(res));
