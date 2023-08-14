@@ -97,6 +97,10 @@
       margin-bottom: 20px;
     }
 
+    .matriculas{
+      justify-content: flex-start;
+    }
+
     .cadastrarMatricula .form{
       flex-direction: column;
       align-items: flex-start;

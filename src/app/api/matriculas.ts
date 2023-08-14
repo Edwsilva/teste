@@ -48,8 +48,11 @@ const apiCheckMatricula = async ({
     `http://localhost:3001/matriculas?matricula=${matricula}`
   );
   const data = await req.json();
-  if (nascimento === data[0].nascimento) {
-    return data[0];
+  console.log(data.length === 0)
+  if(data.length !== 0){
+    if (nascimento === data[0].nascimento) {
+      return data[0];
+    }
   }
 };
 

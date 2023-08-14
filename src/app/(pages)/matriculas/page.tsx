@@ -3,18 +3,21 @@ import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import { matriculasActions } from "../../../redux/features/matriculas-slice";
-import { apiCheckMatricula, postMatricula, getMinhasMatriculas } from "@/app/api/matriculas";
+import { apiCheckMatricula, postMatricula } from "@/app/api/matriculas";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
-import { AppDispatch, store, useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import Matricula from "@/app/components/Matricula/Matricula";
 import Container from "@/app/components/Container/Container";
-import { fetchMatriculas } from "@/app/utils/utils";
+import { fetchMatriculas, launchToast } from "@/app/utils/utils";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/app/components/Spinner/Spinner";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
-    const [matricula, setMatricula] = useState("");
-    const [nascimento, setNascimento] = useState("");
+    const [matricula, setMatricula] = useState<string>("");
+    const [nascimento, setNascimento] = useState<string>("");
 
     const dispatch = useDispatch<AppDispatch>();
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
@@ -46,13 +49,17 @@ const Matriculas = () => {
     //         console.error("Erro buscando suas matrículas", error);
     //     }
     // }
-
-    if (!matriculasFetched) {
-        console.log('Dentro do If');
-        fetchMatriculas();
+    async function fetchData() {
+        await fetchMatriculas();
         dispatch(matriculasActions.setMatriculasFetched(true));
     }
 
+    if (!matriculasFetched) {
+        console.log('Dentro do If');
+        setTimeout(() => {
+            fetchData();
+        }, 2000)
+    }
 
     return (
         <div className={styles.main}>
@@ -62,8 +69,9 @@ const Matriculas = () => {
             <Container>
                 <h2 className={styles.title}>Minhas Matrículas</h2>
                 <p className={styles.text}>Consulte as matrículas e veja os boletins escolares. Clique em uma das matrículas cadastradas para seleciona-la.</p>
+                
                 <div className={styles.matriculasContainer}>
-                    {matriculas.length === 0 ? <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                    {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ? <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
                         da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                         :
                         <div className={styles.matriculas}>
@@ -92,10 +100,13 @@ const Matriculas = () => {
                                     const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
                                     if (matriculaAdded.success) {
                                         dispatch(matriculasActions.addMatricula(data));
+                                        launchToast({ msg: "Matrícula adicionada!", type: "success" });
                                     } else {
+                                        launchToast({ msg: "Erro ao adicionar matrícula às suas matrículas.", type: "error" });
                                         console.error("Erro ao adicionar matrícula às suas matrículas.", matriculaAdded.status)
                                     }
                                 } else {
+                                    launchToast({ msg: "Dados inválidos ou não encontrados.", type: "error" })
                                     console.error("Dados inválidos ou não encontrados.");
                                 }
                                 setMatricula("");
@@ -105,6 +116,7 @@ const Matriculas = () => {
                     </div>
                 </div>
             </Container>
+            <ToastContainer />
         </div>
     )
 }

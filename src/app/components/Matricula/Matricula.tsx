@@ -3,6 +3,7 @@ import {  matriculasActions } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
 import { deleteMatricula } from "../../api/matriculas"
+import { launchToast } from "@/app/utils/utils";
 
 type Props = {
   id: number;
@@ -27,7 +28,9 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, dispatch }
             if (matriculaDeleted.success) {
               dispatch(matriculasActions.removeMatricula(matricula));
               toggle(i, true);
+              launchToast({msg: "Matrícula removida", type: "success"});
             } else {
+              launchToast({msg: "Erro ao remover matrícula de suas matrículas.", type: "error"})
               console.error("Erro ao remover matrícula de suas matrículas.", matriculaDeleted.status);
             }
           }
