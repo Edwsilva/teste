@@ -97,56 +97,133 @@
       "nome": "Comandante Arnaldo Varella"
     }
   ],
-  "anos": [
-    2005,
-    2007,
-    2009,
-    2011,
-    2013
-  ],
-  "infoPorEscola": [
+  "escolas": [
     {
-      "serie": "4ª a 6ª Série",
+      "nome": "Comandante Arnaldo Varella",
       "info": [
         {
-          "ano": 2007,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 4
+          "serie": "4ª a 6ª Série",
+          "data": [
+            {
+              "ano": 2007,
+              "nota": 4
+            },
+            {
+              "ano": 2009,
+              "nota": 0
+            }
+          ]
         },
         {
-          "ano": 2009,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 0
+          "serie": "7ª a 9ª Série",
+          "info": [
+            {
+              "ano": 2005,
+              "nota": 3.9
+            },
+            {
+              "ano": 2007,
+              "nota": 4.4
+            },
+            {
+              "ano": 2009,
+              "nota": 3.3
+            },
+            {
+              "ano": 2011,
+              "nota": 3.9
+            },
+            {
+              "ano": 2013,
+              "nota": 4.1
+            }
+          ]
         }
       ]
     },
     {
-      "serie": "7ª a 9ª Série",
+      "nome": "Escola Estadual Santos Dumont",
       "info": [
         {
-          "ano": 2005,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 3.9
+          "serie": "4º ao 6º Ano",
+          "data": [
+            {
+              "ano": 2007,
+              "nota": 3.7
+            },
+            {
+              "ano": 2009,
+              "nota": 3.9
+            }
+          ]
         },
         {
-          "ano": 2007,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 4.4
+          "serie": "7º ao 9º Ano",
+          "info": [
+            {
+              "ano": 2005,
+              "nota": 4.2
+            },
+            {
+              "ano": 2007,
+              "nota": 4.0
+            },
+            {
+              "ano": 2009,
+              "nota": 3.8
+            },
+            {
+              "ano": 2011,
+              "nota": 4.1
+            },
+            {
+              "ano": 2013,
+              "nota": 3.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Colégio Monte Verde",
+      "info": [
+        {
+          "serie": "4º ao 6º Ano",
+          "data": [
+            {
+              "ano": 2007,
+              "nota": 4.5
+            },
+            {
+              "ano": 2009,
+              "nota": 4.2
+            }
+          ]
         },
         {
-          "ano": 2009,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 3.3
-        },
-        {
-          "ano": 2011,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 3.9
-        },
-        {
-          "ano": 2013,
-          "nome": "Comandante Arnaldo Varella",
-          "nota": 4.1
+          "serie": "7º ao 9º Ano",
+          "info": [
+            {
+              "ano": 2005,
+              "nota": 3.8
+            },
+            {
+              "ano": 2007,
+              "nota": 4.0
+            },
+            {
+              "ano": 2009,
+              "nota": 3.7
+            },
+            {
+              "ano": 2011,
+              "nota": 4.2
+            },
+            {
+              "ano": 2013,
+              "nota": 4.1
+            }
+          ]
         }
       ]
     }
@@ -255,12 +332,6 @@
       "nome": "Ana Beatriz Silva",
       "nascimento": "21/05/1995",
       "matricula": "3256789012345"
-    },
-    {
-      "id": 567821,
-      "nome": "Pedro Henrique Souza",
-      "nascimento": "12/09/1998",
-      "matricula": "4567812345678"
     }
   ],
   "matriculas": [

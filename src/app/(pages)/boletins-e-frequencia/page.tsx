@@ -1,6 +1,6 @@
 'use client'
 import Banner from "@/app/components/Banner/Banner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import styles from "./boletins.module.css";
 import BoletimCard from "@/app/components/BoletimCard/BoletimCard";
@@ -12,59 +12,15 @@ import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
 import { useDispatch } from "react-redux";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
-import { fetchMatriculas } from "@/app/utils/utils";
-
-type Escola = {
-  nome: string;
-  nota: number;
-};
-
-type TopIndice = {
-  nome: string;
-  top: Escola[];
-};
-
-type TopIndices = TopIndice[];
+import { fetchMatriculas, launchToast } from "@/app/utils/utils";
+import { MinhasEscolas, TopIndices } from "@/app/utils/types";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/app/components/Spinner/Spinner";
+import { getMinhasEscolas, getTop10Escolas } from "@/app/api/desenvolvimento";
 
 //MOCKS
-const topIndice = [
-  {
-    nome: "top4a6",
-    top: [
-      { nome: "Escola Alegria", nota: 9.0 },
-      { nome: "Escola Saber", nota: 8.5 },
-      { nome: "Escola Progresso", nota: 7.2 },
-      { nome: "Escola Futuro", nota: 6.8 },
-      { nome: "Escola União", nota: 5.5 },
-      { nome: "Escola Esperança", nota: 4.7 },
-      { nome: "Escola Harmonia", nota: 4.5 },
-      { nome: "Escola Conhecimento", nota: 3.8 },
-      { nome: "Escola Ideal", nota: 3.2 },
-      { nome: "Escola Superação", nota: 2.9 }
-    ]
-  },
-  {
-    nome: "top7a9",
-    top: [
-      { nome: "Escola Vencedores", nota: 9.8 },
-      { nome: "Escola Progresso II", nota: 9.5 },
-      { nome: "Escola Conquista", nota: 8.7 },
-      { nome: "Escola Sabedoria", nota: 8.2 },
-      { nome: "Escola União II", nota: 7.9 },
-      { nome: "Escola Futuro II", nota: 7.5 },
-      { nome: "Escola Esperança II", nota: 6.9 },
-      { nome: "Escola Harmonia II", nota: 6.4 },
-      { nome: "Escola Ideal II", nota: 5.7 },
-      { nome: "Escola Superação II", nota: 5.1 }
-    ]
-  }
-]
-
-const minhasEscolasData = [
-  { id: 1, nome: "Comandante Arnaldo Varella" }
-];
-
-const anosData = [2005, 2007, 2009, 2011, 2013];
+const anos = [2005, 2007, 2009, 2011, 2013];
 
 const infoPorEscola = [
   {
@@ -129,27 +85,40 @@ const infoPorAno = [
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
+  const [minhasEscolas, setMinhasEscolas] = useState<MinhasEscolas>([]);
   const [escolaField, setEscolaField] = useState<string>("");
   const [anoField, setAnoField] = useState<string>("");
   const [selectField, setSelectField] = useState<string>("");
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
-  // const [topIndices, setTopIndices] = useState<TopIndices>([]);
+  const [topIndices, setTopIndices] = useState<TopIndices>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
-  if (!matriculasFetched) {
-    console.log('Dentro do If');
-    fetchMatriculas();
+  async function fetchData() {
+    await fetchMatriculas();
     dispatch(matriculasActions.setMatriculasFetched(true));
   }
 
-  // useEffect(() => {
-  //   if (topIndices.length === 0) {
-  //     getTopIndices().then(res => setTopIndices(res));
-  //   }
-  // }, []);
+  if (!matriculasFetched) {
+    console.log('Dentro do If');
+    setTimeout(() => {
+      fetchData();
+    }, 2000)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getTop10Escolas().then(res => {
+        setTopIndices(res);
+        setIsLoading(false);
+      })
+    }, 3000);
+    getMinhasEscolas().then(res => setMinhasEscolas(res));
+    // getAnosData().then(res => setAnosData(res));
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -161,7 +130,7 @@ const Boletins = () => {
           <h2 className={styles.title}>Boletim</h2>
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
-          {matriculas.length === 0 ?
+          {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ?
             <h3 className={styles.title2}>No momento você não possui matrícula cadastrada.
               Acesse a página "Matrículas" e cadastre as informações do aluno para
               aproveitar todos os recursos disponíveis.</h3>
@@ -188,7 +157,7 @@ const Boletins = () => {
                   setSelectField(e.target.value);
                 }}>
                 <option value="">Selecione</option>
-                {minhasEscolasData.map(escola => (
+                {minhasEscolas.map(escola => (
                   <option value={escola.nome} key={escola.id}>{escola.nome}</option>
                 ))}
               </select>
@@ -206,7 +175,7 @@ const Boletins = () => {
                   setSelectField(e.target.value);
                 }}>
                 <option value="">Selecione</option>
-                {anosData.map((ano, i) => (
+                {anos.map((ano, i) => (
                   <option value={ano} key={i}>{ano}</option>
                 ))}
               </select>
@@ -215,11 +184,14 @@ const Boletins = () => {
           <div className={styles.tablesContainer}>
             <span className={selectedTable === 1 ? `${styles.tableSelect1} ${styles.tableSelectSelected}` : styles.tableSelect1} onClick={() => setSelectedTable(1)}>4ª a 6ª Série</span>
             <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
-            <TopTable data={selectField === "" ? topIndice[selectedTable - 1].top : escolaField === "" ? infoPorAno[selectedTable - 1].top : infoPorEscola[selectedTable - 1].info}
-              selectField={selectField}
-              anoField={anoField}
-              escolaField={escolaField}
-              selectedTable={selectedTable} />
+            {isLoading ?
+              <Spinner />
+              :
+              <TopTable data={selectField === "" ? topIndices[selectedTable - 1].top : escolaField === "" ? infoPorAno[selectedTable - 1].top : infoPorEscola[selectedTable - 1].info}
+                selectField={selectField}
+                anoField={anoField}
+                escolaField={escolaField}
+                selectedTable={selectedTable} />}
           </div>
         </div>
       </Container>
@@ -235,11 +207,13 @@ const Boletins = () => {
           width: '75%',
           height: '75%',
           padding: 10,
+          position: 'relative'
         },
       }} isOpen={modalIsOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setIsOpen(!modalIsOpen)} />
         <BoletimModal />
       </Modal>
+      <ToastContainer />
     </div>
   )
 }

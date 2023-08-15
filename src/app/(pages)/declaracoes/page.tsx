@@ -7,9 +7,12 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
 import Container from "@/app/components/Container/Container";
-import { fetchMatriculas } from "@/app/utils/utils";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { useDispatch } from "react-redux";
+import { fetchMatriculas, launchToast } from "@/app/utils/utils";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/app/components/Spinner/Spinner";
 
 
 const Declaracoes = () => {
@@ -32,10 +35,16 @@ const Declaracoes = () => {
     });
   };
 
-  if (!matriculasFetched) {
-    console.log('Dentro do If')
-    fetchMatriculas();
+  async function fetchData() {
+    await fetchMatriculas();
     dispatch(matriculasActions.setMatriculasFetched(true));
+  }
+
+  if (!matriculasFetched) {
+    console.log('Dentro do If');
+    setTimeout(() => {
+      fetchData();
+    }, 2000)
   }
 
   return (
@@ -63,7 +72,7 @@ const Declaracoes = () => {
               </div>
             </div>
             <div className={styles.matriculas}>
-              {matriculas.length === 0 ?
+              {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ?
                 <h3 className={styles.title2}>No momento você não possui matrícula cadastrada.
                   Acesse a página "Matrículas" e cadastre as informações do aluno para
                   aproveitar todos os recursos disponíveis.</h3>
@@ -76,6 +85,7 @@ const Declaracoes = () => {
           </div>
         </div>
       </Container>
+      <ToastContainer />
     </div >
 
   )

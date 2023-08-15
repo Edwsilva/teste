@@ -1,17 +1,5 @@
+import { Escola, TopIndice } from "@/app/utils/types";
 import styles from "./toptable.module.css";
-
-type Escola = {
-  ano?: number;
-  nome: string;
-  nota: number;
-};
-
-type TopIndice = {
-  nome: string;
-  top: Escola[];
-};
-
-type TopIndices = TopIndice[];
 
 type TopTableProps = {
   data: Escola[];
