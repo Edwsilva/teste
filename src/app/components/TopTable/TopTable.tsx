@@ -1,4 +1,4 @@
-import { Escola, TopIndice } from "@/app/utils/types";
+import { Escola } from "@/app/utils/types";
 import styles from "./toptable.module.css";
 
 type TopTableProps = {
@@ -9,15 +9,7 @@ type TopTableProps = {
   selectedTable: number;
 }
 
-// const getTopIndices = async () => {
-//   const res = await fetch("http://localhost:3002/topIndice", { next: { revalidate: 172800 } });
-//   const data = await res.json();
-
-//   return data;
-// }
-
 const TopTable = ({ data, selectField, anoField, escolaField, selectedTable }: TopTableProps) => {
-  // console.log(data);
   return (
     <table className={styles.table}>
       <thead className={styles.tHead}>
@@ -40,11 +32,10 @@ const TopTable = ({ data, selectField, anoField, escolaField, selectedTable }: T
         {data.map(({ ano, nome, nota }: Escola, i: number) => (
           <tr className={styles.tRow} key={i}>
             {ano ? <th className={styles.tCell}>{ano}</th> : ""}
-            <th className={styles.tCell}>{nome}</th>
+            {ano ? <th className={styles.tCell}>{escolaField}</th> : <th className={styles.tCell}>{nome}</th>}
             <th className={styles.tCell}>{nota}</th>
           </tr>
-        ))
-        }
+        ))}
       </tbody>
     </table>
   )

@@ -17,71 +17,9 @@ import { MinhasEscolas, TopIndices } from "@/app/utils/types";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
-import { getMinhasEscolas, getTop10Escolas } from "@/app/api/desenvolvimento";
+import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 
-//MOCKS
 const anos = [2005, 2007, 2009, 2011, 2013];
-
-const infoPorEscola = [
-  {
-    serie: "4ª a 6ª Série",
-    info: [
-      { ano: 2007, nome: "Comandante Arnaldo Varella", nota: 4.0 },
-      { ano: 2013, nome: "Comandante Arnaldo Varella", nota: 0.0 }
-    ]
-  },
-  {
-    serie: "7ª a 9ª Série",
-    info: [
-      { ano: 2005, nome: "Comandante Arnaldo Varella", nota: 3.9 },
-      { ano: 2007, nome: "Comandante Arnaldo Varella", nota: 4.4 },
-      { ano: 2009, nome: "Comandante Arnaldo Varella", nota: 3.3 },
-      { ano: 2011, nome: "Comandante Arnaldo Varella", nota: 3.9 },
-      { ano: 2013, nome: "Comandante Arnaldo Varella", nota: 4.1 },
-    ]
-  }
-]
-
-const infoPorAno = [
-  {
-    serie: "4ª a 6ª Série",
-    top: [
-      { nome: "Glauber Rocha", nota: 9.5 },
-      { nome: "Fernando Pessoa", nota: 9.2 },
-      { nome: "Pablo Picasso", nota: 9.0 },
-      { nome: "Marie Curie", nota: 8.8 },
-      { nome: "Albert Einstein", nota: 8.7 },
-      { nome: "Ada Lovelace", nota: 8.6 },
-      { nome: "Leonardo da Vinci", nota: 8.5 },
-      { nome: "Nelson Mandela", nota: 8.4 },
-      { nome: "Isaac Newton", nota: 8.3 },
-      { nome: "Rosa Parks", nota: 8.2 }
-    ]
-  },
-  {
-    serie: "7ª a 9ª Série",
-    top: [
-      { nome: "Ada Lovelace", nota: 9.8 },
-      { nome: "Nelson Mandela", nota: 9.5 },
-      { nome: "Marie Curie", nota: 9.3 },
-      { nome: "Leonardo da Vinci", nota: 9.1 },
-      { nome: "Albert Einstein", nota: 9.0 },
-      { nome: "Rosa Parks", nota: 8.9 },
-      { nome: "Mahatma Gandhi", nota: 8.7 },
-      { nome: "Amelia Earhart", nota: 8.6 },
-      { nome: "Stephen Hawking", nota: 8.4 },
-      { nome: "Malala Yousafzai", nota: 8.2 }
-    ]
-  }
-]
-//FIM DOS MOCKS
-
-// const getTopIndices = async () => {
-//   const res = await fetch("http://localhost:3002/topIndice");
-//   const data = await res.json();
-
-//   return data;
-// }
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
@@ -89,7 +27,7 @@ const Boletins = () => {
   const [escolaField, setEscolaField] = useState<string>("");
   const [anoField, setAnoField] = useState<string>("");
   const [selectField, setSelectField] = useState<string>("");
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -117,8 +55,17 @@ const Boletins = () => {
       })
     }, 3000);
     getMinhasEscolas().then(res => setMinhasEscolas(res));
-    // getAnosData().then(res => setAnosData(res));
   }, []);
+
+  useEffect(() => {
+    if (anoField !== "") {
+      getTop10EscolasPorAno(anoField).then(res => setTopIndices(res[0].info));
+    } else if (escolaField !== "") {
+      getTop10EscolasPorEscola(escolaField).then(res => setTopIndices(res[0].info));
+    } else {
+      getTop10Escolas().then(res => setTopIndices(res));
+    }
+  }, [selectField])
 
   return (
     <div className={styles.main}>
@@ -136,7 +83,7 @@ const Boletins = () => {
               aproveitar todos os recursos disponíveis.</h3>
             :
             matriculas.map(({ nome, matricula }, i) => (
-              <BoletimCard nome={nome} matricula={matricula} setModal={setIsOpen} key={i} />
+              <BoletimCard nome={nome} matricula={matricula} setModal={setModalOpen} key={i} />
             ))
           }
         </div>
@@ -187,7 +134,7 @@ const Boletins = () => {
             {isLoading ?
               <Spinner />
               :
-              <TopTable data={selectField === "" ? topIndices[selectedTable - 1].top : escolaField === "" ? infoPorAno[selectedTable - 1].top : infoPorEscola[selectedTable - 1].info}
+              <TopTable data={topIndices[selectedTable - 1].top}
                 selectField={selectField}
                 anoField={anoField}
                 escolaField={escolaField}
@@ -196,21 +143,25 @@ const Boletins = () => {
         </div>
       </Container>
 
-      <Modal ariaHideApp={false} style={{
-        content: {
-          top: '55%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          transform: 'translate(-50%, -50%)',
-          minWidth: '380px',
-          width: '75%',
-          height: '75%',
-          padding: 10,
-          position: 'relative'
-        },
-      }} isOpen={modalIsOpen}>
-        <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setIsOpen(!modalIsOpen)} />
+      <Modal
+        ariaHideApp={false}
+        style={{
+          content: {
+            top: '55%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            transform: 'translate(-50%, -50%)',
+            minWidth: '380px',
+            width: '75%',
+            height: '75%',
+            padding: 10,
+            position: 'relative'
+          },
+        }}
+        isOpen={modalOpen}
+        data={""}>
+        <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
         <BoletimModal />
       </Modal>
       <ToastContainer />

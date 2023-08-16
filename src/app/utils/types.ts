@@ -1,15 +1,31 @@
 type Escola = {
   ano?: number;
-  nome: string;
+  nome?: string;
   nota: number;
 };
 
 type TopIndice = {
-  nome: string;
+  serie?: "4ª a 6ª Série" | "7ª a 9ª Série";
+  nome?: string;
   top: Escola[];
 };
 
 type TopIndices = TopIndice[];
+
+//Pesquisa no json-server retorna um array por conta dos query params
+type TopIndicesPorAno = [
+  {
+    ano: number;
+    info: TopIndice[];
+  }
+]
+
+type TopIndicesPorEscola = [
+  {
+    nome: string;
+    info: TopIndice[];
+  }
+]
 
 type MinhaEscola = {
   id: number;
@@ -18,4 +34,4 @@ type MinhaEscola = {
 
 type MinhasEscolas = MinhaEscola[];
 
-export type {Escola, TopIndice, TopIndices, MinhasEscolas}
+export type {Escola, TopIndice, TopIndices, TopIndicesPorAno, TopIndicesPorEscola, MinhasEscolas}
