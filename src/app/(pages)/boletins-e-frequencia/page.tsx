@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
+import Error from "@/app/components/Error/Error";
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
@@ -30,40 +31,76 @@ const Boletins = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [errorTable, setErrorTable] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
   async function fetchData() {
-    await fetchMatriculas();
-    dispatch(matriculasActions.setMatriculasFetched(true));
+    try {
+      await fetchMatriculas();
+      dispatch(matriculasActions.setMatriculasFetched(true));
+      setError(false);
+    } catch (error) {
+      setError(true);
+    }
   }
 
-  if (!matriculasFetched) {
+  if (!matriculasFetched || error) {
     console.log('Dentro do If');
     setTimeout(() => {
-      fetchData();
+        fetchData();
     }, 2000)
-  }
+}
 
   useEffect(() => {
     setTimeout(() => {
-      getTop10Escolas().then(res => {
-        setTopIndices(res);
-        setIsLoading(false);
-      })
+      getTop10Escolas()
+        .then(res => {
+          setTopIndices(res);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          setErrorTable(true);
+          setIsLoading(false);
+        })
     }, 3000);
-    getMinhasEscolas().then(res => setMinhasEscolas(res));
+
+    getMinhasEscolas()
+      .then(res => setMinhasEscolas(res))
+      .catch(err => launchToast({ msg: "Erro ao obter suas escolas.", type: "error" }));
   }, []);
 
   useEffect(() => {
     if (anoField !== "") {
-      getTop10EscolasPorAno(anoField).then(res => setTopIndices(res[0].info));
+      getTop10EscolasPorAno(anoField)
+        .then(res => {
+          setTopIndices(res[0].info);
+          setErrorTable(false);
+        })
+        .catch(err => {
+          setErrorTable(true);
+        })
     } else if (escolaField !== "") {
-      getTop10EscolasPorEscola(escolaField).then(res => setTopIndices(res[0].info));
+      getTop10EscolasPorEscola(escolaField)
+        .then(res => {
+          setTopIndices(res[0].info);
+          setErrorTable(false);
+        })
+        .catch(err => {
+          setErrorTable(true);
+        });
     } else {
-      getTop10Escolas().then(res => setTopIndices(res));
+      getTop10Escolas()
+        .then(res => {
+          setTopIndices(res)
+          setErrorTable(false);
+        })
+        .catch(err => {
+          setErrorTable(true);
+        });
     }
   }, [selectField])
 
@@ -77,14 +114,20 @@ const Boletins = () => {
           <h2 className={styles.title}>Boletim</h2>
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
-          {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ?
-            <h3 className={styles.title2}>No momento você não possui matrícula cadastrada.
-              Acesse a página "Matrículas" e cadastre as informações do aluno para
-              aproveitar todos os recursos disponíveis.</h3>
-            :
-            matriculas.map(({ nome, matricula }, i) => (
-              <BoletimCard nome={nome} matricula={matricula} setModal={setModalOpen} key={i} />
-            ))
+          {
+            !matriculasFetched && !error ?
+              <Spinner />
+              :
+              error ?
+                <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                :
+                matriculas.length === 0 ?
+                  <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                    da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                  :
+                  matriculas.map(({ nome, matricula }, i) => (
+                    <BoletimCard nome={nome} matricula={matricula} setModal={setModalOpen} key={i} />
+                  ))
           }
         </div>
         <div className={styles.top10}>
@@ -100,8 +143,8 @@ const Boletins = () => {
                 value={escolaField}
                 onChange={(e) => {
                   setEscolaField(e.target.value);
-                  setAnoField("");
                   setSelectField(e.target.value);
+                  setAnoField("");
                 }}>
                 <option value="">Selecione</option>
                 {minhasEscolas.map(escola => (
@@ -133,12 +176,13 @@ const Boletins = () => {
             <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
             {isLoading ?
               <Spinner />
-              :
-              <TopTable data={topIndices[selectedTable - 1].top}
-                selectField={selectField}
-                anoField={anoField}
-                escolaField={escolaField}
-                selectedTable={selectedTable} />}
+              : errorTable ? <Error msg="Não foi possível carregar esta tabela, tente novamente mais tarde..." /> :
+                <TopTable data={topIndices[selectedTable - 1].top}
+                  selectField={selectField}
+                  anoField={anoField}
+                  escolaField={escolaField}
+                  selectedTable={selectedTable} />
+            }
           </div>
         </div>
       </Container>

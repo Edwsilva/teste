@@ -166,7 +166,7 @@
             },
             {
               "ano": 2007,
-              "nota": 4.0
+              "nota": 4
             },
             {
               "ano": 2009,
@@ -209,7 +209,7 @@
             },
             {
               "ano": 2007,
-              "nota": 4.0
+              "nota": 4
             },
             {
               "ano": 2009,
@@ -708,15 +708,11 @@
   "minhasMatriculas": [
     {
       "id": 318465,
-      "nome": "Eduardo Cassano de Sá",
-      "nascimento": "08/12/2000",
-      "matricula": "8593204678123"
-    },
-    {
-      "id": 842739,
-      "nome": "Ana Beatriz Silva",
-      "nascimento": "21/05/1995",
-      "matricula": "3256789012345"
+      "nome": "Antonio Cassano",
+      "nascimento": "12/07/1982",
+      "matricula": "8593204678123",
+      "mae": "Maria Silva",
+      "pai": "José Cassano"
     }
   ],
   "matriculas": [
@@ -724,79 +720,105 @@
       "id": 318465,
       "nome": "Antonio Cassano",
       "nascimento": "12/07/1982",
-      "matricula": "8593204678123"
+      "matricula": "8593204678123",
+      "mae": "Maria Silva",
+      "pai": "José Cassano"
     },
     {
       "id": 842739,
       "nome": "Ana Beatriz Silva",
       "nascimento": "21/05/1995",
-      "matricula": "3256789012345"
+      "matricula": "3256789012345",
+      "mae": "Carla Rodrigues",
+      "pai": "João Silva"
     },
     {
       "id": 567821,
       "nome": "Pedro Henrique Souza",
       "nascimento": "12/09/1998",
-      "matricula": "4567812345678"
+      "matricula": "4567812345678",
+      "mae": "Amanda Souza",
+      "pai": "Ricardo Souza"
     },
     {
       "id": 239456,
       "nome": "Carolina Santos",
       "nascimento": "17/03/2002",
-      "matricula": "9876543210123"
+      "matricula": "9876543210123",
+      "mae": "Isabel Santos",
+      "pai": "Carlos Oliveira"
     },
     {
       "id": 903274,
       "nome": "Rafael Pereira",
       "nascimento": "30/11/1993",
-      "matricula": "7463829101293"
+      "matricula": "7463829101293",
+      "mae": "Sandra Pereira",
+      "pai": "Fernando Pereira"
     },
     {
       "id": 753492,
       "nome": "Julia Oliveira",
       "nascimento": "04/07/1997",
-      "matricula": "5689123456790"
+      "matricula": "5689123456790",
+      "mae": "Patrícia Oliveira",
+      "pai": "Ricardo Oliveira"
     },
     {
       "id": 613845,
       "nome": "Lucas Mendes",
       "nascimento": "02/02/2001",
-      "matricula": "1243567890123"
+      "matricula": "1243567890123",
+      "mae": "Adriana Mendes",
+      "pai": "Paulo Mendes"
     },
     {
       "id": 129578,
       "nome": "Mariana Fernandes",
       "nascimento": "15/08/1996",
-      "matricula": "8712367890123"
+      "matricula": "8712367890123",
+      "mae": "Ana Fernandes",
+      "pai": "Luís Fernandes"
     },
     {
       "id": 793245,
       "nome": "Gabriel Torres",
       "nascimento": "25/06/1994",
-      "matricula": "9023567890123"
+      "matricula": "9023567890123",
+      "mae": "Silvia Torres",
+      "pai": "Rafael Torres"
     },
     {
       "id": 908742,
       "nome": "Isabella Lima",
       "nascimento": "09/03/1999",
-      "matricula": "6578901234567"
+      "matricula": "6578901234567",
+      "mae": "Patrícia Lima",
+      "pai": "Daniel Lima"
     },
     {
       "id": 457392,
       "nome": "Thiago Rodrigues",
       "nascimento": "19/10/2003",
-      "matricula": "5890123456789"
+      "matricula": "5890123456789",
+      "mae": "Fernanda Rodrigues",
+      "pai": "Gustavo Rodrigues"
     },
     {
       "id": 641259,
       "nome": "Larissa Costa",
       "nascimento": "14/12/2000",
-      "matricula": "1234098765432"
+      "matricula": "1234098765432",
+      "mae": "Renata Costa",
+      "pai": "Fábio Costa"
     },
     {
       "id": 814726,
       "nome": "Gustavo Alves",
       "nascimento": "23/01/1992",
-      "matricula": "3456789012345"
+      "matricula": "3456789012345",
+      "mae": "Lúcia Alves",
+      "pai": "Marcos Alves"
     }
   ]
 }

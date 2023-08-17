@@ -1,8 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type InputMatricula = {
-  // id: number;
-  // nome: string;
   nascimento: string;
   matricula: string;
 }
@@ -12,6 +10,8 @@ export type Matricula = {
   nome: string;
   nascimento: string;
   matricula: string;
+  mae: string;
+  pai: string;
 }
 
 type InitialState = {

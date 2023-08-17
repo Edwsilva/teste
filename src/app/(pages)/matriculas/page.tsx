@@ -13,11 +13,13 @@ import { fetchMatriculas, launchToast } from "@/app/utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
+import Error from "@/app/components/Error/Error";
 
 const Matriculas = () => {
     const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
     const [matricula, setMatricula] = useState<string>("");
     const [nascimento, setNascimento] = useState<string>("");
+    const [error, setError] = useState<boolean>(false);
 
     const dispatch = useDispatch<AppDispatch>();
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
@@ -40,21 +42,17 @@ const Matriculas = () => {
 
     };
 
-    // async function fetchMatriculas() {
-    //     try {
-    //         const data = await getMinhasMatriculas();
-    //         console.log("fetchMatriculas")
-    //         store.dispatch(matriculasActions.setMinhasMatriculas(data));
-    //     } catch (error) {
-    //         console.error("Erro buscando suas matrículas", error);
-    //     }
-    // }
     async function fetchData() {
-        await fetchMatriculas();
-        dispatch(matriculasActions.setMatriculasFetched(true));
+        try {
+            await fetchMatriculas();
+            dispatch(matriculasActions.setMatriculasFetched(true));
+            setError(false);
+        } catch (error) {
+            setError(true);
+        }
     }
 
-    if (!matriculasFetched) {
+    if (!matriculasFetched || error) {
         console.log('Dentro do If');
         setTimeout(() => {
             fetchData();
@@ -69,16 +67,24 @@ const Matriculas = () => {
             <Container>
                 <h2 className={styles.title}>Minhas Matrículas</h2>
                 <p className={styles.text}>Consulte as matrículas e veja os boletins escolares. Clique em uma das matrículas cadastradas para seleciona-la.</p>
-                
+
                 <div className={styles.matriculasContainer}>
-                    {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ? <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
-                        da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
-                        :
-                        <div className={styles.matriculas}>
-                            {matriculas.map(({ id, nome, matricula }, index) => (
-                                <Matricula id={id} key={index} i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
-                            ))}
-                        </div>
+                    {
+                        !matriculasFetched && !error ?
+                            <Spinner />
+                            :
+                            error ?
+                                <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                                :
+                                matriculas.length === 0 ?
+                                    <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                                        da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                                    :
+                                    <div className={styles.matriculas}>
+                                        {matriculas.map(({ id, nome, matricula }, index) => (
+                                            <Matricula id={id} key={index} i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
+                                        ))}
+                                    </div>
                     }
                 </div>
                 <div className={styles.cadastrarMatricula}>
@@ -97,7 +103,7 @@ const Matriculas = () => {
                                 const nascimentoFormated = nascimento.split("-").reverse().join("/");
                                 const data = await apiCheckMatricula({ nascimento: nascimentoFormated, matricula });
                                 if (data) {
-                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula });
+                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula, mae: data.mae, pai: data.pai});
                                     if (matriculaAdded.success) {
                                         dispatch(matriculasActions.addMatricula(data));
                                         launchToast({ msg: "Matrícula adicionada!", type: "success" });

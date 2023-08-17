@@ -1,0 +1,32 @@
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.errorText{
+    font-size: 1.1rem;
+    font-weight: light;
+}
+
+.errorIcon{
+    font-size: 1.5rem;
+    color: var(--warning);
+}
+
+@media screen and (max-width: 768px){
+    .error{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .errorText{
+        font-size: 1rem;
+    }
+    
+    .errorIcon{
+        font-size: 2rem;
+    }   
+}

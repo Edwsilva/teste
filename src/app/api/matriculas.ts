@@ -1,6 +1,7 @@
 import { InputMatricula, Matricula } from "@/redux/features/matriculas-slice";
 
 const getMinhasMatriculas = async (): Promise<Matricula[]> => {
+  // throw new Error("Erro ao chamar matrículas");
   const req = await fetch("http://localhost:3001/minhasMatriculas");
   const data = await req.json();
   return data;

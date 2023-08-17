@@ -2,21 +2,21 @@ import styles from "./matriculadropdown.module.css";
 import Image from "next/image";
 import Button from "../Button/Button";
 import logoDeclara from "../../../../public/images/logodeclara.png";
+import { Matricula } from "@/redux/features/matriculas-slice";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 
 export type RadioProps = "curso" | "conclusao";
 
 type Props = {
+  data: Matricula;
   i: number;
-  nome: string;
-  matricula: string;
   selected: RadioProps;
   dropdownVisible: boolean;
   toggle: (index: number) => void;
 }
 
-const MatriculaDropdown = ({ i, nome, matricula, selected, dropdownVisible, toggle }: Props) => {
+const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props) => {
   const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -28,8 +28,8 @@ const MatriculaDropdown = ({ i, nome, matricula, selected, dropdownVisible, togg
         toggle(i);
       }}>
         <div className={styles.matriculaGroup}>
-          <span>Aluno: <b>{nome}</b></span>
-          <span>Matrícula: <b>{matricula}</b></span>
+          <span>Aluno: <b>{data.nome}</b></span>
+          <span>Matrícula: <b>{data.matricula}</b></span>
         </div>
         <button
           className={`${styles.iconButton} ${dropdownVisible ? styles.open : ""}`}
@@ -85,15 +85,15 @@ const MatriculaDropdown = ({ i, nome, matricula, selected, dropdownVisible, togg
           </table>
           <div className={styles.declaracaoText}>
             {selected === "curso" ?
-              <p>Declaro que o(a) aluno(a) ISABELLA RAFAEL BAPTISTA, código 2011116500200,
-                NIS 16330094080, filho(a) de SIDNEI ALVES BAPTISTA e de ADRIANA DE SOUZA
-                RAFAEL, nascido(a) em 03/08/2008, está matriculado(a) neste Estabelecimento,
+              <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
+                NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
+                , nascido(a) em 03/08/2008, está matriculado(a) neste Estabelecimento,
                 no(a) 9º ano do(a) Ensino Fundamental, no turno Manhã, obtendo frequência
                 de 0,00 % até a presente data.</p>
               :
-              <p>Declaro que o(a) aluno(a) ISABELLA RAFAEL BAPTISTA, código 2011116500200,
-                NIS 16330094080, filho(a) de SIDNEI ALVES BAPTISTA e de ADRIANA DE SOUZA
-                RAFAEL, nascido(a) em 03/08/2008, cursou neste Estabelecimento, o 8º ano
+              <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
+                NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
+                , nascido(a) em 03/08/2008, cursou neste Estabelecimento, o 8º ano
                 do(a) Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
                 98,44% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº
                 42/2020 que autorizou a implementação da Reorganização Curricular e do

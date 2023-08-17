@@ -13,11 +13,13 @@ import { fetchMatriculas, launchToast } from "@/app/utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
+import Error from "@/app/components/Error/Error";
 
 
 const Declaracoes = () => {
   const [selected, setSelected] = useState<RadioProps>("curso");
   const [dropdownVisible, setDropdownVisible] = useState<boolean[]>([]);
+  const [error, setError] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
@@ -36,16 +38,21 @@ const Declaracoes = () => {
   };
 
   async function fetchData() {
-    await fetchMatriculas();
-    dispatch(matriculasActions.setMatriculasFetched(true));
+    try {
+      await fetchMatriculas();
+      dispatch(matriculasActions.setMatriculasFetched(true));
+      setError(false);
+    } catch (error) {
+      setError(true);
+    }
   }
 
-  if (!matriculasFetched) {
+  if (!matriculasFetched || error) {
     console.log('Dentro do If');
     setTimeout(() => {
-      fetchData();
+        fetchData();
     }, 2000)
-  }
+}
 
   return (
     <div className={styles.main}>
@@ -72,14 +79,19 @@ const Declaracoes = () => {
               </div>
             </div>
             <div className={styles.matriculas}>
-              {!matriculasFetched ? <Spinner /> : matriculas.length === 0 ?
-                <h3 className={styles.title2}>No momento você não possui matrícula cadastrada.
-                  Acesse a página "Matrículas" e cadastre as informações do aluno para
-                  aproveitar todos os recursos disponíveis.</h3>
+              {!matriculasFetched && !error ?
+                <Spinner />
                 :
-                matriculas.map(({ matricula, nome }, i) => (
-                  <MatriculaDropdown nome={nome} matricula={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
-                ))
+                error ?
+                  <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                  :
+                  matriculas.length === 0 ?
+                    <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                      da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                    :
+                    matriculas.map((matricula, i) => (
+                      <MatriculaDropdown data={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
+                    ))
               }
             </div>
           </div>
