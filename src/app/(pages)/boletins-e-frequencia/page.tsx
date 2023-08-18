@@ -51,22 +51,21 @@ const Boletins = () => {
   if (!matriculasFetched || error) {
     console.log('Dentro do If');
     setTimeout(() => {
-        fetchData();
+      fetchData();
     }, 2000)
-}
+  }
 
   useEffect(() => {
-    setTimeout(() => {
-      getTop10Escolas()
-        .then(res => {
-          setTopIndices(res);
-          setIsLoading(false);
-        })
-        .catch(err => {
-          setErrorTable(true);
-          setIsLoading(false);
-        })
-    }, 3000);
+    getTop10Escolas()
+      .then(res => {
+        // console.log(res);
+        setTopIndices(res);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setErrorTable(true);
+        setIsLoading(false);
+      })
 
     getMinhasEscolas()
       .then(res => setMinhasEscolas(res))
@@ -79,30 +78,38 @@ const Boletins = () => {
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
+          setIsLoading(false);
         })
         .catch(err => {
           setErrorTable(true);
+          setIsLoading(false);
         })
+      setIsLoading(false);
     } else if (escolaField !== "") {
       getTop10EscolasPorEscola(escolaField)
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
+          setIsLoading(false);
         })
         .catch(err => {
           setErrorTable(true);
+          setIsLoading(false);
         });
+      setIsLoading(false)
     } else {
       getTop10Escolas()
         .then(res => {
           setTopIndices(res)
           setErrorTable(false);
+          setIsLoading(false);
         })
         .catch(err => {
           setErrorTable(true);
+          setIsLoading(false);
         });
     }
-  }, [selectField])
+  }, [selectField]);
 
   return (
     <div className={styles.main}>
@@ -142,6 +149,7 @@ const Boletins = () => {
               <select name="minhasEscolas" id="minhasEscolas" className={styles.select}
                 value={escolaField}
                 onChange={(e) => {
+                  setIsLoading(true);
                   setEscolaField(e.target.value);
                   setSelectField(e.target.value);
                   setAnoField("");
@@ -160,6 +168,7 @@ const Boletins = () => {
               <select name="ano" id="ano" className={styles.select}
                 value={anoField}
                 onChange={(e) => {
+                  setIsLoading(true);
                   setAnoField(e.target.value);
                   setEscolaField("");
                   setSelectField(e.target.value);
@@ -204,7 +213,7 @@ const Boletins = () => {
           },
         }}
         isOpen={modalOpen}
-        data={""}>
+        data={{}}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
         <BoletimModal />
       </Modal>

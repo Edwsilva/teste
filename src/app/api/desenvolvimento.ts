@@ -1,13 +1,13 @@
 import { TopIndices, TopIndicesPorAno, MinhasEscolas, TopIndicesPorEscola } from "../utils/types";
 
 const getMinhasEscolas = async (): Promise<MinhasEscolas> => {
-  const req = await fetch("http://localhost:3001/minhasEscolas", {cache: 'force-cache'});
+  const req = await fetch("http://localhost:3001/minhasEscolas", {cache: 'no-cache'});
   const data = await req.json();
   return data;
 }
 
 const getTop10Escolas = async (): Promise<TopIndices> => {
-  const req = await fetch("http://localhost:3001/topIndice", {next: {revalidate: 86400}});
+  const req = await fetch("http://localhost:3001/topIndice", {cache: 'no-cache'});
   const data = await req.json();
   return data;
 }
