@@ -12,6 +12,9 @@ export type Matricula = {
   matricula: string;
   mae: string;
   pai: string;
+  escola: string;
+  serie: string;
+  turma: number;
 }
 
 type InitialState = {

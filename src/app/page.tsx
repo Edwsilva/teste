@@ -1,14 +1,12 @@
-'use client'
 import styles from "./page.module.css";
 import Button from "./components/Button/Button";
 import { BsCardList, BsCalendarDate } from "react-icons/bs";
 import { IoRestaurantOutline, IoDocumentTextOutline } from "react-icons/io5";
 import Banner from "./components/Banner/Banner";
-import { useRouter } from "next/navigation";
 import Card from "./components/Card/Card";
+import Link from "next/link";
 
 export default function Home() {
-  const router = useRouter();
 
   return (
     <main className={styles.main}>
@@ -17,7 +15,9 @@ export default function Home() {
         <p className={styles.bannerText}>
           Fique por dentro de tudo mesmo fora da escola
         </p>
-        <Button text="Confira seu boletim" fn={() => router.push('/boletins-e-frequencia')} />
+        <Link href="/boletins-e-frequencia">
+          <Button text="Confira seu boletim" />
+        </Link>
       </Banner>
       <div className={styles.container}>
         <div className={styles.sectionB}>
@@ -28,7 +28,10 @@ export default function Home() {
               ao aluno da rede municipal. Cadastre a matrícula de seu filho
               na página "Matrículas" para utilizar nossos serviços.
             </p>
-            <Button text="Ir até Matrículas" fn={() => router.push('/matriculas')} />
+            
+            <Link href="/matriculas">
+              <Button text="Ir até Matrículas" />
+            </Link>
           </div>
           <div className={styles.sectionB2}>
             <div className={styles.cardContainer}>

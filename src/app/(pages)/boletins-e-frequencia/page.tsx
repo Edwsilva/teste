@@ -19,6 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 import Error from "@/app/components/Error/Error";
+import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
@@ -29,6 +30,7 @@ const Boletins = () => {
   const [anoField, setAnoField] = useState<string>("");
   const [selectField, setSelectField] = useState<string>("");
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [boletimData, setBoletimData] = useState<BoletimData>({escola: "", serie: "", turma: 0, nome: "", matricula: ""});
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorTable, setErrorTable] = useState<boolean>(false);
@@ -132,8 +134,8 @@ const Boletins = () => {
                   <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
                     da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                   :
-                  matriculas.map(({ nome, matricula }, i) => (
-                    <BoletimCard nome={nome} matricula={matricula} setModal={setModalOpen} key={i} />
+                  matriculas.map((matricula, i) => (
+                    <BoletimCard data={matricula} setModal={setModalOpen} setBoletim={setBoletimData} key={i} />
                   ))
           }
         </div>
@@ -212,10 +214,9 @@ const Boletins = () => {
             position: 'relative'
           },
         }}
-        isOpen={modalOpen}
-        data={{}}>
+        isOpen={modalOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        <BoletimModal />
+        <BoletimModal data={boletimData}/>
       </Modal>
       <ToastContainer />
     </div>

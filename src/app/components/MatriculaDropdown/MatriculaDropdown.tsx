@@ -68,7 +68,7 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
                 </th>
                 <th className={styles.tCell}>
                   Denominação<br />
-                  <p className={styles.tCellText}>Em Comandante Arnaldo Varella</p>
+                  <p className={styles.tCellText}>{data.escola}</p>
                 </th>
               </tr>
               <tr className={styles.tRow}>
@@ -87,14 +87,14 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
             {selected === "curso" ?
               <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
                 NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
-                , nascido(a) em 03/08/2008, está matriculado(a) neste Estabelecimento,
-                no(a) 9º ano do(a) Ensino Fundamental, no turno Manhã, obtendo frequência
+                , nascido(a) em {data.nascimento}, está matriculado(a) neste Estabelecimento,
+                no(a) {data.serie} do(a) Ensino Fundamental, no turno Manhã, obtendo frequência
                 de 0,00 % até a presente data.</p>
               :
               <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
                 NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
-                , nascido(a) em 03/08/2008, cursou neste Estabelecimento, o 8º ano
-                do(a) Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
+                , nascido(a) em {data.nascimento}, cursou neste Estabelecimento, o {data.serie} do(a)
+                 Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
                 98,44% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº
                 42/2020 que autorizou a implementação da Reorganização Curricular e do
                 Continum Curricular disposto na Deliberação CME Nº 43/2020, com base no

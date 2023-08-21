@@ -25,6 +25,8 @@ const Matriculas = () => {
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
     const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
+    console.log(nascimento);
+
     const toggleDropdown = (index: number, remove?: boolean) => {
         if (remove) {
             setDropdownVisible((prevState) => {
@@ -57,6 +59,10 @@ const Matriculas = () => {
         setTimeout(() => {
             fetchData();
         }, 2000)
+    }
+
+    if(matricula.match(/[^0-9]/g)){
+        console.log("match");
     }
 
     return (
@@ -92,18 +98,20 @@ const Matriculas = () => {
                     <div className={styles.form}>
                         <div className={styles.textField}>
                             <label htmlFor="" className={styles.label}>Matrícula:</label>
-                            <input type="text" placeholder="Ex: 1234567" className={styles.input} value={matricula} onChange={(e) => setMatricula(e.target.value)} />
+                            <input type="text" placeholder="Ex: 1234567891011" maxLength={13} className={styles.input} value={matricula} onChange={(e) => { setMatricula(e.target.value) }} />
                         </div>
                         <div className={styles.textField}>
                             <label htmlFor="" className={styles.label}>Nascimento:</label>
                             <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
                         </div>
                         <Button text="Salvar" p="p-10" fn={async () => {
-                            if (nascimento !== "" && matricula !== "") {
+                            if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
+                                launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
+                            } else {
                                 const nascimentoFormated = nascimento.split("-").reverse().join("/");
                                 const data = await apiCheckMatricula({ nascimento: nascimentoFormated, matricula });
                                 if (data) {
-                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula, mae: data.mae, pai: data.pai});
+                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula, mae: data.mae, pai: data.pai, escola: data.escola, serie: data.serie, turma: data.turma });
                                     if (matriculaAdded.success) {
                                         dispatch(matriculasActions.addMatricula(data));
                                         launchToast({ msg: "Matrícula adicionada!", type: "success" });
