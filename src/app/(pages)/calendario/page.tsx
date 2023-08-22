@@ -1,8 +1,8 @@
-'use client'
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./calendario.module.css";
 import Button from "@/app/components/Button/Button";
 import Container from "@/app/components/Container/Container";
+import Link from "next/link";
 
 const ano = "2021";
 
@@ -19,7 +19,9 @@ const Calendario = () => {
                         será necessário habilitar os POP-UPS na barra de endereços do seu
                         navegador</p>
                     <p className={styles.textI}>Ano {ano}</p>
-                    <Button text="Calendário Escolar" />
+                    <Link href="https://educacao.prefeitura.rio/calendario/" target="_blank">
+                        <Button text="Calendário Escolar" />
+                    </Link>
                 </div>
             </Container>
         </div>

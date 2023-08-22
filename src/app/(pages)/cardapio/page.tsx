@@ -1,12 +1,18 @@
+'use client'
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
 import Container from "@/app/components/Container/Container";
+import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
+import { useState } from "react";
+import Link from "next/link";
 
 const data = "28/02/2022";
 const dataFinal = "04/03/2022";
 
 const Cardapio = () => {
+  const [pdfOpen, setPdfOpen] = useState<boolean>(false);
+  console.log(pdfOpen)
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerCardapio">
@@ -22,7 +28,11 @@ const Cardapio = () => {
           <p className={styles.text}>Confira o cardápio da merenda escolar oferecido nas
             escolas, creches e Espaços de Desenvolvimento Infantil (EDIs).</p>
           <p className={styles.textI}>Semana de {data} a {dataFinal}</p>
-          <Button text="Cardápio nas Unidades Educacionais" />
+          {pdfOpen ?
+            <PDFViewer pdfUrl="https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-comunicacao.pdf" />
+            :
+            ""}
+          <Button text={pdfOpen ? "Fechar Cardápio" : "Cardápio das Unidades Educacionais"} fn={() => setPdfOpen(!pdfOpen)} />
         </div>
         <div className={styles.sobre}>
           <h3 className={styles.title2}>Cardápios do Programa Nacional de Alimentação Escolar</h3>
@@ -47,7 +57,9 @@ const Cardapio = () => {
           <p className={styles.text}>Os cardápios são os mesmos para toda a rede municipal de ensino e a sua execução
             ocorre de forma alternada, ou seja, as Coordenadorias Regionais de Educação (CRE)
             utilizam semanas diferentes, conforme anexos.</p>
-          <Button text="Sobre o Cardápio da Alimentação Escolar" />
+          <Link href="https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/Lauda-TIMBRADA-18.pdf" target="_blank">
+            <Button text="Sobre o Cardápio da Alimentação Escolar" />
+          </Link>
         </div>
       </Container>
     </div>
