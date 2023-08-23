@@ -21,3 +21,10 @@
     background-color: transparent;
     color: var(--primary);
 }
+
+@media screen and (max-width: 480px) {
+    .p10{
+        padding: 9px;
+        font-size: .9rem;
+    }
+}

@@ -190,12 +190,9 @@
 
 @media screen and (max-width: 480px){
   .matriculaGroup{
-    display: flex;
-    gap: 10px;
-  }
-
-  .matriculaGroup{
     font-size: .9rem;
+    display: flex;
+    gap: 5px;
   }
 
   .matriculaGroup span b{

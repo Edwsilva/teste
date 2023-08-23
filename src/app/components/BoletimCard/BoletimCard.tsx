@@ -18,6 +18,9 @@ type Props = {
 }
 
 const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
+  // let partesNome = data.nome.split(" ");
+  // let nome = `${partesNome[0]} ${partesNome[partesNome.length - 1]}`;
+
   return (
     <div className={styles.boletim}>
       <div className={styles.boletimGroup}>
@@ -25,9 +28,9 @@ const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
         <span>Matrícula: <b>{data.matricula}</b></span>
       </div>
       <Button text="Consultar" p="p-10" radius fn={() => {
-        setBoletim({ escola: data.escola, serie: data.serie, turma: data.turma, nome: data.nome, matricula: data.matricula})
+        setBoletim({ escola: data.escola, serie: data.serie, turma: data.turma, nome: data.nome, matricula: data.matricula })
         setModal(true)
-        }}/>
+      }} />
     </div>
   )
 }
