@@ -4,15 +4,15 @@ import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
 import Container from "@/app/components/Container/Container";
 import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const data = "28/02/2022";
-const dataFinal = "04/03/2022";
+const data = "21/08/2023";
+const dataFinal = "25/08/2023";
 
 const Cardapio = () => {
   const [pdfOpen, setPdfOpen] = useState<boolean>(false);
-  console.log(pdfOpen)
+
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerCardapio">

@@ -7,32 +7,40 @@ import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
+import {BsCalendar3} from "react-icons/bs";
+import {IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline} from "react-icons/io5";
+import {RiProfileLine} from "react-icons/ri";
 
 const links = [
   {
     id: 1,
     name: "Boletins e Frequência",
     href: "/boletins-e-frequencia",
+    icon: <IoSchoolOutline size={25}/>
   },
   {
     id: 2,
     name: "Calendário",
     href: "/calendario",
+    icon: <BsCalendar3 size={25}/>
   },
   {
     id: 3,
     name: "Cardápio",
     href: "/cardapio",
+    icon: <IoRestaurantOutline size={25}/>
   },
   {
     id: 4,
     name: "Declarações",
     href: "/declaracoes",
+    icon: <IoDocumentTextOutline size={25} />
   },
   {
     id: 5,
     name: "Matrículas",
     href: "/matriculas",
+    icon: <RiProfileLine size={25} />
   }
 ];
 
@@ -40,6 +48,8 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
   const pathname = usePathname();
+
+  const menuItemDelay = .3;
 
   function closeLinks(){
     setResponsiveLinksOpen(false);
@@ -51,6 +61,14 @@ const Navbar = () => {
       document.removeEventListener('click', closeLinks);
     }
   })
+
+  useEffect(() => {
+    if(menuOpen){
+      document.body.style.overflow = "hidden";
+    }else{
+      document.body.style.overflow = "";
+    }
+  }, [menuOpen])
 
   return (
     <header className={styles.header}>
@@ -107,15 +125,15 @@ const Navbar = () => {
             <Image className={styles.img} src={logo} alt="Logo" />
           </Link>
           <div className={styles.mobileLinks}>
-            {links.map((link) => (
+            {links.map((link, index) => (
               <Link
-                className={`${styles.mobileLink} ${menuOpen === true ? styles.menuOpenFirstTime : ""
-                  }`}
+                className={`${styles.mobileLink} ${menuOpen ? styles.menuOpenAnim : ""}`}
                 href={link.href}
                 key={link.id}
                 onClick={() => setMenuOpen(false)}
+                style={{animationDuration: `${index * menuItemDelay}s`}}
               >
-                {link.name}
+                {link.icon}{link.name}
               </Link>
             ))}
           </div>
