@@ -7,28 +7,30 @@ import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import {BsCalendar3} from "react-icons/bs";
-import {IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline} from "react-icons/io5";
-import {RiProfileLine} from "react-icons/ri";
+import { BsCalendar3 } from "react-icons/bs";
+import { IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline } from "react-icons/io5";
+import { RiProfileLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { MdOutlineLogout } from "react-icons/md";
 
 const links = [
   {
     id: 1,
     name: "Boletins e Frequência",
     href: "/boletins-e-frequencia",
-    icon: <IoSchoolOutline size={25}/>
+    icon: <IoSchoolOutline size={25} />
   },
   {
     id: 2,
     name: "Calendário",
     href: "/calendario",
-    icon: <BsCalendar3 size={25}/>
+    icon: <BsCalendar3 size={25} />
   },
   {
     id: 3,
     name: "Cardápio",
     href: "/cardapio",
-    icon: <IoRestaurantOutline size={25}/>
+    icon: <IoRestaurantOutline size={25} />
   },
   {
     id: 4,
@@ -49,9 +51,9 @@ const Navbar = () => {
   const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
   const pathname = usePathname();
 
-  const menuItemDelay = .3;
+  const menuItemDelay = .25;
 
-  function closeLinks(){
+  function closeLinks() {
     setResponsiveLinksOpen(false);
   }
 
@@ -63,9 +65,9 @@ const Navbar = () => {
   })
 
   useEffect(() => {
-    if(menuOpen){
+    if (menuOpen) {
       document.body.style.overflow = "hidden";
-    }else{
+    } else {
       document.body.style.overflow = "";
     }
   }, [menuOpen])
@@ -90,6 +92,8 @@ const Navbar = () => {
           }
           <Login />
         </div>
+
+        {/* Medium Screens Navbar */}
         <div className={styles.responsiveLinks}>
           <div className={styles.responsiveLinksContainer}>
             <button className={responsiveLinksOpen === true ? `${styles.linksButton} ${styles.linksButtonActive}` : styles.linksButton} onClick={() => setResponsiveLinksOpen(!responsiveLinksOpen)}>
@@ -104,6 +108,7 @@ const Navbar = () => {
           <Login />
         </div>
 
+        {/* Mobile Navbar Button */}
         <div className={styles.mobileNav}>
           <button
             className={`${styles.iconButton} ${menuOpen ? styles.open : ""}`}
@@ -117,6 +122,7 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+      {/*Mobile Navbar*/}
       <div
         className={`${styles.menu} ${menuOpen === true ? styles.menuOpen : ""}`}
       >
@@ -124,6 +130,13 @@ const Navbar = () => {
           <Link href="/" className={styles.logoMobile} onClick={() => setMenuOpen(false)}>
             <Image className={styles.img} src={logo} alt="Logo" />
           </Link>
+          <div className={`${styles.profile} ${menuOpen ? styles.menuOpenAnim : ""}`} style={{ animationDuration: `${menuItemDelay}s` }}>
+            <CgProfile size={40} />
+            <div className={styles.profileInfo}>
+              <h1>Nome</h1>
+              <p>emaildousuario@gmail.com</p>
+            </div>
+          </div>
           <div className={styles.mobileLinks}>
             {links.map((link, index) => (
               <Link
@@ -131,11 +144,19 @@ const Navbar = () => {
                 href={link.href}
                 key={link.id}
                 onClick={() => setMenuOpen(false)}
-                style={{animationDuration: `${index * menuItemDelay}s`}}
+                style={{ animationDuration: `${(index + 2) * menuItemDelay}s` }}
               >
                 {link.icon}{link.name}
               </Link>
             ))}
+          </div>
+          <div className={styles.logout}>
+            <button
+              className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
+              style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
+              onClick={() => console.log("Aqui será o handleLogout com keycloak")}>
+              <MdOutlineLogout size={25} /> Sair
+            </button>
           </div>
         </div>
       </div>
