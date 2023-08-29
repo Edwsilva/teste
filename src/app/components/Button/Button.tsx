@@ -6,12 +6,11 @@ type ButtonProps = {
     text: ReactNode;
     fn?: () => void | Dispatch<SetStateAction<boolean>> | Promise<boolean> | Promise<void>;
     p?: "p-10";
-    radius?: boolean;
 }
 
-const Button = ({ text, fn, p, radius }: ButtonProps) => {
+const Button = ({ text, fn, p }: ButtonProps) => {
     return (
-        <button className={`${styles.button} ${p ? styles.p10 : ""} ${radius ? styles.radius : ""}`} onClick={fn}>{text}</button>
+        <button className={`${styles.button} ${p ? styles.p10 : ""}`} onClick={fn}>{text}</button>
     )
 }
 

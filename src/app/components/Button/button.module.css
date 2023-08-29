@@ -6,14 +6,11 @@
     font-size: 1rem;
     cursor: pointer;
     font-weight: 500;
+    border-radius: 5px;
 }
 
 .p10{
     padding: 9px;
-}
-
-.radius{
-    border-radius: 5px;
 }
 
 .button:hover{

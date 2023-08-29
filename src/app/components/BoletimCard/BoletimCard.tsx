@@ -27,7 +27,7 @@ const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
         <span>Aluno: <b>{data.nome}</b></span>
         <span>Matrícula: <b>{data.matricula}</b></span>
       </div>
-      <Button text="Consultar" p="p-10" radius fn={() => {
+      <Button text="Consultar" p="p-10" fn={() => {
         setBoletim({ escola: data.escola, serie: data.serie, turma: data.turma, nome: data.nome, matricula: data.matricula })
         setModal(true)
       }} />
