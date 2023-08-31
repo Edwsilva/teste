@@ -25,13 +25,14 @@
 
 .matriculaTitle{
   color: var(--textDark);
-  font-size: 1rem;
+  font-size: .9rem;
   margin: 0;
   font-weight: 600;
 }
 
 .matriculaNumber{
   color: var(--text);
+  font-size: .9rem;
 }
 
 .dropdown,

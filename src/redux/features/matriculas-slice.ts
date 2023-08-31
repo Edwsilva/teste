@@ -1,21 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-export type InputMatricula = {
-  nascimento: string;
-  matricula: string;
-}
-
-export type Matricula = {
-  id: number;
-  nome: string;
-  nascimento: string;
-  matricula: string;
-  mae: string;
-  pai: string;
-  escola: string;
-  serie: string;
-  turma: number;
-}
+import {Matricula} from "@/app/utils/types";
 
 type InitialState = {
   matriculas: Matricula[];
@@ -31,10 +15,7 @@ export const matriculas = createSlice({
   name: "matriculas",
   initialState,
   reducers: {
-    addMatricula: (state, action: PayloadAction<Matricula>) => {
-      state.matriculas.push(action.payload);
-    },
-    removeMatricula: (state, action: PayloadAction<string>) => {
+    removeMatricula: (state, action: PayloadAction<number>) => {
       state.matriculas = state.matriculas.filter(matricula => matricula.matricula !== action.payload);
     },
     setMinhasMatriculas: (state, action: PayloadAction<Matricula[]>) => {

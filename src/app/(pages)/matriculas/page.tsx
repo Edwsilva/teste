@@ -3,7 +3,7 @@ import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import { matriculasActions } from "../../../redux/features/matriculas-slice";
-import { apiCheckMatricula, postMatricula } from "@/app/api/matriculas";
+import { getMinhasMatriculas, postMatricula } from "@/app/api/matriculas";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
 import { AppDispatch, useAppSelector } from "@/redux/store";
@@ -24,8 +24,6 @@ const Matriculas = () => {
     const dispatch = useDispatch<AppDispatch>();
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
     const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
-
-    console.log(nascimento);
 
     const toggleDropdown = (index: number, remove?: boolean) => {
         if (remove) {
@@ -55,14 +53,9 @@ const Matriculas = () => {
     }
 
     if (!matriculasFetched || error) {
-        console.log('Dentro do If');
         setTimeout(() => {
             fetchData();
         }, 2000)
-    }
-
-    if(matricula.match(/[^0-9]/g)){
-        console.log("match");
     }
 
     return (
@@ -109,19 +102,13 @@ const Matriculas = () => {
                                 launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                             } else {
                                 const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                const data = await apiCheckMatricula({ nascimento: nascimentoFormated, matricula });
-                                if (data) {
-                                    const matriculaAdded = await postMatricula({ id: data.id, nome: data.nome, nascimento: data.nascimento, matricula: data.matricula, mae: data.mae, pai: data.pai, escola: data.escola, serie: data.serie, turma: data.turma });
-                                    if (matriculaAdded.success) {
-                                        dispatch(matriculasActions.addMatricula(data));
-                                        launchToast({ msg: "Matrícula adicionada!", type: "success" });
-                                    } else {
-                                        launchToast({ msg: "Erro ao adicionar matrícula às suas matrículas.", type: "error" });
-                                        console.error("Erro ao adicionar matrícula às suas matrículas.", matriculaAdded.status)
-                                    }
+                                const matriculaAdded = await postMatricula({matricula, nascimento: nascimentoFormated});
+                                if (matriculaAdded.success) {
+                                    const newMatriculas = await getMinhasMatriculas();
+                                    dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
+                                    launchToast({ msg: "Matrícula adicionada!", type: "success" });
                                 } else {
-                                    launchToast({ msg: "Dados inválidos ou não encontrados.", type: "error" })
-                                    console.error("Dados inválidos ou não encontrados.");
+                                    launchToast({ msg: matriculaAdded.msg, type: "error" })
                                 }
                                 setMatricula("");
                                 setNascimento("");

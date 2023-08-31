@@ -2,7 +2,7 @@ import styles from "./matriculadropdown.module.css";
 import Image from "next/image";
 import Button from "../Button/Button";
 import logoDeclara from "../../../../public/images/logodeclara.png";
-import { Matricula } from "@/redux/features/matriculas-slice";
+import { Matricula } from "@/app/utils/types";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 
@@ -68,7 +68,7 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
                 </th>
                 <th className={styles.tCell}>
                   Denominação<br />
-                  <p className={styles.tCellText}>{data.escola}</p>
+                  <p className={styles.tCellText}>Escola Lorem</p>
                 </th>
               </tr>
               <tr className={styles.tRow}>
@@ -85,15 +85,15 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
           </table>
           <div className={styles.declaracaoText}>
             {selected === "curso" ?
-              <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
-                NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
-                , nascido(a) em {data.nascimento}, está matriculado(a) neste Estabelecimento,
-                no(a) {data.serie} do(a) Ensino Fundamental, no turno Manhã, obtendo frequência
+              <p>Declaro que o(a) aluno(a) NOME DO ALUNO, código {data.matricula},
+                NIS 16330094080, filho(a) de NOME DO PAI e de NOME DA MAE
+                , nascido(a) em NASCIMENTO, está matriculado(a) neste Estabelecimento,
+                no(a) SERIE do(a) Ensino Fundamental, no turno Manhã, obtendo frequência
                 de 0,00 % até a presente data.</p>
               :
-              <p>Declaro que o(a) aluno(a) {data.nome.toUpperCase()}, código {data.matricula},
-                NIS 16330094080, filho(a) de {data.pai.toUpperCase()} e de {data.mae.toUpperCase()}
-                , nascido(a) em {data.nascimento}, cursou neste Estabelecimento, o {data.serie} do(a)
+              <p>Declaro que o(a) aluno(a) NOME DO ALUNO, código {data.matricula},
+                NIS 16330094080, filho(a) de NOME DO PAI e de NOME DA MAE
+                , nascido(a) em NASCIMENTO, cursou neste Estabelecimento, o SERIE do(a)
                  Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
                 98,44% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº
                 42/2020 que autorizou a implementação da Reorganização Curricular e do

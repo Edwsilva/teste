@@ -708,170 +708,125 @@
   "minhasMatriculas": [
     {
       "id": 318465,
-      "nome": "Antonio Cassano",
-      "nascimento": "12/07/1982",
-      "matricula": "8593204678123",
-      "mae": "Maria Silva",
-      "pai": "José Cassano",
-      "escola": "Comandante Arnaldo Varella",
-      "serie": "9° ano",
-      "turma": 1901
+      "matricula": 8593204678123,
+      "nome": "ANTONIO CASSANO",
+      "designacao": 817047,
+      "cpfResponsavel": "02112968743",
+      "dataInclusao": "2023-08-31T17:05:38.711Z"
     },
     {
       "id": 842739,
-      "nome": "Ana Beatriz Silva",
-      "nascimento": "21/05/1995",
-      "matricula": "3256789012345",
-      "mae": "Carla Rodrigues",
-      "pai": "João Silva",
-      "escola": "Escola Municipal São João",
-      "serie": "7° ano",
-      "turma": 1703
+      "matricula": 3256789012345,
+      "nome": "ANA BEATRIZ SILVA",
+      "designacao": 787047,
+      "cpfResponsavel": "02112478743",
+      "dataInclusao": "2023-08-31T18:00:16.427Z"
     }
   ],
   "matriculas": [
     {
       "id": 318465,
-      "nome": "Antonio Cassano",
+      "nome": "ANTONIO CASSANO",
       "nascimento": "12/07/1982",
-      "matricula": "8593204678123",
-      "mae": "Maria Silva",
-      "pai": "José Cassano",
-      "escola": "Comandante Arnaldo Varella",
-      "serie": "9° ano",
-      "turma": 1901
+      "matricula": 8593204678123,
+      "designacao": 817047,
+      "cpfResponsavel": "02112968743"
     },
     {
       "id": 842739,
-      "nome": "Ana Beatriz Silva",
+      "nome": "ANA BEATRIZ SILVA",
       "nascimento": "21/05/1995",
-      "matricula": "3256789012345",
-      "mae": "Carla Rodrigues",
-      "pai": "João Silva",
-      "escola": "Escola Municipal São João",
-      "serie": "7° ano",
-      "turma": 1703
+      "matricula": 3256789012345,
+      "designacao": 787047,
+      "cpfResponsavel": "02112478743"
     },
     {
       "id": 567821,
-      "nome": "Pedro Henrique Souza",
+      "nome": "PEDRO HENRIQUE SOUZA",
       "nascimento": "12/09/1998",
-      "matricula": "4567812345678",
-      "mae": "Amanda Souza",
-      "pai": "Ricardo Souza",
-      "escola": "Escola Estadual Dom Pedro II",
-      "serie": "3° ano",
-      "turma": 3302
+      "matricula": 4567812345678,
+      "designacao": 983347,
+      "cpfResponsavel": "02002968643"
     },
     {
       "id": 239456,
-      "nome": "Carolina Santos",
+      "nome": "CAROLINA SANTOS",
       "nascimento": "17/03/2002",
-      "matricula": "9876543210123",
-      "mae": "Isabel Santos",
-      "pai": "Carlos Oliveira",
-      "escola": "Colégio Particular Santa Clara",
-      "serie": "1° ano",
-      "turma": 1101
+      "matricula": 9876543210123,
+      "designacao": 714031,
+      "cpfResponsavel": "00031874731"
     },
     {
       "id": 903274,
-      "nome": "Rafael Pereira",
+      "nome": "RAFAEL PEREIRA",
       "nascimento": "30/11/1993",
-      "matricula": "7463829101293",
-      "mae": "Sandra Pereira",
-      "pai": "Fernando Pereira",
-      "escola": "Escola Municipal São Francisco",
-      "serie": "8° ano",
-      "turma": 1802
+      "matricula": 7463829101293,
+      "designacao": 674031,
+      "cpfResponsavel": "00031874731"
     },
     {
       "id": 753492,
-      "nome": "Julia Oliveira",
+      "nome": "JULIA OLIVEIRA",
       "nascimento": "04/07/1997",
-      "matricula": "5689123456790",
-      "mae": "Patrícia Oliveira",
-      "pai": "Ricardo Oliveira",
-      "escola": "Escola Estadual José de Alencar",
-      "serie": "5° ano",
-      "turma": 2505
+      "matricula": 5689123456790,
+      "designacao": 891177,
+      "cpfResponsavel": "16232389011"
     },
     {
       "id": 613845,
-      "nome": "Lucas Mendes",
+      "nome": "LUCAS MENDES",
       "nascimento": "02/02/2001",
-      "matricula": "1243567890123",
-      "mae": "Adriana Mendes",
-      "pai": "Paulo Mendes",
-      "escola": "Colégio Particular Santo Antônio",
-      "serie": "2° ano",
-      "turma": 2201
+      "matricula": 1243567890123,
+      "designacao": 991117,
+      "cpfResponsavel": "16232389011"
     },
     {
       "id": 129578,
-      "nome": "Mariana Fernandes",
+      "nome": "MARIANA FERNANDES",
       "nascimento": "15/08/1996",
-      "matricula": "8712367890123",
-      "mae": "Ana Fernandes",
-      "pai": "Luís Fernandes",
-      "escola": "Escola Municipal São Lucas",
-      "serie": "6° ano",
-      "turma": 1604
+      "matricula": 8712367890123,
+      "designacao": 771184,
+      "cpfResponsavel": "16235489031"
     },
     {
       "id": 793245,
-      "nome": "Gabriel Torres",
+      "nome": "GABRIEL TORRES",
       "nascimento": "25/06/1994",
-      "matricula": "9023567890123",
-      "mae": "Silvia Torres",
-      "pai": "Rafael Torres",
-      "escola": "Escola Estadual Monteiro Lobato",
-      "serie": "4° ano",
-      "turma": 4303
+      "matricula": 9023567890123,
+      "designacao": 889900,
+      "cpfResponsavel": "17235309233"
     },
     {
       "id": 908742,
-      "nome": "Isabella Lima",
+      "nome": "ISABELLA LIMA",
       "nascimento": "09/03/1999",
-      "matricula": "6578901234567",
-      "mae": "Patrícia Lima",
-      "pai": "Daniel Lima",
-      "escola": "Colégio Particular Nossa Senhora",
-      "serie": "10° ano",
-      "turma": 1001
+      "matricula": 6578901234567,
+      "designacao": 994563,
+      "cpfResponsavel": "45786783410"
     },
     {
       "id": 457392,
-      "nome": "Thiago Rodrigues",
+      "nome": "THIAGO RODRIGUES",
       "nascimento": "19/10/2003",
-      "matricula": "5890123456789",
-      "mae": "Fernanda Rodrigues",
-      "pai": "Gustavo Rodrigues",
-      "escola": "Escola Estadual Castro Alves",
-      "serie": "1° ano",
-      "turma": 1102
+      "matricula": 5890123456789,
+      "designacao": 697836,
+      "cpfResponsavel": "16263987011"
     },
     {
       "id": 641259,
-      "nome": "Larissa Costa",
+      "nome": "LARISSA COSTA",
       "nascimento": "14/12/2000",
-      "matricula": "1234098765432",
-      "mae": "Renata Costa",
-      "pai": "Fábio Costa",
-      "escola": "Colégio Particular São Pedro",
-      "serie": "9° ano",
-      "turma": 1904
+      "matricula": 1234098765432,
+      "designacao": 763872,
+      "cpfResponsavel": "16232389011"
     },
     {
       "id": 814726,
-      "nome": "Gustavo Alves",
+      "nome": "GUSTAVO ALVES",
       "nascimento": "23/01/1992",
-      "matricula": "3456789012345",
-      "mae": "Lúcia Alves",
-      "pai": "Marcos Alves",
-      "escola": "Escola Municipal Santo Antônio",
-      "serie": "7° ano",
-      "turma": 1701
+      "matricula": 3456789012345,
+      "designacao": 123456,
+      "cpfResponsavel": "23456789980"
     }
   ]
 }

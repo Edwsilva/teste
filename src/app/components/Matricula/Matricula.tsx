@@ -1,15 +1,15 @@
 import styles from "./matricula.module.css";
-import {  matriculasActions } from "@/redux/features/matriculas-slice";
+import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
-import { deleteMatricula } from "../../api/matriculas"
+import { deleteMatricula, getMinhasMatriculas } from "../../api/matriculas"
 import { launchToast } from "@/app/utils/utils";
 
 type Props = {
   id: number;
   i: number;
   nome: string;
-  matricula: string;
+  matricula: number;
   dropdownVisible: boolean;
   toggle: (i: number, remove?: boolean) => void;
   dispatch: AppDispatch;
@@ -26,12 +26,12 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, dispatch }
           <button className={styles.dropdownButton} onClick={async () => {
             const matriculaDeleted = await deleteMatricula(id);
             if (matriculaDeleted.success) {
-              dispatch(matriculasActions.removeMatricula(matricula));
+              const newMatriculas = await getMinhasMatriculas();
+              dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
               toggle(i, true);
-              launchToast({msg: "Matrícula removida", type: "success"});
+              launchToast({msg: matriculaDeleted.msg, type: "success"});
             } else {
-              launchToast({msg: "Erro ao remover matrícula de suas matrículas.", type: "error"})
-              console.error("Erro ao remover matrícula de suas matrículas.", matriculaDeleted.status);
+              launchToast({msg: matriculaDeleted.msg, type: "error"});
             }
           }
           }>Remover</button>
