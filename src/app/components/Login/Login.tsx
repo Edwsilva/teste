@@ -12,9 +12,14 @@ const Login = () => {
   //     onLoad: initOptions.onLoad, checkLoginIframe: false
   //   });
 
-  const kc = () => {
-    console.log('TESTE NO LOGIN')
-     userKeycloak.doInitialize.init({}).then((error) => console.log(error) );
+  const kc = async () => {
+    try {
+      const authenticated = await userKeycloak.doInitialize.init({})
+      alert(authenticated ? 'authenticated' : 'not authenticated');
+    } catch (error) {
+      alert('failed to initialize');
+    }
+  
   };
   return (
     <button className={styles.button} onClick={() => kc()}>

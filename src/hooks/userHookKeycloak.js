@@ -13,17 +13,22 @@ import Keycloak from 'keycloak-js';
 //REACT_APP_KEYCLOAK_URL=https://auth-idriohom.apps.rio.gov.br/auth/
 //REACT_APP_KEYCLOAK_REALM=idrio_cidadao
 //REACT_APP_KEYCLOAK_REDIRECT_URI=http://localhost:3000
+const teste = process.env.VITE_KEYCLOAK_CLIENT
 
 let initOptions = {
-  url: 'https://auth-idriohom.apps.rio.gov.br/auth/',
-  realm: 'idrio_cidadao',
-  clientId: 'contracheque-api.apps.ocp.rio.gov.br',
+  url: process.env.VITE_KEYCLOAK_URL,
+  realm: process.env.VITE_KEYCLOAK_REALM,
+  clientId: process.env.VITE_KEYCLOAK_CLIENT,
+  // url: 'https://auth-idriohom.apps.rio.gov.br/auth/',
+  // realm: 'idrio_cidadao',
+  // clientId: 'contracheque-api.apps.ocp.rio.gov.br',
+
   credentials: {
     secret:'0756326e-e88c-4287-8ac7-817e040bb9e2',
   },
   'ssl-required': 'external',
   'confidential-port': 0,
-  onLoad: 'login-required',
+  // onLoad: 'login-required',
 
   // url: 'http://127.0.0.1:4000/',
   // realm: 'myrealm',
@@ -38,9 +43,11 @@ let initOptions = {
 //   clientId: process.env.VITE_KEYCLOAK_CLIENT,
 //   onLoad: 'login-required',
 // });
+console.log("TESTET", teste)
+console.log(initOptions)
 
 const _kc = new Keycloak(initOptions);
-console.log('KCCC', _kc);
+ console.log('KCCC', _kc);
 
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
@@ -74,10 +81,7 @@ const initKeycloak = (onAuthenticatedCallback) => {
 };
 
 const doInitialize = _kc;
-// const doInitialize = _kc.init({
-//   onLoad: initOptions.onLoad,
-//   checkLoginIframe: false,
-// });
+
 console.log("_KC ", doInitialize)
 
 const doLogin = _kc.login;
