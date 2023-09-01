@@ -1,7 +1,7 @@
 import styles from "./matriculadropdown.module.css";
 import Image from "next/image";
 import Button from "../Button/Button";
-import logoDeclara from "../../../../public/images/logodeclara.png";
+import logoDeclara from "@/../public/images/logodeclara.png";
 import { Matricula } from "@/app/utils/types";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
@@ -94,7 +94,7 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
               <p>Declaro que o(a) aluno(a) NOME DO ALUNO, código {data.matricula},
                 NIS 16330094080, filho(a) de NOME DO PAI e de NOME DA MAE
                 , nascido(a) em NASCIMENTO, cursou neste Estabelecimento, o SERIE do(a)
-                 Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
+                Ensino Fundamental, no turno Manhã, no ano letivo de 2022, obteve
                 98,44% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº
                 42/2020 que autorizou a implementação da Reorganização Curricular e do
                 Continum Curricular disposto na Deliberação CME Nº 43/2020, com base no
@@ -128,9 +128,9 @@ const MatriculaDropdown = ({ i, data, selected, dropdownVisible, toggle }: Props
               920ad26d8a</p>
           </div>
         </div>
-        <Button text="Imprimir" fn={handlePrint}/>
+        <Button text="Imprimir" fn={handlePrint} />
       </div>
-      
+
     </div>
   )
 }

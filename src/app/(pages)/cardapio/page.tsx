@@ -4,7 +4,7 @@ import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
 import Container from "@/app/components/Container/Container";
 import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 const data = "21/08/2023";

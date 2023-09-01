@@ -3,7 +3,7 @@ import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import logo from "../../../../public/images/logoNovo.png";
+import logo from "@/../public/images/logoNovo.png";
 import Login from "../Login/Login";
 import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";

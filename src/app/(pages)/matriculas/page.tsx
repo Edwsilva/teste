@@ -2,7 +2,7 @@
 import Banner from "@/app/components/Banner/Banner";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import { matriculasActions } from "../../../redux/features/matriculas-slice";
+import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { getMinhasMatriculas, postMatricula } from "@/app/api/matriculas";
 import { useDispatch } from "react-redux";
 import styles from "./matriculas.module.css";
@@ -102,7 +102,7 @@ const Matriculas = () => {
                                 launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                             } else {
                                 const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                const matriculaAdded = await postMatricula({matricula, nascimento: nascimentoFormated});
+                                const matriculaAdded = await postMatricula({ matricula, nascimento: nascimentoFormated });
                                 if (matriculaAdded.success) {
                                     const newMatriculas = await getMinhasMatriculas();
                                     dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));

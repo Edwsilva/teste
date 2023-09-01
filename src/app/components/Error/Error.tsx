@@ -5,10 +5,10 @@ type ErrorProps = {
     msg: string;
 }
 
-const Error = ({msg}:ErrorProps) => {
+const Error = ({ msg }: ErrorProps) => {
     return (
         <div className={styles.error}>
-            <BiSolidError className={styles.errorIcon}/>
+            <BiSolidError className={styles.errorIcon} />
             <p className={styles.errorText}>{msg}</p>
         </div>
     )

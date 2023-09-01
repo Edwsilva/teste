@@ -1,13 +1,13 @@
 import styles from "./boletimodal.module.css";
 import Image from "next/image";
-import logoboletim from "../../../../public/images/logoboletim.jpeg";
-import { BoletimData } from "../BoletimCard/BoletimCard";
+import logoboletim from "@/../public/images/logoboletim.jpeg";
+// import { BoletimData } from "../BoletimCard/BoletimCard";
 
-type BoletimProps = {
-  data: BoletimData;
-}
+// type BoletimProps = {
+//   data: BoletimData;
+// }
 
-const BoletimModal = ({data}:BoletimProps) => {
+const BoletimModal = () => {
   return (
     <div className={styles.modal}>
       <div className={styles.sectionLogo}>
@@ -15,11 +15,11 @@ const BoletimModal = ({data}:BoletimProps) => {
         <h1 className={styles.title2}>Boletim Escolar Online 2023</h1>
       </div>
       <div className={styles.sectionInfo}>
-        <span><b>Escola: </b>{data.escola}</span>
-        <span><b>Série: </b>{data.serie}</span>
-        <span><b>Turma: </b>{data.turma}</span>
-        <span><b>Nome: </b>{data.nome}</span>
-        <span><b>Código: </b>{data.matricula}</span>
+        <span><b>Escola: </b>ESCOLA</span>
+        <span><b>Série: </b>SERIE</span>
+        <span><b>Turma: </b>TURMA</span>
+        <span><b>Nome: </b>NOME</span>
+        <span><b>Código: </b>CODIGO</span>
       </div>
       <div className={styles.boletim}>
         <div className={styles.boletimTableContainer}>

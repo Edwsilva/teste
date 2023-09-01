@@ -1,4 +1,4 @@
-import Placeholder from "../../components/Placeholder/Placeholder";
+import Placeholder from "@/app/components/Placeholder/Placeholder";
 
 const Loading = () => {
   return <Placeholder type="ordinary" />

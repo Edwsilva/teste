@@ -2,7 +2,7 @@ import styles from "./matricula.module.css";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AppDispatch } from "@/redux/store";
-import { deleteMatricula, getMinhasMatriculas } from "../../api/matriculas"
+import { deleteMatricula, getMinhasMatriculas } from "@/app/api/matriculas";
 import { launchToast } from "@/app/utils/utils";
 
 type Props = {
@@ -29,9 +29,9 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, dispatch }
               const newMatriculas = await getMinhasMatriculas();
               dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
               toggle(i, true);
-              launchToast({msg: matriculaDeleted.msg, type: "success"});
+              launchToast({ msg: matriculaDeleted.msg, type: "success" });
             } else {
-              launchToast({msg: matriculaDeleted.msg, type: "error"});
+              launchToast({ msg: matriculaDeleted.msg, type: "error" });
             }
           }
           }>Remover</button>
