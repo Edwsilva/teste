@@ -8,12 +8,27 @@ import Keycloak from 'keycloak-js';
 // VITE_KEYCLOAK_URL=http://127.0.0.1:4000/
 // VITE_KEYCLOAK_REALM=myrealm
 // VITE_KEYCLOAK_CLIENT=myclient
+//REACT_APP_KEYCLOAK_CLIENT_ID=contracheque-api.apps.ocp.rio.gov.br
+//REACT_APP_KEYCLOAK_CLIENT_SECRET=0756326e-e88c-4287-8ac7-817e040bb9e2
+//REACT_APP_KEYCLOAK_URL=https://auth-idriohom.apps.rio.gov.br/auth/
+//REACT_APP_KEYCLOAK_REALM=idrio_cidadao
+//REACT_APP_KEYCLOAK_REDIRECT_URI=http://localhost:3000
 
 let initOptions = {
-  url: 'http://127.0.0.1:4000/',
-  realm: 'myrealm',
-  clientId: 'myclient',
+  url: 'https://auth-idriohom.apps.rio.gov.br/auth/',
+  realm: 'idrio_cidadao',
+  clientId: 'contracheque-api.apps.ocp.rio.gov.br',
+  credentials: {
+    secret:'0756326e-e88c-4287-8ac7-817e040bb9e2',
+  },
+  'ssl-required': 'external',
+  'confidential-port': 0,
   onLoad: 'login-required',
+
+  // url: 'http://127.0.0.1:4000/',
+  // realm: 'myrealm',
+  // clientId: 'myclient',
+  // onLoad: 'login-required',
   // KeycloakResponseType: 'code'
 };
 
@@ -63,6 +78,7 @@ const doInitialize = _kc;
 //   onLoad: initOptions.onLoad,
 //   checkLoginIframe: false,
 // });
+console.log("_KC ", doInitialize)
 
 const doLogin = _kc.login;
 
