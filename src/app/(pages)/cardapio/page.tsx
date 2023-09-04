@@ -7,10 +7,10 @@ import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
 import { useState } from "react";
 import Link from "next/link";
 
-const data = "21/08/2023";
-const dataFinal = "25/08/2023";
+const data = "04/09/2023";
+const dataFinal = "08/09/2023";
 
-const Cardapio = () => {
+const Cardapio = async () => {
   const [pdfOpen, setPdfOpen] = useState<boolean>(false);
 
   return (
@@ -29,7 +29,7 @@ const Cardapio = () => {
             escolas, creches e Espaços de Desenvolvimento Infantil (EDIs).</p>
           <p className={styles.textI}>Semana de {data} a {dataFinal}</p>
           {pdfOpen ?
-            <PDFViewer pdfUrl="https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-comunicacao.pdf" />
+            <PDFViewer pdfUrl="https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/09/ANEXO-1-completo.pdf" />
             :
             ""}
           <Button text={pdfOpen ? "Fechar Cardápio" : "Cardápio das Unidades Educacionais"} fn={() => setPdfOpen(!pdfOpen)} />
@@ -65,5 +65,10 @@ const Cardapio = () => {
     </div>
   )
 }
+
+//Links cardápio:
+//semana 1: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-comunicacao.pdf
+//semana 2: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-COMPLETO-1.pdf
+//semana 3: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/09/ANEXO-1-completo.pdf
 
 export default Cardapio;

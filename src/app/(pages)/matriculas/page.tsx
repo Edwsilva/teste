@@ -25,7 +25,15 @@ const Matriculas = () => {
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
     const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
-    const toggleDropdown = (index: number, remove?: boolean) => {
+    const closeDropdowns = () => {
+        setDropdownVisible((prevState) => {
+            const states = [...prevState];
+            const updatedStates = states.map(state => state = false);
+            return updatedStates;
+        });
+    }
+
+    const toggleDropdown = (index: number, remove?: boolean, clickOut?: boolean) => {
         if (remove) {
             setDropdownVisible((prevState) => {
                 const updatedStates = [...prevState];
@@ -39,7 +47,6 @@ const Matriculas = () => {
                 return updatedStates;
             });
         }
-
     };
 
     async function fetchData() {
@@ -81,7 +88,7 @@ const Matriculas = () => {
                                     :
                                     <div className={styles.matriculas}>
                                         {matriculas.map(({ id, nome, matricula }, index) => (
-                                            <Matricula id={id} key={index} i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} dispatch={dispatch} />
+                                            <Matricula id={id} key={index} i={index} nome={nome} matricula={matricula} dropdownVisible={dropdownVisible[index]} toggle={toggleDropdown} closeDropdowns={closeDropdowns} dispatch={dispatch} />
                                         ))}
                                     </div>
                     }

@@ -707,20 +707,20 @@
   ],
   "minhasMatriculas": [
     {
-      "id": 318465,
-      "matricula": 8593204678123,
-      "nome": "ANTONIO CASSANO",
-      "designacao": 817047,
-      "cpfResponsavel": "02112968743",
-      "dataInclusao": "2023-08-31T17:05:38.711Z"
-    },
-    {
       "id": 842739,
       "matricula": 3256789012345,
       "nome": "ANA BEATRIZ SILVA",
       "designacao": 787047,
       "cpfResponsavel": "02112478743",
-      "dataInclusao": "2023-08-31T18:00:16.427Z"
+      "dataInclusao": "2023-09-04T14:42:01.554Z"
+    },
+    {
+      "id": 318465,
+      "matricula": 8593204678123,
+      "nome": "ANTONIO CASSANO",
+      "designacao": 817047,
+      "cpfResponsavel": "02112968743",
+      "dataInclusao": "2023-09-04T14:44:41.309Z"
     }
   ],
   "matriculas": [
