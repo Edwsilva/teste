@@ -6,11 +6,12 @@ import Container from "@/app/components/Container/Container";
 import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
 import { useState } from "react";
 import Link from "next/link";
+import puppeteer from 'puppeteer';
 
 const data = "04/09/2023";
 const dataFinal = "08/09/2023";
 
-const Cardapio = async () => {
+const Cardapio = () => {
   const [pdfOpen, setPdfOpen] = useState<boolean>(false);
 
   return (
