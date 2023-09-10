@@ -10,11 +10,7 @@ let initOptions = {
   url: process.env.VITE_KEYCLOAK_URL,
   realm: process.env.VITE_KEYCLOAK_REALM,
   clientId: process.env.VITE_KEYCLOAK_CLIENT,
-  credentials: {
-    secret:'0756326e-e88c-4287-8ac7-817e040bb9e2',
-  },
-  'ssl-required': 'external',
-  'confidential-port': 0,
+ 
 };
 
 const _kc = new Keycloak(initOptions);

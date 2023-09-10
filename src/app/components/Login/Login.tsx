@@ -3,6 +3,7 @@ import styles from "./login.module.css";
 import { BiSolidUserCircle } from "react-icons/bi";
 import userKeycloak from '../../../hooks/userHookKeycloak';
 
+
 const Login = () => {
   console.log("LOGINN")
   // const keycloak = (callBack: any) => {
@@ -14,7 +15,9 @@ const Login = () => {
 
   const kc = async () => {
     try {
-      const authenticated = await userKeycloak.doInitialize.init({})
+      console.log("BLOCO TRY")
+      const authenticated = await userKeycloak.doInitialize.init({onLoad: "login-required"})
+      console.log("authenticated", authenticated)
       alert(authenticated ? 'authenticated' : 'not authenticated');
     } catch (error) {
       alert('failed to initialize');
