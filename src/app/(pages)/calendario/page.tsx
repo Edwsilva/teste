@@ -5,12 +5,14 @@ import Container from "@/app/components/Container/Container";
 import Link from "next/link";
 import { fetchUrl } from "@/app/api/cardapio";
 
-const ano = "2023";
+const date = new Date();
+const ano = date.getFullYear();
 
 const Calendario = async () => {
     const data = await fetchUrl();
 
-    console.log("HREF", data);
+    console.log("DATA", data);
+
     return (
         <div className={styles.main}>
             <Banner type="overlaySM" banner="bannerCalendario">
