@@ -7,14 +7,13 @@ import Keycloak from 'keycloak-js';
 
 
 let initOptions = {
-  url: process.env.VITE_KEYCLOAK_URL,
-  realm: process.env.VITE_KEYCLOAK_REALM,
-  clientId: process.env.VITE_KEYCLOAK_CLIENT,
- 
+  url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
+  realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
+  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
 };
 
 const _kc = new Keycloak(initOptions);
- console.log('KCCC', _kc);
+console.log('KCCC', _kc);
 
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
@@ -22,7 +21,7 @@ const _kc = new Keycloak(initOptions);
  * @param onAuthenticatedCallback
  */
 const initKeycloak = (onAuthenticatedCallback) => {
-  console.log(onAuthenticatedCallback);
+  console.log('INIT ', onAuthenticatedCallback);
   // const isRun = useRef(false);
   // const [isLogin, setLogin] = useState(false);
   // const [token, setToken] = useState(null);
