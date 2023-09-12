@@ -1,18 +1,15 @@
-'use client'
+// 'use client'
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
 import Container from "@/app/components/Container/Container";
 import PDFViewer from "@/app/components/PDFViewer/PDFViewer";
-import { useState } from "react";
 import Link from "next/link";
-import puppeteer from 'puppeteer';
+import { fetchUrl } from "@/app/api/cardapio";
 
-const data = "04/09/2023";
-const dataFinal = "08/09/2023";
-
-const Cardapio = () => {
-  const [pdfOpen, setPdfOpen] = useState<boolean>(false);
+const Cardapio = async () => {
+  const url = await fetchUrl();
+  console.log("CARDAPIO", url?.success);
 
   return (
     <div className={styles.main}>
@@ -28,12 +25,7 @@ const Cardapio = () => {
           <h3 className={styles.title2}>Confira o cardápio</h3>
           <p className={styles.text}>Confira o cardápio da merenda escolar oferecido nas
             escolas, creches e Espaços de Desenvolvimento Infantil (EDIs).</p>
-          <p className={styles.textI}>Semana de {data} a {dataFinal}</p>
-          {pdfOpen ?
-            <PDFViewer pdfUrl="https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/09/ANEXO-1-completo.pdf" />
-            :
-            ""}
-          <Button text={pdfOpen ? "Fechar Cardápio" : "Cardápio das Unidades Educacionais"} fn={() => setPdfOpen(!pdfOpen)} />
+          <PDFViewer url={url} />
         </div>
         <div className={styles.sobre}>
           <h3 className={styles.title2}>Cardápios do Programa Nacional de Alimentação Escolar</h3>
