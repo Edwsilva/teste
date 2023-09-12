@@ -1,4 +1,3 @@
-// 'use client'
 import Banner from "@/app/components/Banner/Banner";
 import styles from "./cardapio.module.css";
 import Button from "@/app/components/Button/Button";
@@ -9,7 +8,6 @@ import { fetchUrl } from "@/app/api/cardapio";
 
 const Cardapio = async () => {
   const url = await fetchUrl();
-  console.log("CARDAPIO", url?.success);
 
   return (
     <div className={styles.main}>
@@ -58,10 +56,5 @@ const Cardapio = async () => {
     </div>
   )
 }
-
-//Links cardápio:
-//semana 1: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-comunicacao.pdf
-//semana 2: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/08/ANEXO-1-COMPLETO-1.pdf
-//semana 3: https://educacao.prefeitura.rio/wp-content/uploads/sites/42/2023/09/ANEXO-1-completo.pdf
 
 export default Cardapio;

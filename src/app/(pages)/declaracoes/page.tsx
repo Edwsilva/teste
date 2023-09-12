@@ -48,11 +48,10 @@ const Declaracoes = () => {
   }
 
   if (!matriculasFetched || error) {
-    console.log('Dentro do If');
     setTimeout(() => {
-        fetchData();
+      fetchData();
     }, 2000)
-}
+  }
 
   return (
     <div className={styles.main}>
