@@ -12,6 +12,7 @@ import { IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline } from "rea
 import { RiProfileLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
+import userKeycloak from "../../../hooks/userHookKeycloak"
 
 const links = [
   {
@@ -42,15 +43,21 @@ const links = [
     id: 5,
     name: "Matrículas",
     href: "/matriculas",
-    icon: <RiProfileLine size={25} />
+    icon: <RiProfileLine size={45} />
   }
 ];
 
 const Navbar = () => {
+  // const logado = userKeycloak.isLoggedIn()
+  // console.log("LOGADO ", logado)
+  // if (logado) {
+  //   userKeycloak.getUsername()
+  // }
+  const [user, setUser] = useState('Nome');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
   const pathname = usePathname();
-
+  
   const menuItemDelay = .25;
 
   function closeLinks() {
@@ -58,6 +65,9 @@ const Navbar = () => {
   }
 
   useEffect(() => {
+    if(userKeycloak.isLoggedIn()) {
+      setUser(userKeycloak.getUsername())
+    }
     document.addEventListener('click', closeLinks);
     return () => {
       document.removeEventListener('click', closeLinks);
@@ -133,7 +143,7 @@ const Navbar = () => {
           <div className={`${styles.profile} ${menuOpen ? styles.menuOpenAnim : ""}`} style={{ animationDuration: `${menuItemDelay}s` }}>
             <CgProfile size={40} />
             <div className={styles.profileInfo}>
-              <h1>Nome</h1>
+              <h1>{user}</h1>
               <p>emaildousuario@gmail.com</p>
             </div>
           </div>
