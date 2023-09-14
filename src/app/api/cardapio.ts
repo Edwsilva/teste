@@ -29,11 +29,8 @@ const fetchUrl = async () => {
   } catch (error) {
     return { success: false, href: "Falha ao buscar link do PDF." };
   }
-}
-  
-function processResponse(response: any) {
-  console.log('Href do link:', response.href);
-}
-  
 
-export {fetchUrl}
+  return { success: false, href: "Não foi possível obter o link do PDF." };
+};
+
+export { fetchUrl };
