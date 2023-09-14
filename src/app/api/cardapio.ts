@@ -13,31 +13,27 @@ const fetchUrl = async () => {
 
       const linkText = "Plano Alimentar - Cardápio da Semana";
       const linkElement = p(`a:contains("${linkText}")`);
-      console.log("ANTES IF");
 
       if (linkElement.length > 0) {
         const href = linkElement.attr("href");
 
         if (href !== undefined) {
-          console.log("IF HREF", href);
           return { success: true, href };
         } else {
-          console.log("Href não encontrado");
           return { success: false, href: "Href não encontrado." };
         }
       } else {
-        console.log("Link não encontrado");
         return { success: false, href: "Link não encontrado." };
       }
     }
   } catch (error) {
-    console.error("Falha ao buscar link do PDF:", error);
     return { success: false, href: "Falha ao buscar link do PDF." };
   }
+}
+  
+function processResponse(response: any) {
+  console.log('Href do link:', response.href);
+}
+  
 
-  // Return a default value if none of the conditions are met
-  return { success: false, href: "Não foi possível obter o link do PDF." };
-};
-
-export { fetchUrl };
-
+export {fetchUrl}

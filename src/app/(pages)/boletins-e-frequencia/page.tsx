@@ -51,7 +51,6 @@ const Boletins = () => {
   }
 
   if (!matriculasFetched || error) {
-    console.log('Dentro do If');
     setTimeout(() => {
       fetchData();
     }, 2000)

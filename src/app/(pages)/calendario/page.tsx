@@ -8,10 +8,7 @@ import { fetchUrl } from "@/app/api/cardapio";
 const date = new Date();
 const ano = date.getFullYear();
 
-const Calendario = async () => {
-    const data = await fetchUrl();
-
-    console.log("DATA", data);
+const Calendario = () => {
 
     return (
         <div className={styles.main}>
