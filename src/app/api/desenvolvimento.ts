@@ -20,7 +20,7 @@ const getTop10EscolasPorAno = async (ano: string): Promise<TopIndicesPorAno> => 
 
 const getTop10EscolasPorEscola = async (escola: string): Promise<TopIndicesPorEscola> => {
   if(escola.indexOf(" ")){
-    escola = escola.replace(" ", "%20");
+    escola = escola.replace(/ /g, "%20");
   }
   const req = await fetch(`http://localhost:3001/escolas?nome=${escola}`);
   const data = await req.json();

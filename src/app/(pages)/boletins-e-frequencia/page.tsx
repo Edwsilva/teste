@@ -55,26 +55,26 @@ const Boletins = () => {
       fetchData();
     }, 2000)
   }
-
+  
   useEffect(() => {
     getTop10Escolas()
-      .then(res => {
-        setTopIndices(res);
-        setIsLoading(false);
+    .then(res => {
+      setTopIndices(res);
+      setIsLoading(false);
       })
       .catch(err => {
         setErrorTable(true);
         setIsLoading(false);
       })
-
-    getMinhasEscolas()
+      
+      getMinhasEscolas()
       .then(res => setMinhasEscolas(res))
       .catch(err => launchToast({ msg: "Erro ao obter suas escolas.", type: "error" }));
-  }, []);
-
-  useEffect(() => {
-    if (anoField !== "") {
-      getTop10EscolasPorAno(anoField)
+    }, []);
+    
+    useEffect(() => {
+      if (anoField !== "") {
+        getTop10EscolasPorAno(anoField)
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
@@ -84,9 +84,9 @@ const Boletins = () => {
           setErrorTable(true);
           setIsLoading(false);
         })
-      setIsLoading(false);
-    } else if (escolaField !== "") {
-      getTop10EscolasPorEscola(escolaField)
+        setIsLoading(false);
+      } else if (escolaField !== "") {
+        getTop10EscolasPorEscola(escolaField)
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
