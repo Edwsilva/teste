@@ -66,7 +66,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if(userKeycloak.isLoggedIn()) {
-      setUser(userKeycloak.getUsername())
+      setUser(userKeycloak.getToken);
     }
     document.addEventListener('click', closeLinks);
     return () => {

@@ -34,4 +34,17 @@ type MinhaEscola = {
 
 type MinhasEscolas = MinhaEscola[];
 
+//Auth
+type UserInfo = {
+  name: string;
+  email: string;
+  token: string;
+};
+
+type AuthInfoState = {
+  authenticated: boolean;
+  userInfo: UserInfo;
+};
+
 export type {Escola, TopIndice, TopIndices, TopIndicesPorAno, TopIndicesPorEscola, MinhasEscolas}
+export type { UserInfo, AuthInfoState };

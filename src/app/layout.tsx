@@ -24,12 +24,12 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
       </head>
       <body className={roboto.className}>
-        <Navbar />
         <ReduxProvider>
+          <Navbar />
           {children}
+          <Footer />
         </ReduxProvider>
-        <Footer />
       </body>
-    </html >
-  )
+    </html>
+  );
 }

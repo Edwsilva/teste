@@ -1,12 +1,13 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import Keycloak from 'keycloak-js';
+import { UserInfo } from '@/app/utils/types';
+import { KeycloakTokenParsed } from 'keycloak-js';
 
 // const [isLogin, setLogin] = useState(false);
 // const [token, setToken] = useState(null);
 
-
-let initOptions = {
+const initOptions = {
   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
@@ -20,7 +21,7 @@ console.log('KCCC', _kc);
  *
  * @param onAuthenticatedCallback
  */
-const initKeycloak = (onAuthenticatedCallback) => {
+const initKeycloak = (onAuthenticatedCallback: any) => {
   console.log('INIT ', onAuthenticatedCallback);
   // const isRun = useRef(false);
   // const [isLogin, setLogin] = useState(false);
@@ -54,18 +55,25 @@ const doLogout = _kc.logout;
 
 const getToken = () => _kc.token;
 
-const getTokenParsed = () => _kc.tokenParsed;
+const getTokenExpired = () => _kc.onTokenExpired();
+
+const getTokenParsed = (): KeycloakTokenParsed => _kc.tokenParsed;
 
 const isLoggedIn = () => !!_kc.token;
 
 const updateToken = (successCallback) =>
   _kc.updateToken(5).then(successCallback).catch(doLogin);
 
-const getUsername = () => _kc.tokenParsed?.preferred_username;
+const getUserInfo = (): UserInfo => {
+  // @ts-ignore
+  const { name, email } = _kc.tokenParsed;
+  const token = _kc.token;
+  return { name, email, token: token ? token : '' };
+};
 
 //const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
-const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
-
+const hasRole = (roles: any) =>
+  roles.some((role: any) => _kc.hasRealmRole(role));
 
 const userHookKeycloak = {
   initKeycloak,
@@ -74,9 +82,10 @@ const userHookKeycloak = {
   doLogout,
   isLoggedIn,
   getToken,
+  getTokenExpired,
   getTokenParsed,
   updateToken,
-  getUsername,
+  getUserInfo,
   hasRole,
 };
 

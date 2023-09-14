@@ -19,13 +19,13 @@ const getTop10EscolasPorAno = async (ano: string): Promise<TopIndicesPorAno> => 
 }
 
 const getTop10EscolasPorEscola = async (escola: string): Promise<TopIndicesPorEscola> => {
-  if(escola.indexOf(" ")){
-    escola = escola.replace(" ", "%20");
+  if (escola.indexOf(' ')) {
+    escola = escola.replace(' ', '%20');
   }
-  console.log('ESCOLA ', escola);
+
   const teste = userKeycloak.getToken();
   console.log('TESTE TOKEN ', teste);
-  const tokenExpired = userKeycloak.isLoggedIn();
+  const tokenExpired = userKeycloak.getTokenExpired();
   console.log('tokenExpired ', tokenExpired);
   const req = await fetch(`http://localhost:3001/escolas?nome=${escola}`);
   const data = await req.json();

@@ -1,9 +1,15 @@
 "use client";
 import styles from "./login.module.css";
 import { BiSolidUserCircle } from "react-icons/bi";
+
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '@/redux/store';
+import { authActions } from '@/redux/features/auth-slice';
+
 import userKeycloak from '../../../hooks/userHookKeycloak';
 import { useState, useEffect } from 'react';
 import { userAgent } from 'next/server';
+import { UserInfo } from '@/app/utils/types';
 
 //  email: keycloak.tokenParsed?.email,
 //           // @ts-ignore
@@ -12,26 +18,29 @@ import { userAgent } from 'next/server';
 //           preferred_username: keycloak.tokenParsed?.preferred_username,
 
 const Login = () => {
-  const [user, setUser] = useState('Login');
-  const [userIsAuthenticated, setIsAuthenticated] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const userInfoState = useAppSelector((state) => state.authUser);
 
-  const authenticateUser = async () => {
-    // Verifique se o usuário está autenticado (por exemplo, com base em um token válido)
-    /* Verifique a autenticação aqui */
-    console.log('ESTOU NO authenticateUser');
-    const authenticated = await userKeycloak.doInitialize.init({
-      onLoad: 'login-required',
-    });
-    const userIsAuthenticated = authenticated;
-    setIsAuthenticated(userIsAuthenticated);
-  };
+  const [user, setUser] = useState<UserInfo>();
+  const [userIsAuthenticated, setIsAuthenticated] = useState(false);
+  console.log('USER INFO STATE ', userInfoState);
+  // const authenticateUser = async () => {
+  //   // Verifique se o usuário está autenticado (por exemplo, com base em um token válido)
+  //   /* Verifique a autenticação aqui */
+  //   console.log('ESTOU NO authenticateUser');
+  //   const authenticated = await userKeycloak.doInitialize.init({
+  //     onLoad: 'login-required',
+  //   });
+  //   const userIsAuthenticated = authenticated;
+  //   setIsAuthenticated(userIsAuthenticated);
+  // };
 
   // useEffect(() => {
   //   // Chame a função para verificar a autenticação do usuário quando o componente for montado
   //   authenticateUser();
   // }, [userIsAuthenticated]);
 
-  const kc = async () => {
+  const kc = () => {
     try {
       console.log('BLOCO TRY');
       // if (autenticado) {
@@ -42,18 +51,27 @@ const Login = () => {
       //   console.log('HasHole ', role);
       //   //return null
       // }
-      const authenticated = await userKeycloak.doInitialize.init({
-        onLoad: 'login-required',
-      });
-      // if (authenticated) {
-      //   console.log('USER NAME ', user);
-      const userName = await userKeycloak.getUsername();
-      setUser(userName);
+      const authenticated = userKeycloak.doInitialize
+        .init({
+          onLoad: 'login-required',
+        })
+        .then((authenticated) => {
+          const userInfo = userKeycloak.getUserInfo();
+          dispatch(authActions.setLogIn({ authenticated, userInfo }));
+          setUser(userInfoState.userInfo.name);
+          console.log('LOGIN USUARIO ', userInfoState);
+        });
+
+      // const userInfo = await userKeycloak.getUserInfo();
+      // dispatch(authActions.setLogIn({ authenticated, userInfo }));
+      // console.log('LOGIN USUARIO ', userInfoState);
+      console.log('USUARIO ', userInfoState.userInfo.email);
+      // setUser(userInfoState.authenticated);
       //   console.log('CHANGED NAME ', user);
       //   setAutenticado(authenticated);
       // }
-      console.log('Usuário', user);
-      console.log('authenticated', authenticated);
+      //console.log('Usuário', userInfo);
+      //console.log('authenticated', authenticated);
       //alert(authenticated ? 'authenticated' : 'not authenticated');
     } catch (error) {
       alert('failed to initialize');
