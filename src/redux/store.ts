@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import matriculasReducer from "./features/matriculas-slice";
 import authReducer from './features/auth-slice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
@@ -8,14 +9,17 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 const persistConfig = {
   key: 'minhasMatriculas',
   storage,
+  stateReconciler: autoMergeLevel2,
+
 };
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   matriculas: matriculasReducer,
   authUser: authReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+//const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer<ReturnType<typeof rootReducer>>(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,

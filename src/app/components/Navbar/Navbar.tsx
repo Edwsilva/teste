@@ -2,6 +2,11 @@
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '@/redux/store';
+import { authActions } from '@/redux/features/auth-slice';
+
 import { usePathname } from "next/navigation";
 import logo from "../../../../public/images/logoNovo.png";
 import Login from "../Login/Login";
@@ -53,6 +58,9 @@ const Navbar = () => {
   // if (logado) {
   //   userKeycloak.getUsername()
   // }
+  const dispatch = useDispatch<AppDispatch>();
+  const userInfoState = useAppSelector((state) => state.authUser);
+
   const [user, setUser] = useState('Nome');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
@@ -66,7 +74,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if(userKeycloak.isLoggedIn()) {
-      setUser(userKeycloak.getToken);
+      setUser(userInfoState.userInfo.name=="" ? "Anonyomous" : userInfoState.userInfo.name  );
     }
     document.addEventListener('click', closeLinks);
     return () => {
@@ -144,7 +152,7 @@ const Navbar = () => {
             <CgProfile size={40} />
             <div className={styles.profileInfo}>
               <h1>{user}</h1>
-              <p>emaildousuario@gmail.com</p>
+              {/* <p>emaildousuario@gmail.com</p> */}
             </div>
           </div>
           <div className={styles.mobileLinks}>
@@ -164,7 +172,7 @@ const Navbar = () => {
             <button
               className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
               style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
-              onClick={() => console.log("Aqui será o handleLogout com keycloak")}>
+              onClick={() => dispatch(authActions.setLogOut())}>
               <MdOutlineLogout size={25} /> Sair
             </button>
           </div>

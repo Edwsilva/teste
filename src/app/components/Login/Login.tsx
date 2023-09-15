@@ -7,7 +7,7 @@ import { AppDispatch, useAppSelector } from '@/redux/store';
 import { authActions } from '@/redux/features/auth-slice';
 
 import userKeycloak from '../../../hooks/userHookKeycloak';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { userAgent } from 'next/server';
 import { UserInfo } from '@/app/utils/types';
 
@@ -21,9 +21,22 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const userInfoState = useAppSelector((state) => state.authUser);
 
-  const [user, setUser] = useState<UserInfo>();
-  const [userIsAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<UserInfo | ReactNode>();
+  const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   console.log('USER INFO STATE ', userInfoState);
+
+  useEffect(() => {
+    console.warn("USEEFFECT DO LOGIN")
+    setUser(userInfoState.userInfo.name);
+
+  }, [userInfoState])
+
+  useEffect(() => {
+    if (userInfoState.authenticated) {
+      //navigate('/');
+      console.log("ESTOU NO UseEffect do userIsAuthenticated")
+    }
+  }, [userIsAuthenticated]);
   // const authenticateUser = async () => {
   //   // Verifique se o usuário está autenticado (por exemplo, com base em um token válido)
   //   /* Verifique a autenticação aqui */
@@ -51,15 +64,18 @@ const Login = () => {
       //   console.log('HasHole ', role);
       //   //return null
       // }
-      const authenticated = userKeycloak.doInitialize
-        .init({
-          onLoad: 'login-required',
-        })
+      userKeycloak.doInitialize.init({
+        onLoad: 'login-required',
+        // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+        // pkceMethod: 'S256',
+      })
         .then((authenticated) => {
           const userInfo = userKeycloak.getUserInfo();
+          setUserIsAuthenticated(authenticated)
+          console.log("userIsAuthenticated ", userIsAuthenticated)
           dispatch(authActions.setLogIn({ authenticated, userInfo }));
           setUser(userInfoState.userInfo.name);
-          console.log('LOGIN USUARIO ', userInfoState);
+          console.log('LOGIN USUARIO ', userInfoState.authenticated);
         });
 
       // const userInfo = await userKeycloak.getUserInfo();

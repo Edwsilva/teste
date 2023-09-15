@@ -20,7 +20,11 @@ export const auth = createSlice({
       state.userInfo = action.payload.userInfo;
     },
 
-    setLogOut: (state, action: PayloadAction) => {},
+    setLogOut: (state, action: PayloadAction) => {
+      console.log("ESTOU NO LOGOUT")
+      
+      return initialState
+    },
   },
 });
 
