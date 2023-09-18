@@ -12,6 +12,10 @@
   margin-right: 5px;
 }
 
+.buttonMobile{
+  padding: 0;
+}
+
 .icon {
   font-size: 25px;
   margin-right: 5px;

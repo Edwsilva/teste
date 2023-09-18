@@ -12,43 +12,46 @@ import { IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline } from "rea
 import { RiProfileLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
+import Error from "../Error/Error";
+import { PiWarningCircleFill } from "react-icons/pi";
 
 const links = [
   {
     id: 1,
     name: "Boletins e Frequência",
     href: "/boletins-e-frequencia",
-    icon: <IoSchoolOutline size={25} />
+    icon: <IoSchoolOutline size={25} className={styles.mobileIcon} />
   },
   {
     id: 2,
     name: "Calendário",
     href: "/calendario",
-    icon: <BsCalendar3 size={25} />
+    icon: <BsCalendar3 size={25} className={styles.mobileIcon} />
   },
   {
     id: 3,
     name: "Cardápio",
     href: "/cardapio",
-    icon: <IoRestaurantOutline size={25} />
+    icon: <IoRestaurantOutline size={25} className={styles.mobileIcon} />
   },
   {
     id: 4,
     name: "Declarações",
     href: "/declaracoes",
-    icon: <IoDocumentTextOutline size={25} />
+    icon: <IoDocumentTextOutline size={25} className={styles.mobileIcon} />
   },
   {
     id: 5,
     name: "Matrículas",
     href: "/matriculas",
-    icon: <RiProfileLine size={25} />
+    icon: <RiProfileLine size={25} className={styles.mobileIcon} />
   }
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
   const pathname = usePathname();
 
   const menuItemDelay = .25;
@@ -131,13 +134,20 @@ const Navbar = () => {
             <Image className={styles.img} src={logo} alt="Logo" />
           </Link>
           <div className={`${styles.profile} ${menuOpen ? styles.menuOpenAnim : ""}`} style={{ animationDuration: `${menuItemDelay}s` }}>
-            <CgProfile size={40} />
-            <div className={styles.profileInfo}>
-              <h1>Nome</h1>
-              <p>emaildousuario@gmail.com</p>
-            </div>
+            {isLogged ?
+              <>
+                <CgProfile size={40} />
+                <div className={styles.profileInfo}>
+                  <h1>Nome</h1>
+                  <p>emaildousuario@gmail.com</p>
+                </div>
+              </>
+              :
+              ""
+            }
+
           </div>
-          <div className={styles.mobileLinks}>
+          <div className={isLogged ? styles.mobileLinks : `${styles.mobileLinks} ${styles.mobileLinksNotLogged}`}>
             {links.map((link, index) => (
               <Link
                 className={`${styles.mobileLink} ${menuOpen ? styles.menuOpenAnim : ""}`}
@@ -151,12 +161,16 @@ const Navbar = () => {
             ))}
           </div>
           <div className={styles.logout}>
-            <button
-              className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
-              style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
-              onClick={() => console.log("Aqui será o handleLogout com keycloak")}>
-              <MdOutlineLogout size={25} /> Sair
-            </button>
+            {isLogged ?
+              <button
+                className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
+                style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
+                onClick={() => setIsLogged(false)}>
+                <MdOutlineLogout size={25} className={styles.mobileIcon}/> Sair
+              </button>
+              :
+              <Login mobile />
+            }
           </div>
         </div>
       </div>

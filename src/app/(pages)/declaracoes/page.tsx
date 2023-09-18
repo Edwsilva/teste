@@ -82,7 +82,7 @@ const Declaracoes = () => {
                 <Spinner />
                 :
                 error ?
-                  <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                  <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
                   :
                   matriculas.length === 0 ?
                     <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados

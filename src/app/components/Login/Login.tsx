@@ -6,7 +6,13 @@ import {MdOutlineLogout} from "react-icons/md";
 
 const name = "Eduardo Cassano de Sá"
 
-const Login = () => {
+type LoginProps = {
+  mobile?: boolean;
+}
+
+//Implementar prop driling Navbar <- Login
+
+const Login = ({mobile}:LoginProps) => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   return (
     <>
@@ -18,7 +24,7 @@ const Login = () => {
           </div>
           :
           <button
-            className={styles.button}
+            className={mobile ? `${styles.button} ${styles.buttonMobile}` : styles.button}
             onClick={() => setIsLogged(true)}
           >
             <BiSolidUserCircle className={styles.icon} />

@@ -11,8 +11,9 @@
   --textLighter: #ececec;
   --textLighter2: #f2f1f1;
   --textDark: #595A5B;
-  --warning: #E33636;
-  --warningH: #b62b2b;
+  --error: #E33636;
+  --errorH: #b62b2b;
+  --warn: #F6CC2C;
 }
 
 * {

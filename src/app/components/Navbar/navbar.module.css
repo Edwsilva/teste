@@ -195,19 +195,26 @@
 .profile h1 {
   font-size: 1.1rem;
   font-weight: normal;
+  color: var(--textDark);
 }
 
 .profile p {
   opacity: 0.75;
   font-size: 0.8rem;
+  color: var(--textDark);
 }
 
 .mobileLinks {
   display: flex;
   flex-direction: column;
   color: var(--primary);
+  color: var(--textDark);
   margin-top: 40px;
   margin-left: 15px;
+}
+
+.mobileLinksNotLogged{
+  margin-top: 0;
 }
 
 .mobileLink {
@@ -218,6 +225,10 @@
   font-size: 1rem;
   white-space: nowrap;
   width: fit-content;
+}
+
+.mobileIcon{
+  color: var(--primary);
 }
 
 .logoMobile {
@@ -242,7 +253,7 @@
   font-size: 1rem;
   font-weight: 600;
   background-color: transparent;
-  color: var(--primary);
+  color: var(--textDark);
   border: none;
 }
 

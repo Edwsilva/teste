@@ -40,6 +40,8 @@ const Boletins = () => {
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
+  const isAuth = false;
+
   async function fetchData() {
     try {
       await fetchMatriculas();
@@ -122,11 +124,12 @@ const Boletins = () => {
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
           {
+            !isAuth ? <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..."/> :
             !matriculasFetched && !error ?
               <Spinner />
               :
               error ?
-                <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
                 :
                 matriculas.length === 0 ?
                   <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
@@ -185,7 +188,7 @@ const Boletins = () => {
             <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
             {isLoading ?
               <Spinner />
-              : errorTable ? <Error msg="Não foi possível carregar esta tabela, tente novamente mais tarde..." /> :
+              : errorTable ? <Error type="error" msg="Não foi possível carregar esta tabela, tente novamente mais tarde..." /> :
                 <TopTable data={topIndices[selectedTable - 1].top}
                   selectField={selectField}
                   anoField={anoField}

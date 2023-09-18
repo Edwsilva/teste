@@ -13,7 +13,12 @@
 
 .errorIcon{
     font-size: 1.5rem;
-    color: var(--warning);
+    color: var(--error);
+}
+
+.warnIcon{
+    font-size: 2rem;
+    color: var(--warn);
 }
 
 @media screen and (max-width: 768px){
