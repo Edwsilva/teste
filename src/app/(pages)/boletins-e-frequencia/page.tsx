@@ -20,17 +20,24 @@ import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 import Error from "@/app/components/Error/Error";
 import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
+import userHookKeycloak from '../../../hooks/userHookKeycloak';
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
   const [minhasEscolas, setMinhasEscolas] = useState<MinhasEscolas>([]);
-  const [escolaField, setEscolaField] = useState<string>("");
-  const [anoField, setAnoField] = useState<string>("");
-  const [selectField, setSelectField] = useState<string>("");
+  const [escolaField, setEscolaField] = useState<string>('');
+  const [anoField, setAnoField] = useState<string>('');
+  const [selectField, setSelectField] = useState<string>('');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [boletimData, setBoletimData] = useState<BoletimData>({escola: "", serie: "", turma: 0, nome: "", matricula: ""});
+  const [boletimData, setBoletimData] = useState<BoletimData>({
+    escola: '',
+    serie: '',
+    turma: 0,
+    nome: '',
+    matricula: '',
+  });
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorTable, setErrorTable] = useState<boolean>(false);
@@ -38,6 +45,10 @@ const Boletins = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+  const isUserAuthenticated = useAppSelector(
+    (state) => state.authUser.authenticated
+  );
+
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
   async function fetchData() {
@@ -54,173 +65,244 @@ const Boletins = () => {
     console.log('Dentro do If');
     setTimeout(() => {
       fetchData();
-    }, 2000)
+    }, 2000);
   }
 
   useEffect(() => {
     getTop10Escolas()
-      .then(res => {
+      .then((res) => {
         // console.log(res);
         setTopIndices(res);
         setIsLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setErrorTable(true);
         setIsLoading(false);
-      })
+      });
 
     getMinhasEscolas()
-      .then(res => setMinhasEscolas(res))
-      .catch(err => launchToast({ msg: "Erro ao obter suas escolas.", type: "error" }));
+      .then((res) => setMinhasEscolas(res))
+      .catch((err) =>
+        launchToast({ msg: 'Erro ao obter suas escolas.', type: 'error' })
+      );
   }, []);
 
   useEffect(() => {
-    if (anoField !== "") {
+    if (anoField !== '') {
       getTop10EscolasPorAno(anoField)
-        .then(res => {
+        .then((res) => {
           setTopIndices(res[0].info);
           setErrorTable(false);
           setIsLoading(false);
         })
-        .catch(err => {
-          setErrorTable(true);
-          setIsLoading(false);
-        })
-      setIsLoading(false);
-    } else if (escolaField !== "") {
-      getTop10EscolasPorEscola(escolaField)
-        .then(res => {
-          setTopIndices(res[0].info);
-          setErrorTable(false);
-          setIsLoading(false);
-        })
-        .catch(err => {
+        .catch((err) => {
           setErrorTable(true);
           setIsLoading(false);
         });
-      setIsLoading(false)
-    } else {
-      getTop10Escolas()
-        .then(res => {
-          setTopIndices(res)
+      setIsLoading(false);
+    } else if (escolaField !== '') {
+      getTop10EscolasPorEscola(escolaField)
+        .then((res) => {
+          setTopIndices(res[0].info);
           setErrorTable(false);
           setIsLoading(false);
         })
-        .catch(err => {
+        .catch((err) => {
+          setErrorTable(true);
+          setIsLoading(false);
+        });
+      setIsLoading(false);
+    } else {
+      getTop10Escolas()
+        .then((res) => {
+          setTopIndices(res);
+          setErrorTable(false);
+          setIsLoading(false);
+        })
+        .catch((err) => {
           setErrorTable(true);
           setIsLoading(false);
         });
     }
   }, [selectField]);
 
+  console.log(isUserAuthenticated);
   return (
-    <div className={styles.main}>
-      <Banner type="overlaySM" banner="bannerBoletins">
-        <h1>Boletins e Frequência</h1>
-      </Banner>
-      <Container>
-        <div className={styles.info}>
-          <h2 className={styles.title}>Boletim</h2>
-          <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
-            o boletim e frequência escolares.</p>
-          {
-            !matriculasFetched && !error ?
-              <Spinner />
-              :
-              error ?
+    <div>
+      {isUserAuthenticated ? (
+        <div className={styles.main}>
+          <Banner type="overlaySM" banner="bannerBoletins">
+            <h1>Boletins e Frequência</h1>
+          </Banner>
+          <Container>
+            <div className={styles.info}>
+              <h2 className={styles.title}>Boletim</h2>
+              <p className={styles.text}>
+                Pressione o botão "Consultar" do aluno que deseja conferir o
+                boletim e frequência escolares.
+              </p>
+              {!matriculasFetched && !error ? (
+                <Spinner />
+              ) : error ? (
                 <Error msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
-                :
-                matriculas.length === 0 ?
-                  <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
-                    da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
-                  :
-                  matriculas.map((matricula, i) => (
-                    <BoletimCard data={matricula} setModal={setModalOpen} setBoletim={setBoletimData} key={i} />
-                  ))
-          }
-        </div>
-        <div className={styles.top10}>
-          <h3 className={styles.title2}>Top 10 do Índice de Desenvolvimento
-            das Escolas do Município do Rio de Janeiro</h3>
-          <p className={styles.text}> Acesse também informações sobre as escolas da rede municipal
-            mais próximas a você selecionando o campo "Minhas Escolas" ou
-            "Ano" abaixo.</p>
-          <div className={styles.tableOptions}>
-            <span className={styles.selectField}>
-              <label htmlFor="" className={styles.label}>Minhas Escolas:</label>
-              <select name="minhasEscolas" id="minhasEscolas" className={styles.select}
-                value={escolaField}
-                onChange={(e) => {
-                  setIsLoading(true);
-                  setEscolaField(e.target.value);
-                  setSelectField(e.target.value);
-                  setAnoField("");
-                }}>
-                <option value="">Selecione</option>
-                {minhasEscolas.map(escola => (
-                  <option value={escola.nome} key={escola.id}>{escola.nome}</option>
-                ))}
-              </select>
-            </span>
-            <span>
-              <p className={`${styles.text} ${styles.or}`}>ou</p>
-            </span>
-            <span className={styles.selectField}>
-              <label htmlFor="" className={styles.label}>Ano:</label>
-              <select name="ano" id="ano" className={styles.select}
-                value={anoField}
-                onChange={(e) => {
-                  setIsLoading(true);
-                  setAnoField(e.target.value);
-                  setEscolaField("");
-                  setSelectField(e.target.value);
-                }}>
-                <option value="">Selecione</option>
-                {anos.map((ano, i) => (
-                  <option value={ano} key={i}>{ano}</option>
-                ))}
-              </select>
-            </span>
-          </div>
-          <div className={styles.tablesContainer}>
-            <span className={selectedTable === 1 ? `${styles.tableSelect1} ${styles.tableSelectSelected}` : styles.tableSelect1} onClick={() => setSelectedTable(1)}>4ª a 6ª Série</span>
-            <span className={selectedTable === 2 ? `${styles.tableSelect2} ${styles.tableSelectSelected}` : styles.tableSelect2} onClick={() => setSelectedTable(2)}>7ª a 9ª Série</span>
-            {isLoading ?
-              <Spinner />
-              : errorTable ? <Error msg="Não foi possível carregar esta tabela, tente novamente mais tarde..." /> :
-                <TopTable data={topIndices[selectedTable - 1].top}
-                  selectField={selectField}
-                  anoField={anoField}
-                  escolaField={escolaField}
-                  selectedTable={selectedTable} />
-            }
-          </div>
-        </div>
-      </Container>
+              ) : matriculas.length === 0 ? (
+                <h3 className={styles.title2}>
+                  No momento você não possui matrícula cadastrada. Insira os
+                  dados da matrícula e a data de nascimento do aluno e clique em
+                  salvar.
+                </h3>
+              ) : (
+                matriculas.map((matricula, i) => (
+                  <BoletimCard
+                    data={matricula}
+                    setModal={setModalOpen}
+                    setBoletim={setBoletimData}
+                    key={i}
+                  />
+                ))
+              )}
+            </div>
+            <div className={styles.top10}>
+              <h3 className={styles.title2}>
+                Top 10 do Índice de Desenvolvimento das Escolas do Município do
+                Rio de Janeiro
+              </h3>
+              <p className={styles.text}>
+                {' '}
+                Acesse também informações sobre as escolas da rede municipal
+                mais próximas a você selecionando o campo "Minhas Escolas" ou
+                "Ano" abaixo.
+              </p>
+              <div className={styles.tableOptions}>
+                <span className={styles.selectField}>
+                  <label htmlFor="" className={styles.label}>
+                    Minhas Escolas:
+                  </label>
+                  <select
+                    name="minhasEscolas"
+                    id="minhasEscolas"
+                    className={styles.select}
+                    value={escolaField}
+                    onChange={(e) => {
+                      setIsLoading(true);
+                      setEscolaField(e.target.value);
+                      setSelectField(e.target.value);
+                      setAnoField('');
+                    }}
+                  >
+                    <option value="">Selecione</option>
+                    {minhasEscolas.map((escola) => (
+                      <option value={escola.nome} key={escola.id}>
+                        {escola.nome}
+                      </option>
+                    ))}
+                  </select>
+                </span>
+                <span>
+                  <p className={`${styles.text} ${styles.or}`}>ou</p>
+                </span>
+                <span className={styles.selectField}>
+                  <label htmlFor="" className={styles.label}>
+                    Ano:
+                  </label>
+                  <select
+                    name="ano"
+                    id="ano"
+                    className={styles.select}
+                    value={anoField}
+                    onChange={(e) => {
+                      setIsLoading(true);
+                      setAnoField(e.target.value);
+                      setEscolaField('');
+                      setSelectField(e.target.value);
+                    }}
+                  >
+                    <option value="">Selecione</option>
+                    {anos.map((ano, i) => (
+                      <option value={ano} key={i}>
+                        {ano}
+                      </option>
+                    ))}
+                  </select>
+                </span>
+              </div>
+              <div className={styles.tablesContainer}>
+                <span
+                  className={
+                    selectedTable === 1
+                      ? `${styles.tableSelect1} ${styles.tableSelectSelected}`
+                      : styles.tableSelect1
+                  }
+                  onClick={() => setSelectedTable(1)}
+                >
+                  4ª a 6ª Série
+                </span>
+                <span
+                  className={
+                    selectedTable === 2
+                      ? `${styles.tableSelect2} ${styles.tableSelectSelected}`
+                      : styles.tableSelect2
+                  }
+                  onClick={() => setSelectedTable(2)}
+                >
+                  7ª a 9ª Série
+                </span>
+                {isLoading ? (
+                  <Spinner />
+                ) : errorTable ? (
+                  <Error msg="Não foi possível carregar esta tabela, tente novamente mais tarde..." />
+                ) : (
+                  <TopTable
+                    data={topIndices[selectedTable - 1].top}
+                    selectField={selectField}
+                    anoField={anoField}
+                    escolaField={escolaField}
+                    selectedTable={selectedTable}
+                  />
+                )}
+              </div>
+            </div>
+          </Container>
 
-      <Modal
-        ariaHideApp={false}
-        style={{
-          content: {
-            top: '55%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            transform: 'translate(-50%, -50%)',
-            minWidth: '380px',
-            width: '75%',
-            height: '75%',
-            padding: 10,
-            position: 'relative'
-          },
-        }}
-        isOpen={modalOpen}>
-        <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        <BoletimModal data={boletimData}/>
-      </Modal>
-      <ToastContainer />
+          <Modal
+            ariaHideApp={false}
+            style={{
+              content: {
+                top: '55%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                transform: 'translate(-50%, -50%)',
+                minWidth: '380px',
+                width: '75%',
+                height: '75%',
+                padding: 10,
+                position: 'relative',
+              },
+            }}
+            isOpen={modalOpen}
+          >
+            <Button
+              p="p-10"
+              text={
+                <IoClose
+                  size={25}
+                  style={{ display: 'flex', alignItems: 'center' }}
+                />
+              }
+              fn={() => setModalOpen(!modalOpen)}
+            />
+            <BoletimModal data={boletimData} />
+          </Modal>
+          <ToastContainer />
+        </div>
+      ) : (
+        <div style={{ backgroundColor: 'red', marginTop: 120 }}>
+          <h1>teste</h1>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Boletins;

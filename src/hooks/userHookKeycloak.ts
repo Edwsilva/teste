@@ -7,13 +7,25 @@ import { KeycloakTokenParsed } from 'keycloak-js';
 // const [isLogin, setLogin] = useState(false);
 // const [token, setToken] = useState(null);
 
-const initOptions = {
+// const initOptions = {
+//   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
+//   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
+//   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
+// };
+
+
+export const _kc = Keycloak({
   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
-};
+  credentials: {
+    secret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET,
+  },
+  'ssl-required': 'external',
+  'confidential-port': 0,
+});
 
-const _kc = new Keycloak(initOptions);
+// const _kc = new Keycloak(initOptions);
 console.log('KCCC', _kc);
 
 /**

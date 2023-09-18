@@ -64,15 +64,16 @@ const Login = () => {
       //   console.log('HasHole ', role);
       //   //return null
       // }
-      userKeycloak.doInitialize.init({
-        onLoad: 'login-required',
-        // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-        // pkceMethod: 'S256',
-      })
-        .then((authenticated) => {
+      userKeycloak.doInitialize
+        .init({
+          onLoad: 'login-required',
+          // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+          // pkceMethod: 'S256',
+        })
+        .success((authenticated) => {
           const userInfo = userKeycloak.getUserInfo();
-          setUserIsAuthenticated(authenticated)
-          console.log("userIsAuthenticated ", userIsAuthenticated)
+          setUserIsAuthenticated(authenticated);
+          console.log('userIsAuthenticated ', userIsAuthenticated);
           dispatch(authActions.setLogIn({ authenticated, userInfo }));
           setUser(userInfoState.userInfo.name);
           console.log('LOGIN USUARIO ', userInfoState.authenticated);
