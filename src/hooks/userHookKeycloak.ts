@@ -1,9 +1,12 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import Keycloak from 'keycloak-js';
+import Keycloak, { KeycloakInitOptions } from 'keycloak-js';
 import { UserInfo } from '@/app/utils/types';
 import { KeycloakTokenParsed } from 'keycloak-js';
 
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '@/redux/store';
+import { authActions } from '@/redux/features/auth-slice';
 // const [isLogin, setLogin] = useState(false);
 // const [token, setToken] = useState(null);
 
@@ -12,7 +15,6 @@ import { KeycloakTokenParsed } from 'keycloak-js';
 //   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
 //   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
 // };
-
 
 export const _kc = Keycloak({
   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
@@ -24,6 +26,19 @@ export const _kc = Keycloak({
   'ssl-required': 'external',
   'confidential-port': 0,
 });
+
+const initOptions: KeycloakInitOptions = {};
+
+// export const _kc = Keycloak({
+//   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
+//   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
+//   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
+//   credentials: {
+//     secret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET,
+//   },
+//   'ssl-required': 'external',
+//   'confidential-port': 0,
+// });
 
 // const _kc = new Keycloak(initOptions);
 console.log('KCCC', _kc);
@@ -59,6 +74,29 @@ const initKeycloak = (onAuthenticatedCallback: any) => {
   // };
 };
 
+const initialize = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  _kc.init(initOptions).success((authenticated) => {
+    if (authenticated) {
+      console.log('KEYCLOAK ', _kc.token);
+      //  setUser('EDWILSON');
+      //  console.log('USER ', _kc.tokenParsed?.email);
+      //  console.log('Está autenticado ', authenticated);
+      //  // console.log('User Info', userInfo);
+      //  setUserIsAuthenticated(authenticated);
+      //  console.log('Usuaaaário ', user);
+      //  // const userInfo = userKeycloak.getUserInfo();
+      //  console.log('userIsAuthenticated ', userIsAuthenticated);
+      dispatch(authActions.setLogIn({ authenticated, userInfo }));
+      // setUser(userInfoState.userInfo.name);
+      // console.log('LOGIN USUARIO ', userInfoState.authenticated);
+    } else {
+      console.log('Usuário não autenticado');
+    }
+  });
+};
+
 const doInitialize = _kc;
 
 const doLogin = _kc.login;
@@ -67,14 +105,20 @@ const doLogout = _kc.logout;
 
 const getToken = () => _kc.token;
 
-const getTokenExpired = () => _kc.onTokenExpired();
+const getTokenExpired = () => _kc.isTokenExpired();
 
-const getTokenParsed = (): KeycloakTokenParsed => _kc.tokenParsed;
+const getTokenParsed = _kc.tokenParsed;
 
 const isLoggedIn = () => !!_kc.token;
 
-const updateToken = (successCallback) =>
-  _kc.updateToken(5).then(successCallback).catch(doLogin);
+const updateToken = (successCallback: any) =>
+  _kc
+    .updateToken(5)
+    .success(successCallback)
+    .error(() => doLogin());
+
+// const updateToken = (successCallback) =>
+//   _kc.updateToken(5).then(successCallback).catch(doLogin);
 
 const getUserInfo = (): UserInfo => {
   // @ts-ignore
@@ -88,6 +132,7 @@ const hasRole = (roles: any) =>
   roles.some((role: any) => _kc.hasRealmRole(role));
 
 const userHookKeycloak = {
+  initialize,
   initKeycloak,
   doInitialize,
   doLogin,
