@@ -93,7 +93,7 @@ const Navbar = () => {
             )
           })
           }
-          <Login />
+          <Login setLoginState={setIsLogged} loginState={isLogged} />
         </div>
 
         {/* Medium Screens Navbar */}
@@ -108,7 +108,7 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-          <Login />
+          <Login setLoginState={setIsLogged} loginState={isLogged} />
         </div>
 
         {/* Mobile Navbar Button */}
@@ -166,10 +166,10 @@ const Navbar = () => {
                 className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
                 style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
                 onClick={() => setIsLogged(false)}>
-                <MdOutlineLogout size={25} className={styles.mobileIcon}/> Sair
+                <MdOutlineLogout size={25} className={styles.mobileIcon} /> Sair
               </button>
               :
-              <Login mobile />
+              <Login mobile setLoginState={setIsLogged} loginState={isLogged} />
             }
           </div>
         </div>
