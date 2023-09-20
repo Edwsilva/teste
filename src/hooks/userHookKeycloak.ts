@@ -27,7 +27,7 @@ export const _kc = Keycloak({
   'confidential-port': 0,
 });
 
-const initOptions: KeycloakInitOptions = {};
+// const initOptions: KeycloakInitOptions = {};
 
 // export const _kc = Keycloak({
 //   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
@@ -48,54 +48,54 @@ console.log('KCCC', _kc);
  *
  * @param onAuthenticatedCallback
  */
-const initKeycloak = (onAuthenticatedCallback: any) => {
-  console.log('INIT ', onAuthenticatedCallback);
-  // const isRun = useRef(false);
-  // const [isLogin, setLogin] = useState(false);
-  // const [token, setToken] = useState(null);
-  //   useEffect(() => {
-  //     console.log('YESYE');
-  //     _kc
-  //       .init({
-  //         onLoad: initOptions.onLoad,
-  //         checkLoginIframe: false,
-  //         // onLoad: 'check-sso',
-  //         // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-  //         // pkceMethod: 'S256',
-  //       })
-  //       .then((authenticated) => {
-  //         if (!authenticated) {
-  //           console.log('user is not authenticated..!');
-  //         }
-  //         onAuthenticatedCallback();
-  //       })
-  //       .catch(console.error);
-  //   }, []);
-  // };
-};
+// const initKeycloak = (onAuthenticatedCallback: any) => {
+//   console.log('INIT ', onAuthenticatedCallback);
+//   // const isRun = useRef(false);
+//   // const [isLogin, setLogin] = useState(false);
+//   // const [token, setToken] = useState(null);
+//   //   useEffect(() => {
+//   //     console.log('YESYE');
+//   //     _kc
+//   //       .init({
+//   //         onLoad: initOptions.onLoad,
+//   //         checkLoginIframe: false,
+//   //         // onLoad: 'check-sso',
+//   //         // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+//   //         // pkceMethod: 'S256',
+//   //       })
+//   //       .then((authenticated) => {
+//   //         if (!authenticated) {
+//   //           console.log('user is not authenticated..!');
+//   //         }
+//   //         onAuthenticatedCallback();
+//   //       })
+//   //       .catch(console.error);
+//   //   }, []);
+//   // };
+// };
 
-const initialize = () => {
-  const dispatch = useDispatch<AppDispatch>();
+// const initialize = () => {
+//   const dispatch = useDispatch<AppDispatch>();
 
-  _kc.init(initOptions).success((authenticated) => {
-    if (authenticated) {
-      console.log('KEYCLOAK ', _kc.token);
-      //  setUser('EDWILSON');
-      //  console.log('USER ', _kc.tokenParsed?.email);
-      //  console.log('Está autenticado ', authenticated);
-      //  // console.log('User Info', userInfo);
-      //  setUserIsAuthenticated(authenticated);
-      //  console.log('Usuaaaário ', user);
-      //  // const userInfo = userKeycloak.getUserInfo();
-      //  console.log('userIsAuthenticated ', userIsAuthenticated);
-      dispatch(authActions.setLogIn({ authenticated, userInfo }));
-      // setUser(userInfoState.userInfo.name);
-      // console.log('LOGIN USUARIO ', userInfoState.authenticated);
-    } else {
-      console.log('Usuário não autenticado');
-    }
-  });
-};
+//   _kc.init(initOptions).success((authenticated) => {
+//     if (authenticated) {
+//       console.log('KEYCLOAK ', _kc.token);
+//       //  setUser('EDWILSON');
+//       //  console.log('USER ', _kc.tokenParsed?.email);
+//       //  console.log('Está autenticado ', authenticated);
+//       //  // console.log('User Info', userInfo);
+//       //  setUserIsAuthenticated(authenticated);
+//       //  console.log('Usuaaaário ', user);
+//       //  // const userInfo = userKeycloak.getUserInfo();
+//       //  console.log('userIsAuthenticated ', userIsAuthenticated);
+//       dispatch(authActions.setLogIn({ authenticated, userInfo }));
+//       // setUser(userInfoState.userInfo.name);
+//       // console.log('LOGIN USUARIO ', userInfoState.authenticated);
+//     } else {
+//       console.log('Usuário não autenticado');
+//     }
+//   });
+// };
 
 const doInitialize = _kc;
 
@@ -105,9 +105,9 @@ const doLogout = _kc.logout;
 
 const getToken = () => _kc.token;
 
-const getTokenExpired = () => _kc.isTokenExpired();
+const getTokenExpired = () => _kc.isTokenExpired()
 
-const getTokenParsed = _kc.tokenParsed;
+const getTokenParsed = () => _kc.tokenParsed;
 
 const isLoggedIn = () => !!_kc.token;
 
@@ -132,8 +132,8 @@ const hasRole = (roles: any) =>
   roles.some((role: any) => _kc.hasRealmRole(role));
 
 const userHookKeycloak = {
-  initialize,
-  initKeycloak,
+ // initialize,
+  //initKeycloak,
   doInitialize,
   doLogin,
   doLogout,

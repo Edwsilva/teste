@@ -17,7 +17,8 @@ import { IoRestaurantOutline, IoSchoolOutline, IoDocumentTextOutline } from "rea
 import { RiProfileLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
-import userKeycloak from "../../../hooks/userHookKeycloak"
+import userHookKeycloak from "../../../hooks/userHookKeycloak"
+   
 
 const links = [
   {
@@ -72,8 +73,14 @@ const Navbar = () => {
     setResponsiveLinksOpen(false);
   }
 
+  const handleLogout = () => {
+    dispatch(authActions.setLogOut())
+    // resetUserToken();
+    userHookKeycloak.doLogout();
+  };
+
   useEffect(() => {
-    if(userKeycloak.isLoggedIn()) {
+    if(userHookKeycloak.isLoggedIn()) {
       setUser(userInfoState.userInfo.name=="" ? "Anonyomous" : userInfoState.userInfo.name  );
     }
     document.addEventListener('click', closeLinks);
@@ -172,7 +179,7 @@ const Navbar = () => {
             <button
               className={`${styles.logoutButton} ${menuOpen ? styles.menuOpenAnim : ""}`}
               style={{ animationDuration: `${(links.length + 1) * menuItemDelay}s` }}
-              onClick={() => dispatch(authActions.setLogOut())}>
+              onClick={handleLogout}>
               <MdOutlineLogout size={25} /> Sair
             </button>
           </div>
