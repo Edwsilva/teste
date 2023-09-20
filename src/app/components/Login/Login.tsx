@@ -24,49 +24,50 @@ const Login = () => {
   const [user, setUser] = useState<UserInfo | ReactNode>();
  
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
-  
-  userHookkeycloak.doInitialize.init(initOptions).success((auth) => {
-    
-    if (auth) {
+
+  if(userInfo.token ==="") {
+
+    userHookkeycloak.doInitialize.init(initOptions).success((auth) => {
+      console.log("AUTH ", auth)
       try {
-        // const userEmail = keycloak.tokenParsed?.email;
-        // const userName = keycloak.tokenParsed?.name;
-        // const userToken = keycloak.token;
-
-        // @ts-ignore
-        const userEmail = userHookkeycloak.getTokenParsed()?.email;
-        // @ts-ignore
-        const userName = userHookkeycloak.getTokenParsed()?.name;
-        const userToken = userHookkeycloak.getToken();
-
-
-        console.log('KEYCLOAK ', userEmail);
-
-        console.log('KEYCLOAK ', userHookkeycloak.getToken());
-        // setUser(keycloak.profile?.email);
-        // console.log('USER ', keycloak.profile?.email);
-        console.log('Está autenticado ', authenticated);
-        // console.log('User Info', userInfo);
-        setUserIsAuthenticated(authenticated);
-        console.log('Usuaaaário ', user);
-        // const userInfo = userKeycloak.getUserInfo();
-        console.log('userIsAuthenticated ', userIsAuthenticated);
-        dispatch(
-          authActions.setLogIn({
-            authenticated: auth,
-            userInfo: { name: userName, email: userEmail, token: userToken  },
-          })
-        );
-      
-      } catch(erro) {
-        console.log(erro)
-      }
-    } else {
-      console.log("Erro na chamada do keycloak ")
-    }
-  })
-
+        if (auth) {
   
+          // @ts-ignore
+          const userEmail = userHookkeycloak.getTokenParsed()?.email;
+          // @ts-ignore
+          const userName = userHookkeycloak.getTokenParsed()?.name;
+          const userToken = userHookkeycloak.getToken();
+  
+  
+          console.log('KEYCLOAK ', userEmail);
+  
+          console.log('KEYCLOAK ', userHookkeycloak.getToken());
+          // setUser(keycloak.profile?.email);
+          // console.log('USER ', keycloak.profile?.email);
+          console.log('Está autenticado ', authenticated);
+          // console.log('User Info', userInfo);
+          setUserIsAuthenticated(authenticated);
+          console.log('Usuaaaário ', user);
+          // const userInfo = userKeycloak.getUserInfo();
+          console.log('userIsAuthenticated ', userIsAuthenticated);
+          dispatch(
+            authActions.setLogIn({
+              authenticated: auth,
+              userInfo: { name: userName, email: userEmail, token: userToken  },
+            })
+          );
+  
+        } else {
+          console.log("USUARIO NÂO AUTETICADO")
+        }
+  
+  
+      } catch (error) {
+        console.error('Erro ao iniciar a autenticação:', error);
+      }
+      
+    })
+  }
 
   return (
     <button className={styles.button} onClick={() => userHookkeycloak.doLogin()}>
