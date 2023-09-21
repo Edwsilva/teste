@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Banner type="overlaySM" banner="banner">
+      <Banner type="overlay" banner="banner">
         <h1 className={styles.bannerTitle}>Portal do Aluno Carioca</h1>
         <p className={styles.bannerText}>
           Fique por dentro de tudo mesmo fora da escola
