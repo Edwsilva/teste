@@ -75,5 +75,5 @@ type AuthInfoState = {
   userInfo: UserInfo;
 };
 
-export type {Escola, TopIndice, TopIndices, TopIndicesPorAno, TopIndicesPorEscola, MinhasEscolas}
+export type {Matricula, Escola, TopIndice, TopIndices, TopIndicesPorAno, TopIndicesPorEscola, MinhasEscolas}
 export type { UserInfo, AuthInfoState };
