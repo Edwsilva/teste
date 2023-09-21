@@ -51,8 +51,6 @@ const Boletins = () => {
 
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
-  const isAuth = true;
-
   async function fetchData() {
     try {
       await fetchMatriculas();
@@ -136,7 +134,7 @@ const Boletins = () => {
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
           {
-            !isAuth ? <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..."/> :
+            !isUserAuthenticated ? <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..."/> :
             !matriculasFetched && !error ?
               <Spinner />
               :

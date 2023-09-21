@@ -25,6 +25,10 @@ const Matriculas = () => {
     const matriculas = useAppSelector((state) => state.matriculas.matriculas);
     const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
+    const isUserAuthenticated = useAppSelector(
+        (state) => state.authUser.authenticated
+    );
+
     const closeDropdowns = () => {
         setDropdownVisible((prevState) => {
             const states = [...prevState];
@@ -75,7 +79,9 @@ const Matriculas = () => {
                 <p className={styles.text}>Consulte as matrículas e veja os boletins escolares. Clique em uma das matrículas cadastradas para seleciona-la.</p>
 
                 <div className={styles.matriculasContainer}>
-                    {
+                    {!isUserAuthenticated ?
+                        <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..." />
+                        :
                         !matriculasFetched && !error ?
                             <Spinner />
                             :
@@ -93,36 +99,40 @@ const Matriculas = () => {
                                     </div>
                     }
                 </div>
-                <div className={styles.cadastrarMatricula}>
-                    <h3 className={styles.title2}>Incluir nova matrícula</h3>
-                    <div className={styles.form}>
-                        <div className={styles.textField}>
-                            <label htmlFor="" className={styles.label}>Matrícula:</label>
-                            <input type="text" placeholder="Ex: 1234567891011" maxLength={13} className={styles.input} value={matricula} onChange={(e) => { setMatricula(e.target.value) }} />
-                        </div>
-                        <div className={styles.textField}>
-                            <label htmlFor="" className={styles.label}>Nascimento:</label>
-                            <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
-                        </div>
-                        <Button text="Salvar" p="p-10" fn={async () => {
-                            if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
-                                launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
-                            } else {
-                                const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                const matriculaAdded = await postMatricula({ matricula, nascimento: nascimentoFormated });
-                                if (matriculaAdded.success) {
-                                    const newMatriculas = await getMinhasMatriculas();
-                                    dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
-                                    launchToast({ msg: "Matrícula adicionada!", type: "success" });
+                {!isUserAuthenticated ?
+                    ""
+                    :
+                    <div className={styles.cadastrarMatricula}>
+                        <h3 className={styles.title2}>Incluir nova matrícula</h3>
+                        <div className={styles.form}>
+                            <div className={styles.textField}>
+                                <label htmlFor="" className={styles.label}>Matrícula:</label>
+                                <input type="text" placeholder="Ex: 1234567891011" maxLength={13} className={styles.input} value={matricula} onChange={(e) => { setMatricula(e.target.value) }} />
+                            </div>
+                            <div className={styles.textField}>
+                                <label htmlFor="" className={styles.label}>Nascimento:</label>
+                                <input type="date" className={styles.input} value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
+                            </div>
+                            <Button text="Salvar" p="p-10" fn={async () => {
+                                if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
+                                    launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
-                                    launchToast({ msg: matriculaAdded.msg, type: "error" })
+                                    const nascimentoFormated = nascimento.split("-").reverse().join("/");
+                                    const matriculaAdded = await postMatricula({ matricula, nascimento: nascimentoFormated });
+                                    if (matriculaAdded.success) {
+                                        const newMatriculas = await getMinhasMatriculas();
+                                        dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
+                                        launchToast({ msg: "Matrícula adicionada!", type: "success" });
+                                    } else {
+                                        launchToast({ msg: matriculaAdded.msg, type: "error" })
+                                    }
+                                    setMatricula("");
+                                    setNascimento("");
                                 }
-                                setMatricula("");
-                                setNascimento("");
-                            }
-                        }} />
+                            }} />
+                        </div>
                     </div>
-                </div>
+                }
             </Container>
             <ToastContainer />
         </div>

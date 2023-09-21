@@ -25,6 +25,10 @@ const Declaracoes = () => {
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
+  const isUserAuthenticated = useAppSelector(
+    (state) => state.authUser.authenticated
+  );
+
   function changeRadioSelect(value: RadioProps) {
     setSelected(value);
   }
@@ -67,30 +71,37 @@ const Declaracoes = () => {
         <div className={styles.declaracoesContainer}>
           <div className={styles.declaracoes}>
             <h3 className={styles.title2}>Selecione o tipo da declaração do aluno abaixo:</h3>
-            <div className={styles.form}>
-              <div className={styles.inputGroup}>
-                <input type="radio" className={styles.input} id="curso" name="declaracao" value="curso" onChange={() => { changeRadioSelect("curso") }} />
-                <label htmlFor="curso" className={styles.label}><span className={selected === "curso" ? styles.spanSelected : styles.span}><AiFillPrinter className={styles.icon} size={15} /></span>Declaração de Escolaridade em Curso</label>
+            {!isUserAuthenticated ?
+              ""
+              :
+              <div className={styles.form}>
+                <div className={styles.inputGroup}>
+                  <input type="radio" className={styles.input} id="curso" name="declaracao" value="curso" onChange={() => { changeRadioSelect("curso") }} />
+                  <label htmlFor="curso" className={styles.label}><span className={selected === "curso" ? styles.spanSelected : styles.span}><AiFillPrinter className={styles.icon} size={15} /></span>Declaração de Escolaridade em Curso</label>
+                </div>
+                <div className={styles.inputGroup}>
+                  <input type="radio" className={styles.input} id="conclusao" name="declaracao" value="conclusao" onChange={() => { changeRadioSelect("conclusao") }} />
+                  <label htmlFor="conclusao" className={styles.label}><span className={selected === "conclusao" ? styles.spanSelected : styles.span}><AiFillPrinter size={15} /></span>Declaração de Escolaridade de Conclusão</label>
+                </div>
               </div>
-              <div className={styles.inputGroup}>
-                <input type="radio" className={styles.input} id="conclusao" name="declaracao" value="conclusao" onChange={() => { changeRadioSelect("conclusao") }} />
-                <label htmlFor="conclusao" className={styles.label}><span className={selected === "conclusao" ? styles.spanSelected : styles.span}><AiFillPrinter size={15} /></span>Declaração de Escolaridade de Conclusão</label>
-              </div>
-            </div>
+            }
             <div className={styles.matriculas}>
-              {!matriculasFetched && !error ?
-                <Spinner />
+              {!isUserAuthenticated ?
+                <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..." />
                 :
-                error ?
-                  <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+                !matriculasFetched && !error ?
+                  <Spinner />
                   :
-                  matriculas.length === 0 ?
-                    <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
-                      da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                  error ?
+                    <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
                     :
-                    matriculas.map((matricula, i) => (
-                      <MatriculaDropdown data={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
-                    ))
+                    matriculas.length === 0 ?
+                      <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                        da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                      :
+                      matriculas.map((matricula, i) => (
+                        <MatriculaDropdown data={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
+                      ))
               }
             </div>
           </div>
