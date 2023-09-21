@@ -13,7 +13,6 @@ type PDFViewerProps = {
 
 const PDFViewer = (props: PDFViewerProps) => {
   const [pdfOpen, setPdfOpen] = useState<boolean>(false);
-  console.log(props.url.href);
 
   return (
     <>

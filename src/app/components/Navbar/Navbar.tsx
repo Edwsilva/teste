@@ -50,8 +50,8 @@ const links = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [responsiveLinksOpen, setResponsiveLinksOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [responsiveLinksOpen, setResponsiveLinksOpen] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
   const pathname = usePathname();
 
   const menuItemDelay = .25;
@@ -169,7 +169,7 @@ const Navbar = () => {
                 <MdOutlineLogout size={25} className={styles.mobileIcon} /> Sair
               </button>
               :
-              <Login mobile setLoginState={setIsLogged} loginState={isLogged} />
+              <Login mobile menuOpen={menuOpen} linksLength={links.length + 1} delay={menuItemDelay} setLoginState={setIsLogged} loginState={isLogged} />
             }
           </div>
         </div>

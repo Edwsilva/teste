@@ -8,14 +8,17 @@ const name = "Eduardo Cassano de Sá"
 
 type LoginProps = {
   mobile?: boolean;
+  menuOpen?: boolean;
+  linksLength?: number;
+  delay?: number;
   loginState: boolean;
   setLoginState: Dispatch<SetStateAction<boolean>>;
 }
 
-//Implementar prop driling Navbar <- Login
+const Login = ({ mobile, menuOpen ,linksLength, delay, loginState, setLoginState }: LoginProps) => {
 
-const Login = ({ mobile, loginState, setLoginState }: LoginProps) => {
-  // const [isLogged, setIsLogged] = useState<boolean>(false);
+  const animStyle = linksLength && delay ? {animationDuration: `${linksLength * delay}s`} : {};
+
   return (
     <>
       {
@@ -26,7 +29,8 @@ const Login = ({ mobile, loginState, setLoginState }: LoginProps) => {
           </div>
           :
           <button
-            className={mobile ? `${styles.button} ${styles.buttonMobile}` : styles.button}
+            style={animStyle}
+            className={mobile ? `${styles.button} ${styles.buttonMobile} ${menuOpen ? styles.menuOpenAnim : ""}` : styles.button}
             onClick={() => setLoginState(true)}
           >
             <BiSolidUserCircle className={styles.icon} />

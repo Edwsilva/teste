@@ -40,7 +40,7 @@ const Boletins = () => {
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
-  const isAuth = false;
+  const isAuth = true;
 
   async function fetchData() {
     try {
