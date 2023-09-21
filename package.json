@@ -17,6 +17,7 @@
     "cheerio": "^1.0.0-rc.12",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
+    "keycloak-js": "^7.0.1",
     "next": "13.4.7",
     "node-cache": "^5.1.2",
     "react": "18.2.0",

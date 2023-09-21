@@ -8,6 +8,7 @@ interface BannerProps{
 }
 
 const Banner = ({type, banner, children}: BannerProps) => {
+
   return (
     <div className={styles.container}>
       <div className={styles[banner]}>

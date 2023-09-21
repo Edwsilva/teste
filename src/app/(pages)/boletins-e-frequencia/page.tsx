@@ -20,17 +20,24 @@ import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 import Error from "@/app/components/Error/Error";
 // import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
+import userHookKeycloak from '../../../hooks/userHookKeycloak';
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
 const Boletins = () => {
   const [selectedTable, setSelectedTable] = useState<number>(1);
   const [minhasEscolas, setMinhasEscolas] = useState<MinhasEscolas>([]);
-  const [escolaField, setEscolaField] = useState<string>("");
-  const [anoField, setAnoField] = useState<string>("");
-  const [selectField, setSelectField] = useState<string>("");
+  const [escolaField, setEscolaField] = useState<string>('');
+  const [anoField, setAnoField] = useState<string>('');
+  const [selectField, setSelectField] = useState<string>('');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  // const [boletimData, setBoletimData] = useState<BoletimData>({escola: "", serie: "", turma: 0, nome: "", matricula: ""});
+  // const [boletimData, setBoletimData] = useState<BoletimData>({
+  //   escola: '',
+  //   serie: '',
+  //   turma: 0,
+  //   nome: '',
+  //   matricula: '',
+  // });
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorTable, setErrorTable] = useState<boolean>(false);
@@ -38,6 +45,10 @@ const Boletins = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+  const isUserAuthenticated = useAppSelector(
+    (state) => state.authUser.authenticated
+  );
+
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
   const isAuth = true;
@@ -55,7 +66,7 @@ const Boletins = () => {
   if (!matriculasFetched || error) {
     setTimeout(() => {
       fetchData();
-    }, 2000)
+    }, 2000);
   }
   
   useEffect(() => {
@@ -64,7 +75,7 @@ const Boletins = () => {
       setTopIndices(res);
       setIsLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setErrorTable(true);
         setIsLoading(false);
       })
@@ -82,7 +93,7 @@ const Boletins = () => {
           setErrorTable(false);
           setIsLoading(false);
         })
-        .catch(err => {
+        .catch((err) => {
           setErrorTable(true);
           setIsLoading(false);
         })
@@ -94,25 +105,26 @@ const Boletins = () => {
           setErrorTable(false);
           setIsLoading(false);
         })
-        .catch(err => {
+        .catch((err) => {
           setErrorTable(true);
           setIsLoading(false);
         });
-      setIsLoading(false)
+      setIsLoading(false);
     } else {
       getTop10Escolas()
-        .then(res => {
-          setTopIndices(res)
+        .then((res) => {
+          setTopIndices(res);
           setErrorTable(false);
           setIsLoading(false);
         })
-        .catch(err => {
+        .catch((err) => {
           setErrorTable(true);
           setIsLoading(false);
         });
     }
   }, [selectField]);
 
+  console.log(isUserAuthenticated);
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">
@@ -221,7 +233,7 @@ const Boletins = () => {
       </Modal>
       <ToastContainer />
     </div>
-  )
-}
+  );
+};
 
 export default Boletins;

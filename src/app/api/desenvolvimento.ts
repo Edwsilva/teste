@@ -1,5 +1,5 @@
 import { TopIndices, TopIndicesPorAno, MinhasEscolas, TopIndicesPorEscola } from "../utils/types";
-
+import userKeycloak from '../../hooks/userHookKeycloak';
 const getMinhasEscolas = async (): Promise<MinhasEscolas> => {
   const req = await fetch("http://localhost:3001/minhasEscolas", {cache: 'no-cache'});
   const data = await req.json();
@@ -22,6 +22,11 @@ const getTop10EscolasPorEscola = async (escola: string): Promise<TopIndicesPorEs
   if(escola.indexOf(" ")){
     escola = escola.replace(/ /g, "%20");
   }
+
+  const teste = userKeycloak.getToken();
+  console.log('TESTE TOKEN ', teste);
+  const tokenExpired = userKeycloak.getTokenExpired();
+  console.log('tokenExpired ', tokenExpired);
   const req = await fetch(`http://localhost:3001/escolas?nome=${escola}`);
   const data = await req.json();
   return data;
