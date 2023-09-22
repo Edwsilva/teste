@@ -7,6 +7,7 @@ import { KeycloakTokenParsed } from 'keycloak-js';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, useAppSelector } from '@/redux/store';
 import { authActions } from '@/redux/features/auth-slice';
+import keycloakConfig from '../app/utils/keycloakConfig';
 // const [isLogin, setLogin] = useState(false);
 // const [token, setToken] = useState(null);
 
@@ -16,16 +17,7 @@ import { authActions } from '@/redux/features/auth-slice';
 //   clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
 // };
 
-export const _kc = Keycloak({
-  url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
-  realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
-  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
-  credentials: {
-    secret: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_SECRET,
-  },
-  'ssl-required': 'external',
-  'confidential-port': 0,
-});
+export const _kc = Keycloak(keycloakConfig);
 
 // const initOptions: KeycloakInitOptions = {};
 
