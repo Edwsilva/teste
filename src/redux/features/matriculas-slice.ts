@@ -15,7 +15,7 @@ export const matriculas = createSlice({
   name: "matriculas",
   initialState,
   reducers: {
-    removeMatricula: (state, action: PayloadAction<number>) => {
+    removeMatricula: (state, action: PayloadAction<string>) => {
       state.matriculas = state.matriculas.filter(matricula => matricula.matricula !== action.payload);
     },
     setMinhasMatriculas: (state, action: PayloadAction<Matricula[]>) => {

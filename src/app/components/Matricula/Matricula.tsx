@@ -11,7 +11,7 @@ type Props = {
   id: number;
   i: number;
   nome: string;
-  matricula: number;
+  matricula: string;
   dropdownVisible: boolean;
   toggle: (i: number, remove?: boolean) => void;
   closeDropdowns: () => void;
@@ -35,7 +35,7 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, closeDropd
       <ul className={`${styles.dropdown} ${dropdownVisible ? styles.dropdownVisible : ''}`}>
         <li className={styles.dropdownItem}>
           <button className={styles.dropdownButton} onClick={async () => {
-            const matriculaDeleted = await deleteMatricula(id);
+            const matriculaDeleted = await deleteMatricula("96185899787", matricula);
             if (matriculaDeleted.success) {
               dispatch(matriculasActions.removeMatricula(matricula));
               toggle(i, true);

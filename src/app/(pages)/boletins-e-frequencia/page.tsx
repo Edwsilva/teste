@@ -21,6 +21,7 @@ import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10Escol
 import Error from "@/app/components/Error/Error";
 // import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
 import userHookKeycloak from '../../../hooks/userHookKeycloak';
+import { obterBoletim, obterDadosBoletim } from "@/app/api/boletim";
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
@@ -53,7 +54,9 @@ const Boletins = () => {
 
   async function fetchData() {
     try {
-      await fetchMatriculas();
+      await fetchMatriculas("96185899787");
+      console.log("OBTER DADOS BOLETIM", obterDadosBoletim(0));
+      console.log("OBTER BOLETIM", obterBoletim(0));
       dispatch(matriculasActions.setMatriculasFetched(true));
       setError(false);
     } catch (error) {
@@ -122,7 +125,7 @@ const Boletins = () => {
     }
   }, [selectField]);
 
-  console.log(isUserAuthenticated);
+  // console.log(isUserAuthenticated);
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">

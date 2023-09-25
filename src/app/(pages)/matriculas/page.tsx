@@ -29,6 +29,12 @@ const Matriculas = () => {
         (state) => state.authUser.authenticated
     );
 
+    const userInfo = useAppSelector(
+        state => state.authUser.userInfo
+    );
+
+    // console.log(userInfo);
+
     const closeDropdowns = () => {
         setDropdownVisible((prevState) => {
             const states = [...prevState];
@@ -55,7 +61,8 @@ const Matriculas = () => {
 
     async function fetchData() {
         try {
-            await fetchMatriculas();
+            // console.log("TOKEN NO FETCH", userInfo.token);
+            await fetchMatriculas("96185899787");
             dispatch(matriculasActions.setMatriculasFetched(true));
             setError(false);
         } catch (error) {
@@ -117,10 +124,10 @@ const Matriculas = () => {
                                 if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
                                     launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
-                                    const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                    const matriculaAdded = await postMatricula({ matricula, nascimento: nascimentoFormated });
+                                    // const nascimentoFormated = nascimento.split("-").reverse().join("/");
+                                    const matriculaAdded = await postMatricula("96185899787", matricula, nascimento);
                                     if (matriculaAdded.success) {
-                                        const newMatriculas = await getMinhasMatriculas();
+                                        const newMatriculas = await getMinhasMatriculas("96185899787");
                                         dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
                                         launchToast({ msg: "Matrícula adicionada!", type: "success" });
                                     } else {

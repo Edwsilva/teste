@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import Button from "../Button/Button";
 import styles from "./boletimcard.module.css";
 import { Matricula } from "@/app/utils/types";
+import { obterDadosBoletim } from "@/app/api/boletim";
 
 // export type BoletimData = {
 //   escola: string;
@@ -30,7 +31,7 @@ const BoletimCard = ({ data, setModal }: Props) => {
       </div>
       <Button text="Consultar" p="p-10" fn={() => {
         // setBoletim({ escola: data.escola, serie: data.serie, turma: data.turma, nome: data.nome, matricula: data.matricula })
-        setModal(true)
+        setModal(true);
       }} />
     </div>
   )

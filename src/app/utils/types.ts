@@ -2,7 +2,7 @@
 type InputMatricula = {
   nascimento: string;
   matricula: string;
-}
+};
 
 // type Matricula = {
 //   id: number;
@@ -18,13 +18,12 @@ type InputMatricula = {
 
 type Matricula = {
   id: number;
-  matricula: number;
+  matricula: string;
   nome: string;
   designacao: number;
   cpfResponsavel: string;
   dataInclusao: string;
-}
-
+};
 
 //Top10 e Escola
 type Escola = {
@@ -47,19 +46,19 @@ type TopIndicesPorAno = [
     ano: number;
     info: TopIndice[];
   }
-]
+];
 
 type TopIndicesPorEscola = [
   {
     nome: string;
     info: TopIndice[];
   }
-]
+];
 
 type MinhaEscola = {
   id: number;
   nome: string;
-}
+};
 
 type MinhasEscolas = MinhaEscola[];
 
@@ -75,5 +74,14 @@ type AuthInfoState = {
   userInfo: UserInfo;
 };
 
-export type {Matricula, Escola, TopIndice, TopIndices, TopIndicesPorAno, TopIndicesPorEscola, MinhasEscolas}
+export type {
+  Matricula,
+  InputMatricula,
+  Escola,
+  TopIndice,
+  TopIndices,
+  TopIndicesPorAno,
+  TopIndicesPorEscola,
+  MinhasEscolas,
+};
 export type { UserInfo, AuthInfoState };
