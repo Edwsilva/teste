@@ -12,8 +12,8 @@ import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
 import { useDispatch } from "react-redux";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
-import { fetchMatriculas, launchToast } from "@/app/utils/utils";
-import { MinhasEscolas, TopIndices } from "@/app/utils/types";
+import { fetchBoletim, fetchDadosBoletim, fetchMatriculas, launchToast } from "@/app/utils/utils";
+import { MinhasEscolas, TopIndices, BoletimDados } from "@/app/utils/types";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
@@ -21,7 +21,6 @@ import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10Escol
 import Error from "@/app/components/Error/Error";
 // import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
 import userHookKeycloak from '../../../hooks/userHookKeycloak';
-import { obterBoletim, obterDadosBoletim } from "@/app/api/boletim";
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
@@ -32,17 +31,13 @@ const Boletins = () => {
   const [anoField, setAnoField] = useState<string>('');
   const [selectField, setSelectField] = useState<string>('');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  // const [boletimData, setBoletimData] = useState<BoletimData>({
-  //   escola: '',
-  //   serie: '',
-  //   turma: 0,
-  //   nome: '',
-  //   matricula: '',
-  // });
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorTable, setErrorTable] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  // const [boletimImgTeste, setBoletimImgTeste] = useState<string>('');
+  const [boletimDados, setBoletimDados] = useState<BoletimDados>({});
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
@@ -55,14 +50,25 @@ const Boletins = () => {
   async function fetchData() {
     try {
       await fetchMatriculas("96185899787");
-      console.log("OBTER DADOS BOLETIM", obterDadosBoletim(0));
-      console.log("OBTER BOLETIM", obterBoletim(0));
+      // await fetchDadosBoletim("2006126402611");
+      // await fetchBoletim("2006126402611");
       dispatch(matriculasActions.setMatriculasFetched(true));
       setError(false);
     } catch (error) {
       setError(true);
     }
   }
+
+  // useEffect(() => {
+  //   async function getBoletim(){
+  //     const data = await fetchBoletim("2006126402611");
+  //     setBoletimImgTeste(data);
+  //     setModalOpen(true);
+  //   }
+  //   getBoletim();
+  //   console.log("FETCHBOLETIMEFFECT");
+  //   fetchDadosBoletim("2006126402611");
+  // },[]);
 
   if (!matriculasFetched || error) {
     setTimeout(() => {
@@ -149,7 +155,7 @@ const Boletins = () => {
                     da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                   :
                   matriculas.map((matricula, i) => (
-                    <BoletimCard data={matricula} setModal={setModalOpen} key={i} />
+                    <BoletimCard data={matricula} setModal={setModalOpen} setBoletim={setBoletimDados} key={i} />
                   ))
           }
         </div>
@@ -230,7 +236,9 @@ const Boletins = () => {
         }}
         isOpen={modalOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        <BoletimModal />
+        <BoletimModal data={boletimDados}/>
+        {/* <div dangerouslySetInnerHTML={{__html: boletimImgTeste}}></div> */}
+        {/* {boletimImgTeste} */}
       </Modal>
       <ToastContainer />
     </div>

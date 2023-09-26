@@ -54,6 +54,11 @@
     font-weight: normal;
     padding: 2px;
   }
+
+  /* .boletimTRow:first-child{
+    color: var(--primary);
+    background-color: var(--textDark);
+  } */
   
   .boletimTRow:nth-child(even) {
     background-color: var(--textLighter);

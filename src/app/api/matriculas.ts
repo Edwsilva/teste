@@ -4,9 +4,8 @@ import {
 } from "@/app/utils/types";
 
 const getMinhasMatriculas = async (cpf: string): Promise<Matricula[]> => {
-  // console.log("Token", token);
-  // console.log("CPF", cpf);
-  const req = await fetch(`http://10.5.224.58:8080/obterAlunos/${cpf}`);
+  const req = await fetch("http://localhost:3001/minhasMatriculas");
+  // const req = await fetch(`http://10.5.224.58:8080/obterAlunos/${cpf}`);
   const data = await req.json();
   return data;
 };

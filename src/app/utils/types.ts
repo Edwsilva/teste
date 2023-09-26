@@ -1,20 +1,112 @@
+//Boletim
+type Aluno = {
+  alu_id: number;
+  mtu_id: number;
+  mtu_numeroChamada: number;
+  alc_matricula: string;
+  pes_sexo: "F" | "M";
+  aluno: string;
+  pes_dataNascimento: string;
+  nomePai: string;
+  nomeMae: string;
+  serie: string;
+  turma: string;
+  turno: string;
+  ultimaFrequenciaAcumulada: number;
+  mtu_resultado: null;
+  resultado: null;
+  escola: string;
+  ano: number;
+  esc_id: number;
+};
+
+type DadoBoletim = {
+  tds_id: number;
+  alu_id: number;
+  mtu_id: number;
+  tur_id: number;
+  tur_codigo: number;
+  tud_global: boolean;
+  tud_disciplinaEspecial: boolean;
+  ava_tipo: number;
+  fav_tipo: number;
+  ava_exibeSemProfessor: boolean;
+  ava_exibeNaoAvaliados: boolean;
+  naoAvaliado: boolean;
+  semProfessor: boolean;
+  tpc_id: number;
+  tpc_nome: string;
+  ava_mostraConceito: boolean;
+  ava_mostraNota: boolean;
+  numeroAulas: number;
+  numeroFaltas: number;
+  avaliacao: null;
+  avaliacaoOriginal: null;
+  avaliacaoAdicional: null;
+  frequenciaAcumulada: number;
+  fav_variacao: number;
+  mostraConceito: boolean;
+  mostraNota: boolean;
+  mostraFrequencia: boolean;
+  naoLancarNota: boolean;
+  naoExibirNota: boolean;
+  naoExibirFrequencia: boolean;
+  ava_nomeRec: string;
+  notaDisciplinaConceito: boolean;
+  esc_id: number;
+  esc_codigo: string;
+  esc_nome: string;
+  tud_tipo: number;
+  esa_tipo: number;
+  nomeDisciplina: string;
+  enriquecimentoCurricular: boolean;
+  parecerConclusivo: null;
+  frequenciaFinalAjustada: number;
+  notaAdicionalNumerica: boolean;
+  disciplinaEspecial: string;
+  notaNumericaRecuperacao: number;
+  mostrarLinhaDisciplina: boolean;
+  notaNumericaResult: boolean;
+  notaSomar: number;
+  notaNumerica: boolean;
+  notaRP: string;
+  disciplina: string;
+  notaID: number;
+  recuperacao: boolean;
+  notaTotal: number;
+  notaResultado: string;
+  notaRecEsp: string;
+  parecerFinal: null;
+};
+
+type Avaliacao = {
+  tpc_nome: string;
+  nomeDisciplina: string;
+  fav_id: number;
+  tur_id: number;
+  mtu_id: number;
+  alu_id: number;
+  tds_id: number;
+  avs_id: number;
+  avs_nome: string;
+  tpc_id: number;
+  tpc_ordem: number;
+  tds_ordem: null;
+  nota: string;
+  notaID: number;
+};
+
+type BoletimDados = {
+  aluno: Aluno;
+  dadosBoletim: DadoBoletim[];
+  avaliacoes: Avaliacao[];
+};
+
 //Matriculas
 type InputMatricula = {
   nascimento: string;
   matricula: string;
 };
-
-// type Matricula = {
-//   id: number;
-//   nome: string;
-//   nascimento: string;
-//   matricula: string;
-//   mae: string;
-//   pai: string;
-//   escola: string;
-//   serie: string;
-//   turma: number;
-// }
 
 type Matricula = {
   id: number;
@@ -74,9 +166,11 @@ type AuthInfoState = {
   userInfo: UserInfo;
 };
 
+export type { BoletimDados };
+
+export type { Matricula, InputMatricula };
+
 export type {
-  Matricula,
-  InputMatricula,
   Escola,
   TopIndice,
   TopIndices,
@@ -84,4 +178,5 @@ export type {
   TopIndicesPorEscola,
   MinhasEscolas,
 };
+
 export type { UserInfo, AuthInfoState };

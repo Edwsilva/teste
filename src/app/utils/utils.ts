@@ -2,6 +2,7 @@ import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { store } from "@/redux/store";
 import { getMinhasMatriculas } from "../api/matriculas";
 import { toast } from "react-toastify";
+import { obterBoletim, obterDadosBoletim } from "../api/boletim";
 
 type ToastifyProps = {
   msg: string;
@@ -9,10 +10,23 @@ type ToastifyProps = {
 };
 
 async function fetchMatriculas(cpf: string) {
-  // const data = await getMinhasMatriculas("");
   const data = await getMinhasMatriculas(cpf);
   console.log("fetchMatriculas");
   store.dispatch(matriculasActions.setMinhasMatriculas(data));
+}
+
+async function fetchDadosBoletim(matricula: string) {
+  const data = await obterDadosBoletim(matricula);
+  console.log("obterDadosBoletim", data);
+  return data;
+  // store.dispatch(matriculasActions.setMinhasMatriculas(data));
+}
+
+async function fetchBoletim(matricula: string) {
+  const data = await obterBoletim(matricula);
+  console.log("obterBoletim", data);
+  return data;
+  // store.dispatch(matriculasActions.setMinhasMatriculas(data));
 }
 
 function launchToast({ msg, type }: ToastifyProps) {
@@ -24,4 +38,4 @@ function launchToast({ msg, type }: ToastifyProps) {
   });
 }
 
-export { fetchMatriculas, launchToast };
+export { fetchMatriculas, fetchDadosBoletim, fetchBoletim, launchToast };

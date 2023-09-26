@@ -1,25 +1,22 @@
 import styles from "./boletimodal.module.css";
 import Image from "next/image";
 import logoboletim from "@/../public/images/logoboletim.jpeg";
-// import { BoletimData } from "../BoletimCard/BoletimCard";
+import { BoletimDados } from "@/app/utils/types";
 
-// type BoletimProps = {
-//   data: BoletimData;
-// }
-
-const BoletimModal = () => {
+const BoletimModal = ({ data }: { data: BoletimDados }) => {
+  const { aluno, dadosBoletim, avaliacoes } = data;
   return (
     <div className={styles.modal}>
       <div className={styles.sectionLogo}>
         <Image src={logoboletim} alt="Logo Prefeitura" />
-        <h1 className={styles.title2}>Boletim Escolar Online 2023</h1>
+        <h1 className={styles.title2}>Boletim Escolar Online {aluno.ano}</h1>
       </div>
       <div className={styles.sectionInfo}>
-        <span><b>Escola: </b>ESCOLA</span>
-        <span><b>Série: </b>SERIE</span>
-        <span><b>Turma: </b>TURMA</span>
-        <span><b>Nome: </b>NOME</span>
-        <span><b>Código: </b>CODIGO</span>
+        <span><b>Escola: </b>{aluno.escola}</span>
+        <span><b>Série: </b>{aluno.serie}</span>
+        <span><b>Turma: </b>{aluno.turma}</span>
+        <span><b>Nome: </b>{aluno.aluno}</span>
+        <span><b>Código: </b>{aluno.alc_matricula}</span>
       </div>
       <div className={styles.boletim}>
         <div className={styles.boletimTableContainer}>
@@ -60,30 +57,32 @@ const BoletimModal = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className={styles.boletimTRow}>
-                <th className={styles.boletimTCell}>Conceito Global</th>
-                <th className={styles.boletimTCell}>B</th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}>26</th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}>MB</th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}>8</th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}></th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}>-</th>
-                <th className={styles.boletimTCell}>34</th>
-              </tr>
+              {/* {dadosBoletim.map((dado, i) => (
+                <tr className={styles.boletimTRow}>
+                  <th className={styles.boletimTCell}>{dado.nomeDisciplina}</th>
+                  <th className={styles.boletimTCell}>B</th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}>26</th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}>MB</th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}>8</th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}></th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}>-</th>
+                  <th className={styles.boletimTCell}>34</th>
+                </tr>
+              ))}; */}
               <tr className={styles.boletimTRow}>
                 <th className={styles.boletimTCell}>Conceito Global</th>
                 <th className={styles.boletimTCell}>B</th>

@@ -1,27 +1,27 @@
-import { Dispatch, SetStateAction } from "react";
+'use client'
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "../Button/Button";
 import styles from "./boletimcard.module.css";
-import { Matricula } from "@/app/utils/types";
-import { obterDadosBoletim } from "@/app/api/boletim";
-
-// export type BoletimData = {
-//   escola: string;
-//   serie: string;
-//   turma: number;
-//   nome: string;
-//   matricula: string;
-// }
+import { BoletimDados, Matricula } from "@/app/utils/types";
+import { fetchDadosBoletim } from "@/app/utils/utils";
 
 type Props = {
   data: Matricula;
   setModal: Dispatch<SetStateAction<boolean>>;
-  // setBoletim: Dispatch<SetStateAction<BoletimData>>;
+  setBoletim: Dispatch<SetStateAction<BoletimDados>>;
 }
 
-const BoletimCard = ({ data, setModal }: Props) => {
+const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
   const { nome, matricula } = data;
   // let partesNome = data.nome.split(" ");
   // let nome = `${partesNome[0]} ${partesNome[partesNome.length - 1]}`;
+
+  async function gerarBoletim() {
+    // const data = await fetchDadosBoletim("2006126402611");
+    const data = await fetchDadosBoletim("2011116500200");
+    setBoletim(data);
+    setModal(true);
+  }
 
   return (
     <div className={styles.boletim}>
@@ -30,8 +30,7 @@ const BoletimCard = ({ data, setModal }: Props) => {
         <span>Matrícula: <b>{matricula}</b></span>
       </div>
       <Button text="Consultar" p="p-10" fn={() => {
-        // setBoletim({ escola: data.escola, serie: data.serie, turma: data.turma, nome: data.nome, matricula: data.matricula })
-        setModal(true);
+        gerarBoletim();
       }} />
     </div>
   )
