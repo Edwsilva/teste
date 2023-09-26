@@ -72,7 +72,7 @@ const Login = ({
           // @ts-ignore
           const userEmail = userHookkeycloak.getTokenParsed()?.email;
           // @ts-ignore
-          const userName = userHookkeycloak.getTokenParsed()?.given_name;
+          const userName = userHookkeycloak.getUsername();
           const userToken = userHookkeycloak.getToken();
 
           console.log('KEYCLOAK ', userEmail);

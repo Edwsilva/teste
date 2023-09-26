@@ -100,6 +100,7 @@ const getToken = () => _kc.token;
 const getTokenExpired = () => _kc.isTokenExpired()
 
 const getTokenParsed = () => _kc.tokenParsed;
+const getUsername = () => _kc.tokenParsed?.given_name;
 
 const isLoggedIn = () => !!_kc.token;
 
@@ -124,7 +125,7 @@ const hasRole = (roles: any) =>
   roles.some((role: any) => _kc.hasRealmRole(role));
 
 const userHookKeycloak = {
- // initialize,
+  // initialize,
   //initKeycloak,
   doInitialize,
   doLogin,
@@ -133,6 +134,7 @@ const userHookKeycloak = {
   getToken,
   getTokenExpired,
   getTokenParsed,
+  getUsername,
   updateToken,
   getUserInfo,
   hasRole,
