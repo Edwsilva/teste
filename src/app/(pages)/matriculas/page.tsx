@@ -123,9 +123,9 @@ const Matriculas = () => {
                                     launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
                                     // const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                    const matriculaAdded = await postMatricula("96185899787", matricula, nascimento);
+                                    const matriculaAdded = await postMatricula(userInfo.token, matricula, nascimento);
                                     if (matriculaAdded.success) {
-                                        const newMatriculas = await getMinhasMatriculas("96185899787");
+                                        const newMatriculas = await getMinhasMatriculas(userInfo.token);
                                         dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
                                         launchToast({ msg: "Matrícula adicionada!", type: "success" });
                                     } else {

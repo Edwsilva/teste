@@ -98,7 +98,7 @@ type Avaliacao = {
 
 type BoletimDados = {
   aluno: Aluno;
-  // educacaoInfantil: boolean;
+  educacaoInfantil: boolean;
   dadosBoletim: DadoBoletim[];
   avaliacoes: Avaliacao[];
 };

@@ -8,7 +8,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
   {/* Ele verifica o tpc_id == 1 e contem disciplina "Conceito global", se o obj inteiro ou a avaliação não for null,
   ele preenche, se for ele joga cells vazias padrão. */}
 
-  const { aluno, dadosBoletim, avaliacoes } = data;
+  const { aluno, educacaoInfantil, dadosBoletim, avaliacoes } = data;
 
   const uniqueFilter = (obj: DadoBoletim, i: number, arr: DadoBoletim[]) => {
     if (i == 0) {
@@ -32,7 +32,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
     subject.disciplina != "Conceito global"
   )).filter(uniqueFilter).map(obj => obj.disciplina);
 
-  console.log(disciplinas);
+  console.log(educacaoInfantil);
   return (
     <div className={styles.modal}>
       <div className={styles.sectionLogo}>

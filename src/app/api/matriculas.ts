@@ -10,7 +10,7 @@ const getMinhasMatriculas = async (token: string): Promise<Matricula[]> => {
   return data;
 };
 
-const postMatricula = async (cpf: string, matricula:string, nascimento:string) => {
+const postMatricula = async (token: string, matricula:string, nascimento:string) => {
   // const matriculaNum = Number(matricula);
 
   // const checkMatricula = await fetch(
@@ -32,7 +32,7 @@ const postMatricula = async (cpf: string, matricula:string, nascimento:string) =
       // }
       
       const postRequest = await fetch(
-        `http://10.5.224.58:8080/adicionarAluno/${cpf}/matricula/${matricula}/dataNascimento/${nascimento}`,
+        `http://10.5.224.58:8080/adicionarAluno/${token}/matricula/${matricula}/dataNascimento/${nascimento}`,
         {
           method: "POST",
           headers: {
