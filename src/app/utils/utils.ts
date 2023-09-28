@@ -9,8 +9,8 @@ type ToastifyProps = {
   type: "info" | "success" | "warning" | "error" | "default";
 };
 
-async function fetchMatriculas(cpf: string) {
-  const data = await getMinhasMatriculas(cpf);
+async function fetchMatriculas(token: string) {
+  const data = await getMinhasMatriculas(token);
   console.log("fetchMatriculas");
   store.dispatch(matriculasActions.setMinhasMatriculas(data));
 }

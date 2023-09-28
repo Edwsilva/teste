@@ -3,9 +3,9 @@ import {
   Matricula,
 } from "@/app/utils/types";
 
-const getMinhasMatriculas = async (cpf: string): Promise<Matricula[]> => {
-  const req = await fetch("http://localhost:3001/minhasMatriculas");
-  // const req = await fetch(`http://10.5.224.58:8080/obterAlunos/${cpf}`);
+const getMinhasMatriculas = async (token: string): Promise<Matricula[]> => {
+  // const req = await fetch("http://localhost:3001/minhasMatriculas");
+  const req = await fetch(`http://10.5.224.58:8080/obterAlunos/${token}`);
   const data = await req.json();
   return data;
 };
@@ -54,9 +54,9 @@ const postMatricula = async (cpf: string, matricula:string, nascimento:string) =
   // }
 };
 
-const deleteMatricula = async (cpf: string, matricula: string) => {
+const deleteMatricula = async (token: string, matricula: string) => {
   const deleteRequest = await fetch(
-    `http://10.5.224.58:8080/removerAluno/${cpf}/matricula/${matricula}`,
+    `http://10.5.224.58:8080/removerAluno/${token}/matricula/${matricula}`,
     {
       method: "DELETE",
       headers: {

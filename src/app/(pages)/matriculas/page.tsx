@@ -60,7 +60,7 @@ const Matriculas = () => {
     async function fetchData() {
         try {
             // console.log("TOKEN NO FETCH", userInfo.token);
-            await fetchMatriculas("96185899787");
+            await fetchMatriculas(userInfo.token);
             dispatch(matriculasActions.setMatriculasFetched(true));
             setError(false);
         } catch (error) {
