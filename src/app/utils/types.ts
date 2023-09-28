@@ -98,6 +98,7 @@ type Avaliacao = {
 
 type BoletimDados = {
   aluno: Aluno;
+  // educacaoInfantil: boolean;
   dadosBoletim: DadoBoletim[];
   avaliacoes: Avaliacao[];
 };
@@ -166,7 +167,7 @@ type AuthInfoState = {
   userInfo: UserInfo;
 };
 
-export type { BoletimDados };
+export type { BoletimDados, DadoBoletim };
 
 export type { Matricula, InputMatricula };
 

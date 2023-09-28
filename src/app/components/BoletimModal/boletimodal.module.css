@@ -54,19 +54,15 @@
     font-weight: normal;
     padding: 2px;
   }
-
-  /* .boletimTRow:first-child{
-    color: var(--primary);
-    background-color: var(--textDark);
-  } */
   
-  .boletimTRow:nth-child(even) {
+  .boletimTRow:nth-child(odd) {
     background-color: var(--textLighter);
   }
   
   .boletimTCell{
     font-weight: normal;
-    padding: 1px;
+    padding: 2px;
+    text-align: center;
   }
   
   .frequencia{

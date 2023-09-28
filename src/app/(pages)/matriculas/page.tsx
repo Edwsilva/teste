@@ -33,8 +33,6 @@ const Matriculas = () => {
         state => state.authUser.userInfo
     );
 
-    // console.log(userInfo);
-
     const closeDropdowns = () => {
         setDropdownVisible((prevState) => {
             const states = [...prevState];

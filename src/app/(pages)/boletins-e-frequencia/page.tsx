@@ -12,14 +12,13 @@ import BoletimModal from "@/app/components/BoletimModal/BoletimModal";
 import Container from "@/app/components/Container/Container";
 import { useDispatch } from "react-redux";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
-import { fetchBoletim, fetchDadosBoletim, fetchMatriculas, launchToast } from "@/app/utils/utils";
+import { fetchMatriculas, launchToast } from "@/app/utils/utils";
 import { MinhasEscolas, TopIndices, BoletimDados } from "@/app/utils/types";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 import Error from "@/app/components/Error/Error";
-// import { BoletimData } from "@/app/components/BoletimCard/BoletimCard";
 import userHookKeycloak from '../../../hooks/userHookKeycloak';
 
 const anos = [2005, 2007, 2009, 2011, 2013];
@@ -37,7 +36,7 @@ const Boletins = () => {
   const [error, setError] = useState<boolean>(false);
 
   // const [boletimImgTeste, setBoletimImgTeste] = useState<string>('');
-  const [boletimDados, setBoletimDados] = useState<BoletimDados>({});
+  const [boletimDados, setBoletimDados] = useState<BoletimDados>();
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
@@ -131,7 +130,6 @@ const Boletins = () => {
     }
   }, [selectField]);
 
-  // console.log(isUserAuthenticated);
   return (
     <div className={styles.main}>
       <Banner type="overlaySM" banner="bannerBoletins">
@@ -236,9 +234,8 @@ const Boletins = () => {
         }}
         isOpen={modalOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        <BoletimModal data={boletimDados}/>
+        {boletimDados ? <BoletimModal data={boletimDados}/> : ""}
         {/* <div dangerouslySetInnerHTML={{__html: boletimImgTeste}}></div> */}
-        {/* {boletimImgTeste} */}
       </Modal>
       <ToastContainer />
     </div>

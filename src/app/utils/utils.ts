@@ -19,14 +19,12 @@ async function fetchDadosBoletim(matricula: string) {
   const data = await obterDadosBoletim(matricula);
   console.log("obterDadosBoletim", data);
   return data;
-  // store.dispatch(matriculasActions.setMinhasMatriculas(data));
 }
 
 async function fetchBoletim(matricula: string) {
   const data = await obterBoletim(matricula);
   console.log("obterBoletim", data);
   return data;
-  // store.dispatch(matriculasActions.setMinhasMatriculas(data));
 }
 
 function launchToast({ msg, type }: ToastifyProps) {

@@ -1,5 +1,5 @@
 'use client'
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Button from "../Button/Button";
 import styles from "./boletimcard.module.css";
 import { BoletimDados, Matricula } from "@/app/utils/types";
@@ -8,7 +8,7 @@ import { fetchDadosBoletim } from "@/app/utils/utils";
 type Props = {
   data: Matricula;
   setModal: Dispatch<SetStateAction<boolean>>;
-  setBoletim: Dispatch<SetStateAction<BoletimDados>>;
+  setBoletim: Dispatch<SetStateAction<BoletimDados | undefined>>;
 }
 
 const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
