@@ -15,25 +15,6 @@ const postMatricula = async (
   matricula: string,
   nascimento: string
 ) => {
-  // const matriculaNum = Number(matricula);
-
-  // const checkMatricula = await fetch(
-  //   `http://localhost:3001/matriculas?matricula=${matriculaNum}`
-  // );
-
-  // const data = await checkMatricula.json();
-  // if (data.length !== 0) {
-  // if (nascimento !== data[0].nascimento) {
-  // return { success: false, msg: "Data de nascimento incorreta." };
-  // } else {
-  // const formatData = {
-  //   id: data[0].id,
-  //   matricula: data[0].matricula,
-  //   nome: data[0].nome,
-  //   designacao: data[0].designacao,
-  //   cpfResponsavel: data[0].cpfResponsavel,
-  //   dataInclusao: new Date()
-  // }
 
   const postRequest = await fetch(
     `http://10.5.224.58:8080/adicionarAluno/${token}/matricula/${matricula}/dataNascimento/${nascimento}`,
@@ -42,7 +23,6 @@ const postMatricula = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify(formatData),
     }
   );
 
@@ -51,11 +31,6 @@ const postMatricula = async (
   } else {
     return { success: false, msg: 'Erro ao adicionar matrícula.' };
   }
-
-  // }
-  // } else {
-  // return { success: false, msg: "Matrícula não encontrada." };
-  // }
 };
 
 const deleteMatricula = async (token: string, matricula: string) => {
