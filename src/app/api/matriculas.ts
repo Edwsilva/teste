@@ -13,7 +13,7 @@ const getMinhasMatriculas = async (token: string): Promise<Matricula[]> => {
 const postMatricula = async (
   token: string,
   matricula: string,
-  nascimento: Date
+  nascimento: string
 ) => {
 
   const postRequest = await fetch(
