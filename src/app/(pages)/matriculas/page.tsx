@@ -122,28 +122,32 @@ const Matriculas = () => {
                                 if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
                                     launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
-                                    const nascimentoFormated =
-                                      nascimento.split('-');
-                                    const dataFormated = new Date(
-                                      Number(nascimentoFormated[0]),
-                                      Number(nascimentoFormated[1]) - 1,
-                                      Number(nascimentoFormated[2])
+                                 
+                                  const matriculaAdded = await postMatricula(
+                                    userInfo.token,
+                                    matricula,
+                                    nascimento
+                                  );
+                                  if (matriculaAdded.success) {
+                                    const newMatriculas =
+                                      await getMinhasMatriculas(userInfo.token);
+                                    dispatch(
+                                      matriculasActions.setMinhasMatriculas(
+                                        newMatriculas
+                                      )
                                     );
-                                    console.log(dataFormated);
-                                    const matriculaAdded = await postMatricula(
-                                      userInfo.token,
-                                      matricula,
-                                      dataFormated
-                                    );
-                                    if (matriculaAdded.success) {
-                                        const newMatriculas = await getMinhasMatriculas(userInfo.token);
-                                        dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
-                                        launchToast({ msg: "Matrícula adicionada!", type: "success" });
-                                    } else {
-                                        launchToast({ msg: matriculaAdded.msg, type: "error" })
-                                    }
-                                    setMatricula("");
-                                    setNascimento("");
+                                    launchToast({
+                                      msg: 'Matrícula adicionada!',
+                                      type: 'success',
+                                    });
+                                  } else {
+                                    launchToast({
+                                      msg: matriculaAdded.msg,
+                                      type: 'error',
+                                    });
+                                  }
+                                  setMatricula('');
+                                  setNascimento('');
                                 }
                             }} />
                         </div>
