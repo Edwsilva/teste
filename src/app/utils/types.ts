@@ -167,7 +167,7 @@ type AuthInfoState = {
   userInfo: UserInfo;
 };
 
-export type { BoletimDados, DadoBoletim };
+export type { BoletimDados, DadoBoletim, Avaliacao };
 
 export type { Matricula, InputMatricula };
 

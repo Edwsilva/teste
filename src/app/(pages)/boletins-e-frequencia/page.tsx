@@ -226,7 +226,7 @@ const Boletins = () => {
             bottom: 'auto',
             transform: 'translate(-50%, -50%)',
             minWidth: '380px',
-            width: '75%',
+            width: '80%',
             height: '75%',
             padding: 10,
             position: 'relative'
@@ -234,7 +234,7 @@ const Boletins = () => {
         }}
         isOpen={modalOpen}>
         <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        {boletimDados ? <BoletimModal data={boletimDados}/> : ""}
+        {boletimDados ? <BoletimModal data={boletimDados}/> : <Spinner />}
         {/* <div dangerouslySetInnerHTML={{__html: boletimImgTeste}}></div> */}
       </Modal>
       <ToastContainer />

@@ -17,10 +17,17 @@ const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
   // let nome = `${partesNome[0]} ${partesNome[partesNome.length - 1]}`;
 
   async function gerarBoletim() {
+    //Matriculas para teste
+    // 2011116500200
+    // 2014093650167
+    // 2018092980182
+    // 2019154331148
+    // 2020126530518
+    // 2017047630617
     // const data = await fetchDadosBoletim("2006126402611");
-    const data = await fetchDadosBoletim("2011116500200");
-    setBoletim(data);
+    const data = await fetchDadosBoletim("2017047630617");
     setModal(true);
+    setBoletim(data);
   }
 
   return (

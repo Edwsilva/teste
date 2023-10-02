@@ -1,9 +1,8 @@
 import styles from "./boletimodal.module.css";
 import Image from "next/image";
 import logoboletim from "@/../public/images/logoboletim.jpeg";
-import { BoletimDados, DadoBoletim } from "@/app/utils/types";
+import { BoletimDados, DadoBoletim, Avaliacao } from "@/app/utils/types";
 import React from "react";
-import { isTemplateLiteral } from "typescript";
 
 const BoletimModal = ({ data }: { data: BoletimDados }) => {
   {/* Ele verifica o tpc_id == 1 e contem disciplina "Conceito global", se o obj inteiro ou a avaliação não for null,
@@ -14,7 +13,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
   const uniqueFilter = (obj: DadoBoletim, i: number, arr: DadoBoletim[]) => {
     if (i == 0) {
       return obj;
-    } else if (obj.tds_id != arr[i - 1].tds_id) {
+    }else if (obj.tds_id != arr[i - 1].tds_id) {
       return obj;
     } else {
       return !arr.find(val => val == obj)
@@ -28,6 +27,10 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
   const conceitoFaltas = conceitoGlobal.filter(uniqueFilter).reduce((total, conceito) => (
     total + conceito.numeroFaltas
   ), 0);
+
+  const conceitoGlobalUnique = conceitoGlobal.filter(uniqueFilter);
+
+  const frequencia = conceitoGlobalUnique[conceitoGlobalUnique.length - 1]
 
   const disciplinas = dadosBoletim.filter(subject => (
     subject.disciplina != "Conceito global"
@@ -51,7 +54,36 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
     ), 0)
   ));
 
-  console.log(totalNotas);
+  const date = new Date();
+  const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+  const month = (date.getMonth() + 1) > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
+  const year = date.getFullYear();
+
+  const buildAvaliacoesMap = () => {
+    const mapaAvaliacoes = new Map();
+
+    avaliacoes.forEach(avaliacao => {
+      const key = avaliacao.avs_nome;
+
+      if (!mapaAvaliacoes.has(key)) {
+        mapaAvaliacoes.set(key, []);
+      };
+
+      mapaAvaliacoes.get(key).push(avaliacao);
+    });
+
+    mapaAvaliacoes.forEach(subarray => {
+      while (subarray.length < 5) {
+        subarray.push(null);
+      }
+    })
+
+    return Array.from(mapaAvaliacoes.values());
+  }
+
+  const avaliacoesAgrupadas = avaliacoes.length > 0 ? buildAvaliacoesMap() : undefined;
+
+  console.log(avaliacoesAgrupadas);
   return (
     <div className={styles.modal}>
       <div className={styles.sectionLogo}>
@@ -115,7 +147,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
                         i == 0 || !conceitoGlobal.find(obj => obj == conceito) && conceito.tpc_id !== 5 ?
                           <React.Fragment key={`${conceito.disciplina} - ${i}`}>
                             <td className={styles.boletimTCell}>{conceito.avaliacao}</td>
-                            <td className={styles.boletimTCell}>{conceito.avaliacaoAdicional == null ? "-" : conceito.avaliacaoAdicional}</td>
+                            <td className={styles.boletimTCell}>{conceito.avaliacaoAdicional == null ? "" : conceito.avaliacaoAdicional}</td>
                             <td className={styles.boletimTCell}>{conceito.numeroFaltas}</td>
                             <td className={styles.boletimTCell}>{conceito.notaRP}</td>
                           </React.Fragment>
@@ -187,10 +219,10 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
                                 <td key={`${obj.disciplina} - ${i}`} className={styles.boletimTCell}>{obj.avaliacao}</td>
                                 :
                                 <React.Fragment key={`empty - ${i}`}>
-                                  <td className={styles.boletimTCell}>-</td>
-                                  <td className={styles.boletimTCell}>-</td>
-                                  <td className={styles.boletimTCell}>-</td>
-                                  <td className={styles.boletimTCell}>-</td>
+                                  <td className={styles.boletimTCell}></td>
+                                  <td className={styles.boletimTCell}></td>
+                                  <td className={styles.boletimTCell}></td>
+                                  <td className={styles.boletimTCell}></td>
                                 </React.Fragment>
                         ))}
                         {disciplinaDados[i].length > 4 ?
@@ -207,12 +239,42 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
                   <tr className={styles.boletimTRow}>
                     <td colSpan={21} className={styles.boletimTCell}>Prova Bimestral</td>
                   </tr>
+                  {!avaliacoesAgrupadas ? "" : avaliacoesAgrupadas.map((avaliacoes: Avaliacao[], i: number) => (
+                    <tr className={styles.boletimTRow} key={i}>
+                      <td className={styles.boletimTCell}>{avaliacoes[0].avs_nome}</td>
+                      {avaliacoes.map((avaliacao: Avaliacao, index: number) => (
+                        index == 4 ?
+                          avaliacao == null ?
+                            <td className={styles.boletimTCell}></td>
+                            :
+                            <td className={styles.boletimTCell}>{avaliacao.nota}</td>
+                          :
+                          avaliacao == null ?
+                            <React.Fragment key={index}>
+                              <td className={styles.boletimTCell}></td>
+                              <td className={styles.boletimTCell}></td>
+                              <td className={styles.boletimTCell}></td>
+                              <td className={styles.boletimTCell}></td>
+                            </React.Fragment>
+                            :
+                            <React.Fragment key={index}>
+                              <td className={styles.boletimTCell}>-</td>
+                              <td className={styles.boletimTCell}>{avaliacao.nota}</td>
+                              <td className={styles.boletimTCell}>-</td>
+                              <td className={styles.boletimTCell}>-</td>
+                            </React.Fragment>
+                      ))}
+                      <td className={styles.boletimTCell}></td>
+                      <td className={styles.boletimTCell}></td>
+                      <td className={styles.boletimTCell}></td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
           <div className={styles.frequencia}>
-            <p>O Aluno obteve uma frequência de 93,52%</p>
+            <p>O aluno obteve uma frequência de {frequencia ? frequencia.frequenciaAcumulada : "0.00"}%</p>
           </div>
           <div className={styles.legenda}>
             <div className={styles.legenda1}>
@@ -223,7 +285,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
               <span><b>DF - </b>DEIXOU DE FREQUENTAR</span></div>
             <div className={styles.legenda2}>
               <h6>Documento meramente informativo, não possuindo valor legal</h6>
-              <p>Atualizado em 24/07/2023</p>
+              <p>Atualizado em {`${day}/${month}/${year}`}</p>
             </div>
           </div>
         </>
