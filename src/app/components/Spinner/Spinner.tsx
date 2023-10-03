@@ -1,8 +1,12 @@
 import styles from "./spinner.module.css";
 
-const Spinner = () => {
+type SpinnerProps = {
+    boletim?: boolean;
+}
+
+const Spinner = ({boletim}: SpinnerProps) => {
     return (
-        <div className={styles.spinnerContainer}>
+        <div className={boletim ? styles.spinnerContainerBoletim : styles.spinnerContainer}>
             <div className={styles.spinner}></div>
         </div>
     )

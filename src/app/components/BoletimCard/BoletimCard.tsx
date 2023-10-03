@@ -8,10 +8,11 @@ import { fetchDadosBoletim } from "@/app/utils/utils";
 type Props = {
   data: Matricula;
   setModal: Dispatch<SetStateAction<boolean>>;
+  setBoletimLoading: Dispatch<SetStateAction<boolean>>;
   setBoletim: Dispatch<SetStateAction<BoletimDados | undefined>>;
 }
 
-const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
+const BoletimCard = ({ data, setModal, setBoletimLoading, setBoletim }: Props) => {
   const { nome, matricula } = data;
   // let partesNome = data.nome.split(" ");
   // let nome = `${partesNome[0]} ${partesNome[partesNome.length - 1]}`;
@@ -25,9 +26,11 @@ const BoletimCard = ({ data, setModal, setBoletim }: Props) => {
     // 2020126530518
     // 2017047630617
     // const data = await fetchDadosBoletim("2006126402611");
-    const data = await fetchDadosBoletim("2017047630617");
+    setBoletimLoading(true);
     setModal(true);
+    const data = await fetchDadosBoletim("2018092980182");
     setBoletim(data);
+    setBoletimLoading(false);
   }
 
   return (

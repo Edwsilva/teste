@@ -6,6 +6,17 @@
     margin: 15px 0;
 }
 
+.errorBoletim{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    gap: 10px;
+}
+
 .errorText{
     font-size: 1.1rem;
     font-weight: light;

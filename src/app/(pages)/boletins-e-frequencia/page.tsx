@@ -20,6 +20,7 @@ import Spinner from "@/app/components/Spinner/Spinner";
 import { getMinhasEscolas, getTop10Escolas, getTop10EscolasPorAno, getTop10EscolasPorEscola } from "@/app/api/desenvolvimento";
 import Error from "@/app/components/Error/Error";
 import userHookKeycloak from '../../../hooks/userHookKeycloak';
+import React from "react";
 
 const anos = [2005, 2007, 2009, 2011, 2013];
 
@@ -32,6 +33,7 @@ const Boletins = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [topIndices, setTopIndices] = useState<TopIndices>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isBoletimLoading, setBoletimLoading] = useState<boolean>(false);
   const [errorTable, setErrorTable] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
@@ -74,26 +76,26 @@ const Boletins = () => {
       fetchData();
     }, 2000);
   }
-  
+
   useEffect(() => {
     getTop10Escolas()
-    .then(res => {
-      setTopIndices(res);
-      setIsLoading(false);
+      .then(res => {
+        setTopIndices(res);
+        setIsLoading(false);
       })
       .catch((err) => {
         setErrorTable(true);
         setIsLoading(false);
       })
-      
-      getMinhasEscolas()
+
+    getMinhasEscolas()
       .then(res => setMinhasEscolas(res))
       .catch(err => launchToast({ msg: "Erro ao obter suas escolas.", type: "error" }));
-    }, []);
-    
-    useEffect(() => {
-      if (anoField !== "") {
-        getTop10EscolasPorAno(anoField)
+  }, []);
+
+  useEffect(() => {
+    if (anoField !== "") {
+      getTop10EscolasPorAno(anoField)
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
@@ -103,9 +105,9 @@ const Boletins = () => {
           setErrorTable(true);
           setIsLoading(false);
         })
-        setIsLoading(false);
-      } else if (escolaField !== "") {
-        getTop10EscolasPorEscola(escolaField)
+      setIsLoading(false);
+    } else if (escolaField !== "") {
+      getTop10EscolasPorEscola(escolaField)
         .then(res => {
           setTopIndices(res[0].info);
           setErrorTable(false);
@@ -141,20 +143,20 @@ const Boletins = () => {
           <p className={styles.text}>Pressione o botão "Consultar" do aluno que deseja conferir
             o boletim e frequência escolares.</p>
           {
-            !isUserAuthenticated ? <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..."/> :
-            !matriculasFetched && !error ?
-              <Spinner />
-              :
-              error ?
-                <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
+            !isUserAuthenticated ? <Error type="warning" msg="Este serviço requer autenticação, efetue o login para ter acesso..." /> :
+              !matriculasFetched && !error ?
+                <Spinner />
                 :
-                matriculas.length === 0 ?
-                  <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
-                    da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                error ?
+                  <Error type="error" msg="Não foi possível buscar suas matrículas, tente de novo mais tarde..." />
                   :
-                  matriculas.map((matricula, i) => (
-                    <BoletimCard data={matricula} setModal={setModalOpen} setBoletim={setBoletimDados} key={i} />
-                  ))
+                  matriculas.length === 0 ?
+                    <h3 className={styles.title2}>No momento você não possui matrícula cadastrada. Insira os dados
+                      da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
+                    :
+                    matriculas.map((matricula, i) => (
+                      <BoletimCard data={matricula} setModal={setModalOpen} setBoletimLoading={setBoletimLoading} setBoletim={setBoletimDados} key={i} />
+                    ))
           }
         </div>
         <div className={styles.top10}>
@@ -233,8 +235,25 @@ const Boletins = () => {
           },
         }}
         isOpen={modalOpen}>
-        <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
-        {boletimDados ? <BoletimModal data={boletimDados}/> : <Spinner />}
+        {isBoletimLoading ?
+          <React.Fragment>
+            <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
+            <Spinner boletim={true} />
+          </React.Fragment>
+          :
+          boletimDados ?
+          <React.Fragment>
+              <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
+              <BoletimModal data={boletimDados} />
+            </React.Fragment>
+            :
+            <React.Fragment>
+              <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
+              <Error type="error" msg="Não foi possível gerar o boletim" boletim />
+            </React.Fragment>
+        }
+        {/* <Button p="p-10" text={<IoClose size={25} style={{ display: "flex", alignItems: "center" }} />} fn={() => setModalOpen(!modalOpen)} />
+        {boletimDados ? <BoletimModal data={boletimDados} /> : ""} */}
         {/* <div dangerouslySetInnerHTML={{__html: boletimImgTeste}}></div> */}
       </Modal>
       <ToastContainer />
