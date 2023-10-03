@@ -107,6 +107,7 @@ type BoletimDados = {
 type InputMatricula = {
   nascimento: string;
   matricula: string;
+  token: string;
 };
 
 type Matricula = {

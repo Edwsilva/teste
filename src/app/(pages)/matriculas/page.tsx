@@ -123,11 +123,11 @@ const Matriculas = () => {
                                     launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
                                  
-                                  const matriculaAdded = await postMatricula(
-                                    userInfo.token,
+                                  const matriculaAdded = await postMatricula({
+                                    token: userInfo.token,
                                     matricula,
                                     nascimento
-                                  );
+                                });
                                   if (matriculaAdded.success) {
                                     const newMatriculas =
                                       await getMinhasMatriculas(userInfo.token);

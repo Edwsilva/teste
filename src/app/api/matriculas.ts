@@ -4,16 +4,15 @@ import {
 } from "@/app/utils/types";
 
 const getMinhasMatriculas = async (token: string): Promise<Matricula[]> => {
-  // const req = await fetch("http://localhost:3001/minhasMatriculas");
   const req = await fetch(`http://10.5.224.58:8080/obterAlunos/${token}`);
   const data = await req.json();
   return data;
 };
 
 const postMatricula = async (
-  token: string,
-  matricula: string,
-  nascimento: string
+  {token,
+  matricula,
+  nascimento} : InputMatricula
 ) => {
 
   const postRequest = await fetch(
