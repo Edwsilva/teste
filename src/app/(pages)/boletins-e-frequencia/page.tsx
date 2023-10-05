@@ -42,17 +42,21 @@ const Boletins = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const matriculas = useAppSelector((state) => state.matriculas.matriculas);
+  
   const isUserAuthenticated = useAppSelector(
     (state) => state.authUser.authenticated
   );
+
+  const userInfo = useAppSelector(
+    state => state.authUser.userInfo
+);
 
   const matriculasFetched = useAppSelector((state) => state.matriculas.fetched);
 
   async function fetchData() {
     try {
-      await fetchMatriculas("96185899787");
-      // await fetchDadosBoletim("2006126402611");
-      // await fetchBoletim("2006126402611");
+      // await fetchMatriculas("96185899787");
+      await fetchMatriculas(userInfo.token);
       dispatch(matriculasActions.setMatriculasFetched(true));
       setError(false);
     } catch (error) {

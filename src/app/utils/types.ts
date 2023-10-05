@@ -13,8 +13,8 @@ type Aluno = {
   turma: string;
   turno: string;
   ultimaFrequenciaAcumulada: number;
-  mtu_resultado: null;
-  resultado: null;
+  mtu_resultado: any;
+  resultado: any;
   escola: string;
   ano: number;
   esc_id: number;
@@ -40,9 +40,9 @@ type DadoBoletim = {
   ava_mostraNota: boolean;
   numeroAulas: number;
   numeroFaltas: number;
-  avaliacao: null;
-  avaliacaoOriginal: null;
-  avaliacaoAdicional: null;
+  avaliacao: any;
+  avaliacaoOriginal: any;
+  avaliacaoAdicional: any;
   frequenciaAcumulada: number;
   fav_variacao: number;
   mostraConceito: boolean;
@@ -60,7 +60,7 @@ type DadoBoletim = {
   esa_tipo: number;
   nomeDisciplina: string;
   enriquecimentoCurricular: boolean;
-  parecerConclusivo: null;
+  parecerConclusivo: any;
   frequenciaFinalAjustada: number;
   notaAdicionalNumerica: boolean;
   disciplinaEspecial: string;
@@ -76,7 +76,7 @@ type DadoBoletim = {
   notaTotal: number;
   notaResultado: string;
   notaRecEsp: string;
-  parecerFinal: null;
+  parecerFinal: any;
 };
 
 type Avaliacao = {
@@ -91,7 +91,7 @@ type Avaliacao = {
   avs_nome: string;
   tpc_id: number;
   tpc_ordem: number;
-  tds_ordem: null;
+  tds_ordem: number | string;
   nota: string;
   notaID: number;
 };
@@ -102,6 +102,79 @@ type BoletimDados = {
   dadosBoletim: DadoBoletim[];
   avaliacoes: Avaliacao[];
 };
+
+
+//Declaração
+type DeclaracaoDados = {
+  alc_matricula: string;
+  mtu_numeroChamada: string;
+  pes_nome: string;
+  pes_dataNascimento: string;
+  nomePai: string;
+  nomeMae: string;
+  serie: string;
+  turma: string;
+  turno: string;
+  esc_id: string;
+  uni_id: string;
+  mtu_resultado: string | null;
+  esc_nome: string;
+  uad_codigo: string;
+  cal_ano: string;
+  cur_nome: string;
+  nomeTurno: string;
+  proxCurriculo: string;
+  dataMovimentacao: string;
+  nivel_ensino: string;
+  cod_censo: string;
+  telefone_escola: string;
+  endereco_escola: string;
+  hash: string;
+  id: number;
+  frequencia: string;
+  conceito: string;
+  avaliacoesAluno: string | null;
+  cursoPeja: string;
+  nisAluno: string;
+  participaBolsaFamilia: string;
+  programasSociais: string;
+}
+
+type DeclaracaoDadosConclusao = {
+  alc_matricula: string;
+  mtu_numeroChamada: string;
+  pes_nome: string;
+  pes_dataNascimento: string;
+  nomePai: string;
+  nomeMae: string;
+  serie: string;
+  turma: string;
+  turno: string;
+  esc_id: string;
+  uni_id: string;
+  mtu_resultado: string | null;
+  esc_nome: string;
+  uad_codigo: string;
+  cal_ano: string;
+  cur_nome: string;
+  nomeTurno: string;
+  proxCurriculo: string;
+  dataMovimentacao: string;
+  nivel_ensino: string;
+  cod_censo: string;
+  telefone_escola: string;
+  endereco_escola: string;
+  hash: string;
+  id: number;
+  participaBolsaFamilia: string;
+  programasSociais: string;
+  nisAluno: string;
+  cursoPeja: string;
+  frequencia: string;
+  conceito: string;
+  avaliacoesAluno: string | null;
+}
+
 
 //Matriculas
 type InputMatricula = {
@@ -171,6 +244,8 @@ type AuthInfoState = {
 export type { BoletimDados, DadoBoletim, Avaliacao };
 
 export type { Matricula, InputMatricula };
+
+export type {DeclaracaoDados, DeclaracaoDadosConclusao}
 
 export type {
   Escola,

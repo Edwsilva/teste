@@ -5,9 +5,6 @@ import { BoletimDados, DadoBoletim, Avaliacao } from "@/app/utils/types";
 import React from "react";
 
 const BoletimModal = ({ data }: { data: BoletimDados }) => {
-  {/* Ele verifica o tpc_id == 1 e contem disciplina "Conceito global", se o obj inteiro ou a avaliação não for null,
-  ele preenche, se for ele joga cells vazias padrão. */}
-
   const { aluno, educacaoInfantil, dadosBoletim, avaliacoes } = data;
 
   const uniqueFilter = (obj: DadoBoletim, i: number, arr: DadoBoletim[]) => {
@@ -55,8 +52,8 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
   ));
 
   const date = new Date();
-  const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
-  const month = (date.getMonth() + 1) > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
   const buildAvaliacoesMap = () => {
@@ -285,7 +282,7 @@ const BoletimModal = ({ data }: { data: BoletimDados }) => {
               <span><b>DF - </b>DEIXOU DE FREQUENTAR</span></div>
             <div className={styles.legenda2}>
               <h6>Documento meramente informativo, não possuindo valor legal</h6>
-              <p>Atualizado em {`${day}/${month}/${year}`}</p>
+              <p>Atualizado em {`${day.toString().padStart(2, "0")}/${month.toString().padStart(2, "0")}/${year}`}</p>
             </div>
           </div>
         </>

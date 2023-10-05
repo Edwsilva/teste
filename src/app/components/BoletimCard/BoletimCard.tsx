@@ -25,10 +25,9 @@ const BoletimCard = ({ data, setModal, setBoletimLoading, setBoletim }: Props) =
     // 2019154331148
     // 2020126530518
     // 2017047630617
-    // const data = await fetchDadosBoletim("2006126402611");
     setBoletimLoading(true);
     setModal(true);
-    const data = await fetchDadosBoletim("2018092980182");
+    const data = await fetchDadosBoletim(matricula);
     setBoletim(data);
     setBoletimLoading(false);
   }
