@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import logoDeclara from "@/../public/images/logodeclara.png";
 import { Matricula, DeclaracaoDados, DeclaracaoDadosConclusao } from "@/app/utils/types";
 import { useReactToPrint } from "react-to-print";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { obterDadosDeclaracao, obterDadosDeclaracaoConclusao } from "@/app/api/declaracao";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
@@ -37,7 +37,7 @@ const DeclaracaoDropdown = ({ token, i, data, selected, dropdownVisible, toggle 
 
   const gerarDeclaracoes = async (type: RadioProps) => {
     try {
-      setIsLoading(true);
+      setIsLoading(true); 
       if (type == "curso") {
         console.log("Chamando declaracao CURSO");
         const declaracaoDados = await obterDadosDeclaracao(data.matricula);
@@ -59,9 +59,13 @@ const DeclaracaoDropdown = ({ token, i, data, selected, dropdownVisible, toggle 
     }
   }
 
+  useEffect(() => {
+    gerarDeclaracoes(selected);
+  },[selected]);
+
   let nis = "";
   if (declaracaoData?.nisAluno != null) {
-    nis = "NIS" + declaracaoData.nisAluno + ","
+    nis = "NIS" + declaracaoData.nisAluno
   }
 
   return (
@@ -136,45 +140,45 @@ const DeclaracaoDropdown = ({ token, i, data, selected, dropdownVisible, toggle 
                 </table>
                 <div className={styles.declaracaoText}>
                   {!declaracaoData ?
-                      <Error type="error" msg="Matrícula não encontrada" />
+                    <Error type="error" msg="Matrícula não encontrada" />
+                    :
+                    selected === "curso" ?
+                      <p>Declaro que o(a) aluno(a) {declaracaoData.pes_nome}, código {declaracaoData?.alc_matricula},
+                        {` ${nis}`}, filho(a) de {declaracaoData.nomePai} e de {declaracaoData.nomeMae}
+                        , nascido(a) em {declaracaoData.pes_dataNascimento}, está matriculado(a) neste Estabelecimento, no(a)
+                        {` ${declaracaoData.serie}`} do(a) {declaracaoData.nivel_ensino}, no turno {declaracaoData.turno}{declaracaoData.frequencia ?
+                          `, obtendo frequência de ${declaracaoData.frequencia}% até a presente data.`
+                          :
+                          "."}
+                      </p>
                       :
-                      selected === "curso" ?
-                        <p>Declaro que o(a) aluno(a) {declaracaoData.pes_nome}, código {declaracaoData?.alc_matricula},
-                          {nis}, filho(a) de {declaracaoData.nomePai} e de {declaracaoData.nomeMae}
-                          , nascido(a) em {declaracaoData.pes_dataNascimento}, está matriculado(a) neste Estabelecimento, no(a)
-                          {declaracaoData.serie} do(a) {declaracaoData.nivel_ensino}, no turno {declaracaoData.turno}{declaracaoData.frequencia ?
-                            `, obtendo frequência de ${declaracaoData.frequencia}% até a presente data.`
-                            :
-                            "."}
-                        </p>
-                        :
-                        <p>Declaro que o(a) aluno(a) {declaracaoData.pes_nome}, código {declaracaoData?.alc_matricula},
-                          NIS 16330094080, filho(a) de {declaracaoData.nomePai} e de {declaracaoData.nomeMae}
-                          , nascido(a) em {declaracaoData.pes_dataNascimento}, cursou neste Estabelecimento, o {declaracaoData.serie} do(a)
-                          {declaracaoData.nivel_ensino}, no turno {declaracaoData?.turno}, no ano letivo de {declaracaoData.cal_ano},
-                          {declaracaoData.frequencia ?
-                            parseInt(declaracaoData.cal_ano) < 2020 ?
-                              ` obtendo o resultado ${declaracaoData.mtu_resultado}, recebendo o conceito global ${declaracaoData.conceito} e 
+                      <p>Declaro que o(a) aluno(a) {declaracaoData.pes_nome}, código {declaracaoData?.alc_matricula},
+                        NIS 16330094080, filho(a) de {declaracaoData.nomePai} e de {declaracaoData.nomeMae}
+                        , nascido(a) em {declaracaoData.pes_dataNascimento}, cursou neste Estabelecimento, o {declaracaoData.serie} do(a)
+                        {declaracaoData.nivel_ensino}, no turno {declaracaoData?.turno}, no ano letivo de {declaracaoData.cal_ano},
+                        {declaracaoData.frequencia ?
+                          parseInt(declaracaoData.cal_ano) < 2020 ?
+                            ` obtendo o resultado ${declaracaoData.mtu_resultado}, recebendo o conceito global ${declaracaoData.conceito} e 
                           apresentando frequência de ${declaracaoData.frequencia}%. O Conselho de Classe indica que o aluno deverá cursar 
                           o ${declaracaoData.proxCurriculo} no próximo período letivo.`
-                              :
-                              ` obteve ${declaracaoData.frequencia}% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº 42/2020 
+                            :
+                            ` obteve ${declaracaoData.frequencia}% de frequência, tendo sido aprovado nos termos da Deliberação CME Nº 42/2020 
                           que autorizou a implementação da Reorganização Curricular e do Continum Curricular disposto na Deliberação CME Nº 
                           43/2020, com base no Parecer CNE/CP Nº 11/2020, e da Lei Nº 14.040/2020, medidas essas implementadas, em caráter 
                           excepcional, durante o estado de calamidade pública reconhecido pelo Decreto Legislativo nº 6, de 20 de março de 
                           2020. O aluno deverá cursar o ${declaracaoData.proxCurriculo} no próximo período letivo.`
-                            :
-                            parseInt(declaracaoData.cal_ano) < 2020 ?
-                              ` obtendo o resultado ${declaracaoData.mtu_resultado}, recebendo o conceito global ${declaracaoData.conceito}. O 
+                          :
+                          parseInt(declaracaoData.cal_ano) < 2020 ?
+                            ` obtendo o resultado ${declaracaoData.mtu_resultado}, recebendo o conceito global ${declaracaoData.conceito}. O 
                        Conselho de Classe indica que o aluno deverá cursar o ${declaracaoData.proxCurriculo} no próximo período letivo.`
-                              :
-                              ` tendo sido aprovado nos termos da Deliberação CME Nº 42/2020 que autorizou a implementação da Reorganização 
+                            :
+                            ` tendo sido aprovado nos termos da Deliberação CME Nº 42/2020 que autorizou a implementação da Reorganização 
                        Curricular e do Continum Curricular disposto na Deliberação CME Nº 43/2020, com base no Parecer CNE/CP Nº 11/2020, 
                        e da Lei Nº 14.040/2020, medidas essas implementadas, em caráter excepcional, durante o estado de calamidade 
                        pública reconhecido pelo Decreto Legislativo nº 6, de 20 de março de 2020. O aluno deverá cursar o 
                        ${declaracaoData.proxCurriculo} no próximo período letivo.`
-                          }
-                        </p>
+                        }
+                      </p>
                   }
                 </div>
                 <div className={styles.declaracaoSignature}>
@@ -191,12 +195,17 @@ const DeclaracaoDropdown = ({ token, i, data, selected, dropdownVisible, toggle 
                     renda ou ocorrer nascimento ou óbito de pessoas de seu domicílio para que seu cadastro seja
                     atualizado.</p>
                 </div>
-                {declaracaoData?.programasSociais ?
-                  `O aluno está cadastrado no(s) seguinte(s) Programa(s):${<br />}
-              ${declaracaoData.programasSociais}`
-                  :
-                  ""
-                }
+                <div className={styles.declaracaoText}>
+                  {declaracaoData?.programasSociais ? (
+                    <p>
+                      O aluno está cadastrado no(s) seguinte(s) Programa(s):
+                      <br />
+                      {declaracaoData.programasSociais}
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 <div className={styles.declaracaoValidate}>
                   <h3 className={styles.validadeTitle}>Documento com validade de 30 dias a partir da data de emissão</h3>
                   <p>Valide sua declaração em: http://prefeitura.rio/sme<br />
