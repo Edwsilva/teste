@@ -12,6 +12,10 @@
     align-items: center;
     justify-content: center;
   }
+
+  .titleEdF{
+    margin: 20px auto;
+  }
   
   .sectionLogo .title2{
     margin: 5px auto 10px auto;
@@ -52,16 +56,17 @@
   .boletimTHeadCell{
     border: 1px solid white;
     font-weight: normal;
-    padding: 2px;
+    padding: 5px;
   }
   
-  .boletimTRow:nth-child(even) {
+  .boletimTRow:nth-child(odd) {
     background-color: var(--textLighter);
   }
   
   .boletimTCell{
     font-weight: normal;
-    padding: 1px;
+    padding: 2px;
+    text-align: center;
   }
   
   .frequencia{

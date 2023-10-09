@@ -3,7 +3,7 @@ import styles from "./matricula.module.css";
 import { useEffect } from "react";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import { deleteMatricula, getMinhasMatriculas } from "@/app/api/matriculas";
 import { launchToast } from "@/app/utils/utils";
 
@@ -11,7 +11,7 @@ type Props = {
   id: number;
   i: number;
   nome: string;
-  matricula: number;
+  matricula: string;
   dropdownVisible: boolean;
   toggle: (i: number, remove?: boolean) => void;
   closeDropdowns: () => void;
@@ -19,6 +19,10 @@ type Props = {
 }
 
 const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, closeDropdowns, dispatch }: Props) => {
+
+  const userInfo = useAppSelector(
+    state => state.authUser.userInfo
+  );
 
   useEffect(() => {
     document.addEventListener('click', closeDropdowns);
@@ -35,7 +39,7 @@ const Matricula = ({ id, i, nome, matricula, dropdownVisible, toggle, closeDropd
       <ul className={`${styles.dropdown} ${dropdownVisible ? styles.dropdownVisible : ''}`}>
         <li className={styles.dropdownItem}>
           <button className={styles.dropdownButton} onClick={async () => {
-            const matriculaDeleted = await deleteMatricula(id);
+            const matriculaDeleted = await deleteMatricula(userInfo.token, matricula);
             if (matriculaDeleted.success) {
               dispatch(matriculasActions.removeMatricula(matricula));
               toggle(i, true);

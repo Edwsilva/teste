@@ -4,8 +4,8 @@ import styles from "./declaracoes.module.css";
 import { useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import MatriculaDropdown from "@/app/components/MatriculaDropdown/MatriculaDropdown";
-import { RadioProps } from "@/app/components/MatriculaDropdown/MatriculaDropdown";
+import DeclaracaoDropdown from "@/app/components/DeclaracaoDropdown/DeclaracaoDropdown";
+import { RadioProps } from "@/app/components/DeclaracaoDropdown/DeclaracaoDropdown";
 import Container from "@/app/components/Container/Container";
 import { matriculasActions } from "@/redux/features/matriculas-slice";
 import { useDispatch } from "react-redux";
@@ -29,7 +29,11 @@ const Declaracoes = () => {
     (state) => state.authUser.authenticated
   );
 
-  function changeRadioSelect(value: RadioProps) {
+  const userInfo = useAppSelector(
+    state => state.authUser.userInfo
+);
+
+  const changeRadioSelect = (value: RadioProps) => {
     setSelected(value);
   }
 
@@ -43,7 +47,7 @@ const Declaracoes = () => {
 
   async function fetchData() {
     try {
-      await fetchMatriculas();
+      await fetchMatriculas(userInfo.token);
       dispatch(matriculasActions.setMatriculasFetched(true));
       setError(false);
     } catch (error) {
@@ -100,7 +104,7 @@ const Declaracoes = () => {
                         da matrícula e a data de nascimento do aluno e clique em salvar.</h3>
                       :
                       matriculas.map((matricula, i) => (
-                        <MatriculaDropdown data={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
+                        <DeclaracaoDropdown token={userInfo.token} data={matricula} i={i} selected={selected} dropdownVisible={dropdownVisible[i]} toggle={toggleDropdown} key={i} />
                       ))
               }
             </div>

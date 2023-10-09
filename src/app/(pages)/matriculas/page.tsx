@@ -29,6 +29,10 @@ const Matriculas = () => {
         (state) => state.authUser.authenticated
     );
 
+    const userInfo = useAppSelector(
+        state => state.authUser.userInfo
+    );
+
     const closeDropdowns = () => {
         setDropdownVisible((prevState) => {
             const states = [...prevState];
@@ -55,7 +59,8 @@ const Matriculas = () => {
 
     async function fetchData() {
         try {
-            await fetchMatriculas();
+            // console.log("TOKEN NO FETCH", userInfo.token);
+            await fetchMatriculas(userInfo.token);
             dispatch(matriculasActions.setMatriculasFetched(true));
             setError(false);
         } catch (error) {
@@ -117,17 +122,32 @@ const Matriculas = () => {
                                 if (nascimento == "" || matricula.length != 13 || matricula.match(/[^0-9]/g)) {
                                     launchToast({ msg: "Por favor, preencha corretamente os campos.", type: "warning" });
                                 } else {
-                                    const nascimentoFormated = nascimento.split("-").reverse().join("/");
-                                    const matriculaAdded = await postMatricula({ matricula, nascimento: nascimentoFormated });
-                                    if (matriculaAdded.success) {
-                                        const newMatriculas = await getMinhasMatriculas();
-                                        dispatch(matriculasActions.setMinhasMatriculas(newMatriculas));
-                                        launchToast({ msg: "Matrícula adicionada!", type: "success" });
-                                    } else {
-                                        launchToast({ msg: matriculaAdded.msg, type: "error" })
-                                    }
-                                    setMatricula("");
-                                    setNascimento("");
+                                 
+                                  const matriculaAdded = await postMatricula({
+                                    token: userInfo.token,
+                                    matricula,
+                                    nascimento
+                                });
+                                  if (matriculaAdded.success) {
+                                    const newMatriculas =
+                                      await getMinhasMatriculas(userInfo.token);
+                                    dispatch(
+                                      matriculasActions.setMinhasMatriculas(
+                                        newMatriculas
+                                      )
+                                    );
+                                    launchToast({
+                                      msg: 'Matrícula adicionada!',
+                                      type: 'success',
+                                    });
+                                  } else {
+                                    launchToast({
+                                      msg: matriculaAdded.msg,
+                                      type: 'error',
+                                    });
+                                  }
+                                  setMatricula('');
+                                  setNascimento('');
                                 }
                             }} />
                         </div>
